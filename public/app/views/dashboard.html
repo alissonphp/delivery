@@ -1,0 +1,26 @@
+<div class=dashboard-page>
+    <div class=container-fluid>
+        <div class=row>
+            <div class="col-sm-6 col-md-2 sidebar">
+                <div class=text-center>
+                    <h2 class=brand>
+                        <small>Gerenciamento</small>
+                    </h2>
+                    <img src=/app/images/primary-logo-png-transp-reduzida.png class="img-responsive"><br> <a ui-sref=login
+                                                                              class="btn btn-white btn-outline btn-rounded btn-sm">Encerrar</a>
+                </div>
+                <ul class="nav nav-sidebar">
+                    <li ng-class="{active: $state.includes('overview')}">
+                        <a ui-sref=overview> Visão Geral
+                        <span class=sr-only>(current)</span></a>
+                    </li>
+                    <li ng-class="{active: $state.includes('cadastros')}"><a ui-sref=cadastros>Cadastros</a></li>
+                    <li><a href="http://startreact.com/product/ani-theme/">Resumo de Anúncios</a></li>
+                    <li><a href=http://www.strapui.com/ani-angularjs-theme>Relatórios</a></li>
+                    <li><a href=http://www.strapui.com/ani-angularjs-theme>Ticket Club</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ui-view></div>
+        </div>
+    </div>
+</div>

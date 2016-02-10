@@ -1,0 +1,14 @@
+/vendor
+/node_modules
+Homestead.yaml
+Homestead.json
+.env
+.ideia
+.ideia/*
+/.idea/.name
+/.idea/blade.xml
+/.idea/deliveryclube.iml
+/.idea/encodings.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/workspace.xml
