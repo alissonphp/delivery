@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of yapp
  */
-angular.module('yapp')
+angular.module('ctrlApp')
   .controller('LoginCtrl', function($scope, $location) {
 
     $scope.submit = function() {

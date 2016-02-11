@@ -1,0 +1,48 @@
+<div>
+    <a ui-sref=novoPlano class="pull-right btn btn-success btn-outline btn-rounded">
+        <i class="glyphicon glyphicon-plus"></i>
+        NOVO PLANO
+    </a>
+
+    <h2>Gerenciamento
+        <small>Planos:</small>
+    </h2>
+    <div class=jumbotron>
+        <div class=container>
+            <h1>Lista de Planos:</h1>
+            <table datatable="ng" class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Plano</th>
+                    <th>Prioridade</th>
+                    <th>Valor</th>
+                    <th>Periodicidade</th>
+                    <th>Registrado</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="plano in planos">
+                    <td>{{ plano.id }}</td>
+                    <td>{{ plano.plano }}</td>
+                    <td>{{ plano.prioridade }}</td>
+                    <td>{{ plano.valor | currency }}</td>
+                    <td>{{ plano.periodicidade }}</td>
+                    <td>{{ plano.created_at | dateParse | date:'short'}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                            <button type="button" class="btn btn-warning" title="Editar">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" title="Excluir">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
