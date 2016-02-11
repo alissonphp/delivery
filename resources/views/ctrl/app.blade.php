@@ -8,6 +8,7 @@
     <link rel=stylesheet href={{ asset('app/styles/main.css') }}>
     <link rel=stylesheet href={{ asset('app/styles/custom.css') }}>
     <link type="text/css" rel="stylesheet" href="{{ asset('app/vendor/datatables/media/css/jquery.dataTables.min.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('app/vendor/notify/ng-notify.min.css') }}"/>
 </head>
 <body ng-app=ctrlApp> <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
@@ -38,6 +39,7 @@
 <script src="{{ asset('app/vendor/angular/ngStorage.min.js') }}"></script>
 <script src="{{ asset('app/vendor/datatables/media/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('app/vendor/angular-datatables/angular-datatables.js') }}"></script>
+<script src="{{ asset('app/vendor/notify/ng-notify.min.js') }}"></script>
 
 <script src={{ asset('app/scripts/app.js') }}></script>
 <script src={{ asset('app/scripts/routes.js') }}></script>

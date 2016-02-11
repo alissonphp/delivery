@@ -51,5 +51,11 @@ ctrlApp.config(function ($stateProvider, $urlRouterProvider) {
             parent: "dashboard",
             templateUrl: "/app/views/plano/create.html",
             controller: "PlanoCtrl"
+        })
+        .state("alterarPlano", {
+            url: "/cadastro/planos/alterar/:id",
+            parent: "dashboard",
+            templateUrl: "/app/views/plano/update.html",
+            controller: "PlanoCtrl"
         });
 });

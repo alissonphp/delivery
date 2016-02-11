@@ -32,12 +32,12 @@
                     <td>{{ plano.created_at | dateParse | date:'short'}}</td>
                     <td>
                         <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                            <button type="button" class="btn btn-warning" title="Editar">
+                            <a ui-sref="alterarPlano({id: plano.id})" class="btn btn-warning" title="Editar">
                                 <i class="glyphicon glyphicon-edit"></i>
-                            </button>
-                            <button type="button" class="btn btn-danger" title="Excluir">
+                            </a>
+                            <a class="btn btn-danger" ng-click="delete(plano.id)" title="Excluir">
                                 <i class="glyphicon glyphicon-trash"></i>
-                            </button>
+                            </a>
                         </div>
                     </td>
                 </tr>

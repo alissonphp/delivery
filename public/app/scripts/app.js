@@ -4,6 +4,7 @@ var ctrlApp = angular.module('ctrlApp', [
         'ui.router',
         'ngAnimate',
         'ngStorage',
+        'ngNotify',
         'datatables'
     ])
     .filter('dateParse', function() {

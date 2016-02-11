@@ -21,16 +21,6 @@ class PlanoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -49,19 +39,9 @@ class PlanoController extends Controller
      */
     public function show($id)
     {
-        //
+        return Plano::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -70,9 +50,17 @@ class PlanoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $item = Plano::find($request->input('id'));
+        $item->plano = $request->input('data.plano');
+        $item->descricao = $request->input('data.descricao');
+        $item->valor = $request->input('data.valor');
+        $item->prioridade = $request->input('data.prioridade');
+        $item->periodicidade = $request->input('data.periodicidade');
+        $item->timestamps = true;
+        $item->save();
+        return $item;
     }
 
     /**
@@ -83,6 +71,6 @@ class PlanoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Plano::find($id)->delete();
     }
 }
