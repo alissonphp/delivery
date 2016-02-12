@@ -57,5 +57,35 @@ ctrlApp.config(function ($stateProvider, $urlRouterProvider) {
             parent: "dashboard",
             templateUrl: "/app/views/plano/update.html",
             controller: "PlanoCtrl"
+        })
+        .state("empresas", {
+            url: "/cadastros/empresas",
+            parent: "dashboard",
+            templateUrl: "/app/views/empresa/index.html",
+            controller: "EmpresaCtrl"
+        })
+        .state("novaEmpresa", {
+            url: "/cadastros/empresas/novo",
+            parent: "dashboard",
+            templateUrl: "/app/views/empresa/create.html",
+            controller: "EmpresaCtrl"
+        })
+        .state("empresaAdicional", {
+            url: "/cadastros/empresas/adicional/:id",
+            parent: "dashboard",
+            templateUrl: "/app/views/empresa/create-infos.html",
+            controller: "EmpresaCtrl"
+        })
+        .state("alterarEmpresa", {
+            url: "/cadastros/empresas/alterar/:id",
+            parent: "dashboard",
+            templateUrl: "/app/views/empresa/update.html",
+            controller: "EmpresaCtrl"
+        })
+        .state("infosEmpresa", {
+            url: "/cadastros/empresas/infos/:id",
+            parent: "dashboard",
+            templateUrl: "/app/views/empresa/infos.html",
+            controller: "EmpresaCtrl"
         });
 });

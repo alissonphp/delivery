@@ -5,6 +5,10 @@ Route::get('/ctrl', function () {
 });
 Route::group(['prefix' => 'api/v1/'], function(){
     Route::resource('plano', 'PlanoController');
+    Route::resource('empresa', 'EmpresaController');
+    Route::controllers([
+        'empresainfos' => 'EmpresaInfosController'
+    ]);
 });
 
 //

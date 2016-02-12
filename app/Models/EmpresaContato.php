@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmpresaContato extends Model
 {
-    //
+    public function empresa()
+    {
+        return $this->belongsTo('App\Models\Empresa', 'empresa_id');
+    }
 }

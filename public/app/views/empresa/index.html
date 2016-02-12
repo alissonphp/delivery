@@ -1,0 +1,51 @@
+<div>
+    <a ui-sref=novaEmpresa class="pull-right btn btn-success btn-outline btn-rounded">
+        <i class="glyphicon glyphicon-plus"></i>
+        NOVA EMPRESA
+    </a>
+
+    <h2>Gerenciamento
+        <small>Empresas:</small>
+    </h2>
+    <div class=jumbotron>
+        <div class=container>
+            <h1>Lista de Empresas:</h1>
+            <table datatable="ng" class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Razão</th>
+                    <th>Fantasia</th>
+                    <th>CNPJ</th>
+                    <th>Responsável</th>
+                    <th>Registrado</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="empresa in empresas">
+                    <td>{{ empresa.id }}</td>
+                    <td>{{ empresa.razao }}</td>
+                    <td>{{ empresa.fantasia }}</td>
+                    <td>{{ empresa.cnpj }}</td>
+                    <td>{{ empresa.responsavel }}</td>
+                    <td>{{ empresa.created_at | dateParse | date:'short'}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                            <a ui-sref="infosEmpresa({id: empresa.id})" class="btn btn-info" title="Informações Adicionais">
+                                <i class="glyphicon glyphicon-file"></i>
+                            </a>
+                            <a ui-sref="alterarEmpresa({id: empresa.id})" class="btn btn-warning" title="Editar">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <a class="btn btn-danger" ng-click="delete(empresa.id)" title="Excluir">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

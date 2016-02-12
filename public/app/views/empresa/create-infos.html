@@ -1,0 +1,140 @@
+<div ng-init="createInfos()">
+    <h2>Gerenciamento
+        <small>Empresas:</small>
+    </h2>
+    <div class=jumbotron>
+        <div class=container>
+            <h1>Informações adicionais:</h1>
+            <form ng-submit="storeInfos()">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Plano de Assinatura:</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <select ng-model="plano.plano" required ng-options="plano.plano for plano in planos" class="form-control">
+                            <option value="">Selecione o plano</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Localização:</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Endereço:</label>
+                        <input type="text" ng-model="endereco.endereco" required class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Número:</label>
+                        <input type="text" ng-model="endereco.numero" required class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <label>Complemento:</label>
+                        <input type="text" ng-model="endereco.complemento"  class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label>Bairro:</label>
+                        <input type="text" ng-model="endereco.bairro" required class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label>Cidade:</label>
+                        <input type="text" ng-model="endereco.cidade" required class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Estado:</label>
+                        <input type="text" ng-model="endereco.estado" required class="form-control">
+                    </div>
+                    <div class="col-md-2">
+                        <label>CEP:</label>
+                        <input type="text" ng-model="endereco.cep"  class="form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Redes Sociais:</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Facebook:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">https://facebook.com/</span>
+                            <input type="text" ng-model="social.facebook" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Twitter:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">https://twitter.com/</span>
+                            <input type="text" ng-model="social.twitter" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Instagram:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">@</span>
+                            <input type="text" ng-model="social.instagram" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Snapchat:</label>
+                        <input type="text" ng-model="social.snapchat" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Youtube:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">https://youtube.com/user/</span>
+                            <input type="text" ng-model="social.youtube" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Contatos:</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Telefone 1:</label>
+                        <input type="text" ng-model="contato.telefone1" required class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Telefone 2:</label>
+                        <input type="text" ng-model="contato.telefone2" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>E-mail:</label>
+                        <input type="text" ng-model="contato.email" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <br>
+                        <button type="submit" class="btn btn-success col-md-12">CADASTRAR DADOS ADICIONAIS</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

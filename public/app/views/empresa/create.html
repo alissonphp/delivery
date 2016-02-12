@@ -1,0 +1,45 @@
+<div>
+    <a ui-sref=empresas class="pull-right btn btn-primary btn-outline btn-rounded">
+        <i class="glyphicon glyphicon-circle-arrow-left"></i>
+        VOLTAR PARA LISTAGEM
+    </a>
+
+    <h2>Gerenciamento
+        <small>Empresas:</small>
+    </h2>
+    <div class=jumbotron>
+        <div class=container>
+            <h1>Cadastrar nova:</h1>
+            <form ng-submit="store()">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Razão Social:</label>
+                        <input type="text" ng-model="empresa.razao" required class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Nome Fantasia:</label>
+                        <input type="text" ng-model="empresa.fantasia" required class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>CNPJ:</label>
+                        <input type="text" ng-model="empresa.cnpj" required class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Responsável:</label>
+                        <input type="text" ng-model="empresa.responsavel" required class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <br>
+                        <button type="submit" class="btn btn-success col-md-12">CADASTRAR</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
