@@ -23,4 +23,8 @@ class Empresa extends Model
     {
         return $this->hasOne('App\Models\EmpresaContato','empresa_id');
     }
+    public function imagens()
+    {
+        return $this->hasOne('App\Models\EmpresaImagem','empresa_id');
+    }
 }

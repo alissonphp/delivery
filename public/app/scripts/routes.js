@@ -70,6 +70,12 @@ ctrlApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/app/views/empresa/create.html",
             controller: "EmpresaCtrl"
         })
+        .state("imgsEmpresa", {
+            url: "/cadastros/empresas/images/:id",
+            parent: "dashboard",
+            templateUrl: "/app/views/empresa/images.html",
+            controller: "EmpresaCtrl"
+        })
         .state("empresaAdicional", {
             url: "/cadastros/empresas/adicional/:id",
             parent: "dashboard",

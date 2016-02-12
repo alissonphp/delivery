@@ -1,0 +1,47 @@
+<div>
+    <a ui-sref=empresas class="pull-right btn btn-primary btn-outline btn-rounded">
+        <i class="glyphicon glyphicon-circle-arrow-left"></i>
+        VOLTAR PARA LISTAGEM
+    </a>
+
+    <h2>Gerenciamento
+        <small>Empresas:</small>
+    </h2>
+    <div class=jumbotron>
+        <div class=container>
+            <h1>Imagens:</h1>
+            <form ng-submit="storeImgs()">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="file-field input-field">
+                            <span>Logo da Empresa</span>
+                            <input class="form-control" type="file" name="logo" ng-model="file.logo" ngf-select accept="image/*" ngf-max-size="1MB">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="file-field input-field">
+                            <span>Capa do Anúncio</span>
+                            <input class="form-control" type="file" name="anuncio" ng-model="file.anuncio" ngf-select accept="image/*" ngf-max-size="1MB">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="file-field input-field">
+                            <span>Capa do Cardápio</span>
+                            <input class="form-control" type="file" name="cardapio" ng-model="file.cardapio" ngf-select accept="image/*" ngf-max-size="1MB">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <br>
+                        <button type="submit" class="btn btn-success col-md-12">ENVIAR IMAGENS</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

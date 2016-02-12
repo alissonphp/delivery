@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Empresa;
 use App\Models\EmpresaContato;
 use App\Models\EmpresaEndereco;
+use App\Models\EmpresaImagem;
 use App\Models\EmpresaPlano;
 use App\Models\EmpresaSocial;
 use App\Models\Plano;
@@ -67,8 +68,78 @@ class EmpresaInfosController extends Controller
         $empresa = Empresa::find($id);
         $empresa->endereco;
         $empresa->social;
+        $empresa->contato;
         $empresa->empresaplano;
         $empresa->empresaplano->plano;
         return $empresa;
+    }
+    public function postUpdateinfos(Request $request, $id)
+    {
+        $empresa = Empresa::find($id);
+
+        $emEnd = $empresa->endereco;
+        $emEnd->endereco = $request->input('endereco.endereco');
+        $emEnd->numero = $request->input('endereco.numero');
+        $emEnd->complemento = $request->input('endereco.complemento');
+        $emEnd->bairro = $request->input('endereco.bairro');
+        $emEnd->cidade = $request->input('endereco.cidade');
+        $emEnd->estado = $request->input('endereco.estado');
+        $emEnd->cep = $request->input('endereco.cep');
+        $emEnd->save();
+
+        $emSocial = $empresa->social;
+        $emSocial->facebook = $request->input('social.facebook');
+        $emSocial->twitter = $request->input('social.twitter');
+        $emSocial->youtube = $request->input('social.youtube');
+        $emSocial->instagram = $request->input('social.instagram');
+        $emSocial->snapchat = $request->input('social.snapchat');
+        $emSocial->save();
+
+        $emContato = $empresa->contato;
+        $emContato->telefone1 = $request->input('contato.telefone1');
+        $emContato->telefone2 = $request->input('contato.telefone2');
+        $emContato->email = $request->input('contato.email');
+        $emContato->save();
+
+        if($request->has('plano')) {
+            $plano = Plano::find($request->input('plano'));
+            $emPlan = $empresa->empresaplano;
+            $emPlan->plano_id = $plano->id;
+            $emPlan->save();
+        } else {
+            $plano = null;
+        }
+        return $id;
+    }
+
+    public function postUpimgs(Request $request, $id)
+    {
+        $empresa = Empresa::find($id);
+        if($empresa->imagens) {
+            $emImg = $empresa->imagens;
+        } else {
+            $emImg = new EmpresaImagem();
+            $emImg->empresa()->associate($empresa);
+        }
+
+        if($request->hasFile('file.logo')) {
+            $file = $request->file('file.logo');
+            $file->move(public_path().'/assets/images/uploads/', date('YmdHis').$file->getClientOriginalName());
+            $emImg->logo = date('YmdHis').$file->getClientOriginalName();
+        }
+        if($request->hasFile('file.anuncio')) {
+            $file = $request->file('file.anuncio');
+            $file->move(public_path().'/assets/images/uploads/', date('YmdHis').$file->getClientOriginalName());
+            $emImg->anuncio_cover = date('YmdHis').$file->getClientOriginalName();
+        }
+        if($request->hasFile('file.cardapio')) {
+            $file = $request->file('file.cardapio');
+            $file->move(public_path().'/assets/images/uploads/', date('YmdHis').$file->getClientOriginalName());
+            $emImg->anuncio_banner = date('YmdHis').$file->getClientOriginalName();
+        }
+
+        $emImg->save();
+
+        return response('ok', 200);
     }
 }

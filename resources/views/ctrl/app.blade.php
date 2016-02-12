@@ -40,6 +40,7 @@
 <script src="{{ asset('app/vendor/datatables/media/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('app/vendor/angular-datatables/angular-datatables.js') }}"></script>
 <script src="{{ asset('app/vendor/notify/ng-notify.min.js') }}"></script>
+<script src="{{ asset('app/vendor/angular-fileupload/ng-file-upload.min.js') }}"></script>
 
 <script src={{ asset('app/scripts/app.js') }}></script>
 <script src={{ asset('app/scripts/routes.js') }}></script>
