@@ -27,4 +27,8 @@ class Empresa extends Model
     {
         return $this->hasOne('App\Models\EmpresaImagem','empresa_id');
     }
+    public function cardapio()
+    {
+        return $this->hasMany('App\Models\EmpresaCardapio','empresa_id');
+    }
 }

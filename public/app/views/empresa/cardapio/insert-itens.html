@@ -1,0 +1,74 @@
+<div ng-init="itens()">
+    <a ui-sref="insertItens({id: data.id })" class="pull-right btn btn-success btn-outline btn-rounded">
+        <i class="glyphicon glyphicon-plus"></i>
+        VOLTAR A LISTA DE ITENS
+    </a>
+
+    <h2>Gerenciamento
+        <small>Cardápio:</small>
+    </h2>
+    <div class=jumbotron>
+        <div class=container>
+            <h1>Itens <small>Cardápio: {{ data.rotulo }}</small></h1>
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Informe os dados do item:</div>
+                        <div class="panel-body">
+                            <form ng-submit="pushItem()">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Item (rótulo):</label>
+                                        <input type="text" ng-model="item.item" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Descrição:</label>
+                                        <textarea ng-model="item.descricao" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Preço (R$):</label>
+                                        <input type="text" ng-model="item.preco" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Ativo:</label>
+                                        <select ng-model="item.ativo" required class="form-control">
+                                            <option value="" selected>Selecione...</option>
+                                            <option value="1">Sim</option>
+                                            <option value="0">Não</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary col-md-12" type="submit">ADICIONAR ESTE ITEM</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Itens preparados:</div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="item in novosItens">
+                                    <span class="badge">{{ item.preco | currency:"R$ " }}</span>
+                                    {{ item.item }} | <a href="" ng-click="removeItem(item)" class="text-danger"> <i class="glyphicon glyphicon-trash"></i> </a>
+                                </li>
+                            </ul>
+                            <a href="" ng-click="storeItens()" ng-show="novosItens.length > 0" class="btn btn-success col-md-12"><i class="glyphicon glyphicon-save"></i> SALVAR ITENS NO CARDÁPIO </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

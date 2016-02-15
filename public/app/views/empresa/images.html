@@ -1,4 +1,4 @@
-<div>
+<div ng-init="listImgs()">
     <a ui-sref=empresas class="pull-right btn btn-primary btn-outline btn-rounded">
         <i class="glyphicon glyphicon-circle-arrow-left"></i>
         VOLTAR PARA LISTAGEM
@@ -14,31 +14,51 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="file-field input-field">
-                            <span>Logo da Empresa</span>
-                            <input class="form-control" type="file" name="logo" ng-model="file.logo" ngf-select accept="image/*" ngf-max-size="1MB">
+                            <p>Logo da Empresa</p>
+                            <img ng-show="images.logo" ng-src="/assets/images/uploads/{{ images.logo }}" class="img-responsive img-thumbnail" alt="">
+                            <input class="form-control" ng-hide="images.logo" type="file" name="logo" ng-model="file.logo" ngf-select accept="image/*" ngf-max-size="1MB">
+                            <p>
+                                <a href="" class="btn btn-default" ng-click="images.logo = null">
+                                    <i class="glyphicon glyphicon-refresh"></i> alterar logo
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="file-field input-field">
-                            <span>Capa do Anúncio</span>
-                            <input class="form-control" type="file" name="anuncio" ng-model="file.anuncio" ngf-select accept="image/*" ngf-max-size="1MB">
+                            <p>Capa do Anúncio</p>
+                            <img ng-show="images.anuncio_cover" ng-src="/assets/images/uploads/{{ images.anuncio_cover }}" class="img-responsive img-thumbnail" alt="">
+                            <input class="form-control" ng-hide="images.anuncio_cover" type="file" name="anuncio" ng-model="file.anuncio" ngf-select accept="image/*" ngf-max-size="1MB">
+                            <p>
+                                <a href="" class="btn btn-default" ng-click="images.anuncio_cover = null">
+                                    <i class="glyphicon glyphicon-refresh"></i> alterar capa do anúncio
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="file-field input-field">
-                            <span>Capa do Cardápio</span>
-                            <input class="form-control" type="file" name="cardapio" ng-model="file.cardapio" ngf-select accept="image/*" ngf-max-size="1MB">
+                            <p>Capa do Cardápio</p>
+                            <img ng-show="images.anuncio_banner" ng-src="/assets/images/uploads/{{ images.anuncio_banner }}" class="img-responsive img-thumbnail" alt="">
+                            <input class="form-control" ng-hide="images.anuncio_banner" type="file" name="cardapio" ng-model="file.cardapio" ngf-select accept="image/*" ngf-max-size="1MB">
+                            <p>
+                                <a href="" class="btn btn-default" ng-click="images.anuncio_banner = null">
+                                    <i class="glyphicon glyphicon-refresh"></i> alterar capa do cardápio
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <br>
-                        <button type="submit" class="btn btn-success col-md-12">ENVIAR IMAGENS</button>
+                        <button type="submit" ng-show="file" class="btn btn-success col-md-12">ENVIAR IMAGENS</button>
                     </div>
                 </div>
             </form>

@@ -86,6 +86,13 @@ ctrlApp.controller('EmpresaCtrl', ['$scope', '$state', 'EmpresaFactory', 'PlanoF
                 console.log(e);
             });
         };
+        $scope.listImgs = function(){
+            $http.get(CONFIG.API+'empresainfos/listimgs/'+$stateParams.id).then(function(r){
+                $scope.images = r.data;
+            }, function (e) {
+                ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
+            });
+        };
         $scope.storeImgs = function(){
             $scope.file.upload = Upload.upload({
                 url: CONFIG.API+'empresainfos/upimgs/'+$stateParams.id,

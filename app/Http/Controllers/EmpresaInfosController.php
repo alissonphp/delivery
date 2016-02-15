@@ -112,6 +112,16 @@ class EmpresaInfosController extends Controller
         return $id;
     }
 
+    public function getListimgs($id)
+    {
+        $empresa = Empresa::find($id);
+        if($empresa->imagens) {
+            return $empresa->imagens;
+        } else {
+            return null;
+        }
+    }
+
     public function postUpimgs(Request $request, $id)
     {
         $empresa = Empresa::find($id);
@@ -141,5 +151,15 @@ class EmpresaInfosController extends Controller
         $emImg->save();
 
         return response('ok', 200);
+    }
+    public function postClearimg(Request $request, $id)
+    {
+        $empresa = Empresa::find($id);
+        return $img = $request->input('img');
+        $imgEmpresa = $empresa->imagens;
+        $imgEmpresa->$img = '';
+        $imgEmpresa->save();
+        return response('ok', 200);
+
     }
 }
