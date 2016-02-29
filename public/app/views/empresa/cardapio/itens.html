@@ -16,6 +16,7 @@
                     <th>#</th>
                     <th>Item</th>
                     <th>Preço</th>
+                    <th>Porção</th>
                     <th>Ativo</th>
                     <th>Registrado</th>
                     <th></th>
@@ -26,6 +27,7 @@
                     <td>{{ item.id }}</td>
                     <td>{{ item.item }}</td>
                     <td>{{ item.preco | currency }}</td>
+                    <td>{{ item.porcao }}</td>
                     <td>{{ item.ativo }}</td>
                     <td>{{ item.created_at | dateParse | date:'short'}}</td>
                     <td>
