@@ -49,6 +49,7 @@
 <script src={{ asset('app/scripts/controllers/PlanoCtrl.js') }}></script>
 <script src={{ asset('app/scripts/controllers/EmpresaCtrl.js') }}></script>
 <script src={{ asset('app/scripts/controllers/CardapioCtrl.js') }}></script>
+<script src={{ asset('app/scripts/controllers/TicketCtrl.js') }}></script>
 <script src={{ asset('app/scripts/controllers/dashboard.js') }}></script>
 <script src={{ asset('app/scripts/controllers/login.js') }}></script>
 </body>
