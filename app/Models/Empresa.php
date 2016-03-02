@@ -31,4 +31,8 @@ class Empresa extends Model
     {
         return $this->hasMany('App\Models\EmpresaCardapio','empresa_id');
     }
+    public function tickets()
+    {
+        return $this->hasMany('App\Models\EmpresaTicketClub','empresa_id');
+    }
 }

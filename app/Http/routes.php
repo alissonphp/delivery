@@ -8,7 +8,8 @@ Route::group(['prefix' => 'api/v1/'], function(){
     Route::resource('empresa', 'EmpresaController');
     Route::controllers([
         'empresainfos'      => 'EmpresaInfosController',
-        'empresacardapio'   => 'CardapioController'
+        'empresacardapio'   => 'CardapioController',
+        'empresaticket'     => 'TicketController'
     ]);
 });
 
