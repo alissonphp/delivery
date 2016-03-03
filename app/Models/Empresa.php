@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Empresa extends Model
 {
-    protected $fillable = ['razao','fantasia','cnpj','responsavel'];
+    protected $fillable = ['razao','fantasia','cnpj','responsavel','telefone_delivery'];
     public function endereco()
     {
         return $this->hasOne('App\Models\EmpresaEndereco', 'empresa_id');

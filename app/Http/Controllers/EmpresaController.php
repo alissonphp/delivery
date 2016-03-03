@@ -58,6 +58,7 @@ class EmpresaController extends Controller
         $item->fantasia = $request->input('data.fantasia');
         $item->cnpj = $request->input('data.cnpj');
         $item->responsavel = $request->input('data.responsavel');
+        $item->telefone_delivery = $request->input('data.telefone_delivery');
         $item->save();
         return response(null, 200);
     }
