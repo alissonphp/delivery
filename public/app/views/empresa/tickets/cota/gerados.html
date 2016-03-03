@@ -1,0 +1,135 @@
+<div ng-init="gerados()">
+    <a ui-sref="ticketEmpresa({id: empresa.id})" class="pull-right btn btn-primary btn-outline btn-rounded">
+        <i class="glyphicon glyphicon-circle-arrow-left"></i>
+        VOLTAR PARA COTA
+    </a>
+
+    <h2>Tickets | Gerados
+        <small>{{ empresa.fantasia }} ({{ empresa.razao }}):</small>
+    </h2>
+    <div class=jumbotron>
+        <div class=container>
+            <h2>Resumos:</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Quantidade de Tickets Contratados: <strong>{{ cota }}</strong></p>
+                    <p>Tickets gerados até o momento: <strong>{{ ofertas.length }}</strong></p>
+                    <p>Seu saldo: <strong>{{ cota - ofertas.length }} tickets disponíveis</strong></p>
+                    <p>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="{{ (100*ofertas.length)/cota }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ (100*ofertas.length)/cota }}%">
+                                <span class="sr-only">45% Complete</span>
+                            </div>
+                        </div>
+                    </p>
+                    <p ng-show="(cota - ofertas.length) > 0">
+                        <a class="btn btn-lg btn-success" data-toggle="modal" data-target="#addOferta">
+                            <i class="glyphicon glyphicon-plus-sign"></i> CADASTRAR OFERTA
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <h1>Ofertas Geradas:</h1>
+            <table datatable="ng" class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Título</th>
+                    <th>Tipo</th>
+                    <th>Preço Normal</th>
+                    <th>Preço Ticket</th>
+                    <th>Validade</th>
+                    <th>Criado em</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="oferta in ofertas">
+                    <td>{{ oferta.id }}</td>
+                    <td>{{ oferta.titulo }}</td>
+                    <td>{{ oferta.tipo }}</td>
+                    <td>{{ oferta.preco_normal}}</td>
+                    <td>{{ oferta.preco_ticket}}</td>
+                    <td>{{ oferta.validade | dateParse | date:'short'}}</td>
+                    <td>{{ oferta.created_at | dateParse | date:'short'}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                            <a class="btn btn-default" title="Editar">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addOferta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Cadastrar uma nova oferta - Ticket Clube</h4>
+            </div>
+            <form ng-submit="storeOferta()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Oferta:</label>
+                                <input type="text" required class="form-control" ng-model="oferta.titulo" placeholder="Título da oferta">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Descrição:</label>
+                                <textarea required class="form-control" ng-model="oferta.descricao" rows="6"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Tipo:</label>
+                                <select required ng-model="oferta.tipo" class="form-control">
+                                    <option value="">Selecione...</option>
+                                    <option value="OFERTA">OFERTA</option>
+                                    <option value="COMBINADO">COMBINADO</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Preço Normal:</label>
+                                <input type="text" required class="form-control" ng-model="oferta.preco_normal" placeholder="29.90">
+                            </div>
+                            <div class="col-md-3">
+                                <label>Preço Ticket:</label>
+                                <input type="text" required class="form-control" ng-model="oferta.preco_ticket" placeholder="19.90">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Validade:</label>
+                                <input type="datetime" required class="form-control" ng-model="oferta.validade">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Banner:</label>
+                                <input class="form-control" required type="file" name="cover" ng-model="oferta.cover" ngf-select accept="image/jpeg" ngf-max-size="1MB">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -111,17 +111,5 @@ ctrlApp.config(function ($stateProvider, $urlRouterProvider) {
             parent: "dashboard",
             templateUrl: "/app/views/empresa/infos.html",
             controller: "EmpresaCtrl"
-        })
-        .state("ticketEmpresa", {
-            url: "/cadastros/empresas/tickets/:id",
-            parent: "dashboard",
-            templateUrl: "/app/views/empresa/tickets/index.html",
-            controller: "TicketCtrl"
-        })
-        .state("newticketEmpresa", {
-            url: "/cadastros/empresas/tickets/novacota/:id",
-            parent: "dashboard",
-            templateUrl: "/app/views/empresa/tickets/cota/create.html",
-            controller: "TicketCtrl"
         });
 });

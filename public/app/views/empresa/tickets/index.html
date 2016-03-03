@@ -23,12 +23,12 @@
                 <tr ng-repeat="ticket in empresatickets">
                     <td>{{ ticket.id }}</td>
                     <td>{{ ticket.tickets }}</td>
-                    <td>{{ ticket.validade | dateParse | date:'short'}}</td>
+                    <td>{{ ticket.validade}}</td>
                     <td>{{ ticket.created_at | dateParse | date:'short'}}</td>
                     <td>
                         <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                            <a class="btn btn-danger" title="Excluir">
-                                <i class="glyphicon glyphicon-trash"></i>
+                            <a ui-sref="ticketsGeradosEmpresa({id: empresa.id, cota: ticket.id})" class="btn btn-default" title="Ver Ofertas da Cota">
+                                <i class="glyphicon glyphicon-asterisk"></i>
                             </a>
                         </div>
                     </td>

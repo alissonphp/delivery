@@ -8,6 +8,10 @@ class EmpresaTicketClub extends Model
 {
     public function empresa()
     {
-        return $this->belongsTo('App\Modes\Empresa', 'empresa_id');
+        return $this->belongsTo('App\Models\Empresa', 'empresa_id');
+    }
+    public function ofertas()
+    {
+        return $this->hasMany('App\Models\TicketClubItem', 'empresa_ticket_club_id');
     }
 }

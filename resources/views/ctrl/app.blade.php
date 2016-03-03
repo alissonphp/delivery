@@ -30,8 +30,10 @@
 <script src="{{ asset('app/scripts/oldieshim.js') }}"></script>
 <![endif]-->
 <script src="{{ asset('app/vendor/datatables/media/js/jquery.js') }}"></script>
-<script type="text/javascript" src="{{ asset('app/vendor/angular/angular.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('app/vendor/angular/angular-locale_pt-br.js') }}"></script>
+<script src="{{ asset('app/vendor/bootstrap/bootstrap.min.js') }}"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="{{ asset('app/vendor/angular/angular.min.js') }}"></script>
+<script src="{{ asset('app/vendor/angular/angular-locale_pt-br.js') }}"></script>
 <script src="{{ asset('app/vendor/angular/angular-mocks.js') }}"></script>
 <script src="{{ asset('app/vendor/angular/angular-ui-router.js') }}"></script>
 <script src="{{ asset('app/vendor/angular/angular-resource.min.js') }}"></script>
@@ -44,6 +46,7 @@
 
 <script src={{ asset('app/scripts/app.js') }}></script>
 <script src={{ asset('app/scripts/routes.js') }}></script>
+<script src={{ asset('app/scripts/routes/ticket.js') }}></script>
 <script src={{ asset('app/scripts/factories/planoFactory.js') }}></script>
 <script src={{ asset('app/scripts/factories/empresaFactory.js') }}></script>
 <script src={{ asset('app/scripts/controllers/PlanoCtrl.js') }}></script>
