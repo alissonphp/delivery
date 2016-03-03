@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorias;
 use App\Models\Empresa;
+use App\Models\EmpresaCategoria;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -29,7 +31,25 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        return Empresa::create($request->all());
+            $reg = new Empresa();
+            $reg->razao = $request->input('razao');
+            $reg->fantasia = $request->input('fantasia');
+            $reg->cnpj = $request->input('cnpj');
+            $reg->responsavel = $request->input('responsavel');
+            $reg->telefone_delivery = $request->input('telefone_delivery');
+            $reg->timestamps = true;
+            $reg->save();
+
+            foreach($request->input('categorias') as $cat) {
+                $empCat = new EmpresaCategoria();
+                $empCat->empresa_id = $reg->id;
+                $empCat->categoria_id = $cat;
+                $empCat->save();
+
+                $cats[] = $cat;
+            }
+
+            return $reg;
     }
 
     /**
@@ -40,7 +60,11 @@ class EmpresaController extends Controller
      */
     public function show($id)
     {
-        return Empresa::find($id);
+        $reg = Empresa::find($id);
+        foreach($reg->empresacategoria as $c) {
+            $c->categoria;
+        }
+        return $reg;
     }
 
 

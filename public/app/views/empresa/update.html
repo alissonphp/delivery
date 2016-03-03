@@ -23,6 +23,26 @@
                         <input type="text" ng-model="empresa.fantasia" required class="form-control">
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <br>
+                        <label>Categorias:</label>
+                        <div class="checkbox" ng-repeat="cat in empresa.empresacategoria">
+                            <label>
+                                <input type="checkbox" name="categoria" ng-checked="cat.categoria.id" ng-model="empresa.categoria[cat.categoria.id]" ng-value="{{ cat.categoria.id }}">
+                                {{ cat.categoria.categoria }}
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="categoria">
+                                Teste
+                            </label>
+                        </div>
+                        <br>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <label>CNPJ:</label>

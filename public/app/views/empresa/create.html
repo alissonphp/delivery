@@ -24,6 +24,19 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-12">
+                        <br>
+                        <label>Categorias:</label>
+                        <div class="checkbox" ng-repeat="cat in categorias">
+                            <label>
+                                <input type="checkbox" ng-model="empresa.categoria[cat.id]" ng-value="{{ cat.id }}">
+                                {{ cat.categoria }}
+                            </label>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <label>CNPJ:</label>
                         <input type="text" ng-model="empresa.cnpj" required class="form-control">

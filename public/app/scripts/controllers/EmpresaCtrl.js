@@ -1,9 +1,18 @@
-ctrlApp.controller('EmpresaCtrl', ['$scope', '$state', 'EmpresaFactory', 'PlanoFactory', 'ngNotify', '$http', '$stateParams', 'CONFIG', 'Upload',
-    function ($scope, $state, EmpresaFactory, PlanoFactory, ngNotify, $http, $stateParams, CONFIG, Upload) {
+ctrlApp.controller('EmpresaCtrl', ['$scope', '$state', 'EmpresaFactory', 'CategoriaFactory', 'PlanoFactory', 'ngNotify', '$http', '$stateParams', 'CONFIG', 'Upload',
+    function ($scope, $state, EmpresaFactory, CategoriaFactory, PlanoFactory, ngNotify, $http, $stateParams, CONFIG, Upload) {
         $scope.empresas = EmpresaFactory.query();
+        $scope.categorias = CategoriaFactory.query();
         $scope.store = function () {
             var data = $scope.empresa;
+            var categorias = [];
+            angular.forEach($scope.empresa.categoria, function(val, key){
+                if(val === true){
+                    categorias.push(key);
+                }
+            });
+            data.categorias = categorias;
             EmpresaFactory.save(data, function (r) {
+                //console.log(r.id);
                 $state.go('empresaAdicional', {id: r.id});
                 ngNotify.set('Empresa registrada com sucesso!', 'success');
             }, function (e) {

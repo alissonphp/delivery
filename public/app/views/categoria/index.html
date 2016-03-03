@@ -1,0 +1,42 @@
+<div>
+    <a ui-sref=novoPlano class="pull-right btn btn-success btn-outline btn-rounded">
+        <i class="glyphicon glyphicon-plus"></i>
+        NOVA CATEGORIA
+    </a>
+
+    <h2>Gerenciamento
+        <small>Categorias:</small>
+    </h2>
+    <div class=jumbotron>
+        <div class=container>
+            <h1>Lista de Categorias:</h1>
+            <table datatable="ng" class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Categoria</th>
+                    <th>Registrado</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="cat in categorias">
+                    <td>{{ cat.id }}</td>
+                    <td>{{ cat.categoria }}</td>
+                    <td>{{ cat.created_at | dateParse | date:'short'}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                            <a ui-sref="alterarCategoria({id: cat.id})" class="btn btn-warning" title="Editar">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <a class="btn btn-danger" ng-click="delete(cat.id)" title="Excluir">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

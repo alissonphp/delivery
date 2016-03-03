@@ -35,4 +35,8 @@ class Empresa extends Model
     {
         return $this->hasMany('App\Models\EmpresaTicketClub','empresa_id');
     }
+    public function empresacategoria()
+    {
+        return $this->hasMany('App\Models\EmpresaCategoria','empresa_id');
+    }
 }

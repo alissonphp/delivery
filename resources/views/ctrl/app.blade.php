@@ -47,12 +47,15 @@
 <script src={{ asset('app/scripts/app.js') }}></script>
 <script src={{ asset('app/scripts/routes.js') }}></script>
 <script src={{ asset('app/scripts/routes/ticket.js') }}></script>
+<script src={{ asset('app/scripts/routes/categoria.js') }}></script>
 <script src={{ asset('app/scripts/factories/planoFactory.js') }}></script>
 <script src={{ asset('app/scripts/factories/empresaFactory.js') }}></script>
+<script src={{ asset('app/scripts/factories/categoriaFactory.js') }}></script>
 <script src={{ asset('app/scripts/controllers/PlanoCtrl.js') }}></script>
 <script src={{ asset('app/scripts/controllers/EmpresaCtrl.js') }}></script>
 <script src={{ asset('app/scripts/controllers/CardapioCtrl.js') }}></script>
 <script src={{ asset('app/scripts/controllers/TicketCtrl.js') }}></script>
+<script src={{ asset('app/scripts/controllers/CategoriaCtrl.js') }}></script>
 <script src={{ asset('app/scripts/controllers/dashboard.js') }}></script>
 <script src={{ asset('app/scripts/controllers/login.js') }}></script>
 </body>
