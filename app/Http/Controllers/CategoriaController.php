@@ -29,7 +29,16 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        return Categorias::create($request->all());
+        $verify = Categorias::where('categoria','=',$request->input('categoria'))->get();
+        try {
+            if(count($verify) == 0) {
+                return Categorias::create($request->all());
+            } else {
+                return response('Categoria similar já registrada',500) ;
+            }
+        }catch (\Exception $ex) {
+            return response($ex->getMessage(),500);
+        }
     }
 
     /**
@@ -56,7 +65,7 @@ class CategoriaController extends Controller
         $item = Categorias::find($request->input('id'));
         $item->categoria = $request->input('data.categoria');
         $item->save();
-        return response(null, 200);
+        return response('ok', 200);
     }
 
     /**

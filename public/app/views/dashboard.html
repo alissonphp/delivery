@@ -14,11 +14,12 @@
                         <a ui-sref=overview> Visão Geral
                         <span class=sr-only>(current)</span></a>
                     </li>
-                    <li ng-class="{active: $state.includes('cadastros')}"><a ui-sref="cadastros">Cadastros</a></li>
+                    <!--<li ng-class="{active: $state.includes('cadastros')}"><a ui-sref="cadastros">Cadastros</a></li>-->
                     <li ng-class="{active: $state.includes('categorias')}"><a ui-sref="categorias">Categorias</a></li>
-                    <li><a href="http://startreact.com/product/ani-theme/">Resumo de Anúncios</a></li>
-                    <li><a href=http://www.strapui.com/ani-angularjs-theme>Relatórios</a></li>
-                    <li><a href=http://www.strapui.com/ani-angularjs-theme>Ticket Club</a></li>
+                    <li ng-class="{active: $state.includes('planos')}"><a ui-sref="planos">Planos</a></li>
+                    <li ng-class="{active: $state.includes('empresas')}"><a ui-sref="empresas">Empresas</a></li>
+                    <li><a >Ticket Club</a></li>
+                    <li><a >Relatórios</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ui-view></div>

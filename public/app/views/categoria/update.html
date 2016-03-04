@@ -1,11 +1,11 @@
 <div ng-init="show()">
-    <a ui-sref=planos class="pull-right btn btn-primary btn-outline btn-rounded">
+    <a ui-sref=categorias class="pull-right btn btn-primary btn-outline btn-rounded">
         <i class="glyphicon glyphicon-circle-arrow-left"></i>
         VOLTAR PARA LISTAGEM
     </a>
 
     <h2>Gerenciamento
-        <small>Planos:</small>
+        <small>Categoria:</small>
     </h2>
     <div class=jumbotron>
         <div class=container>
@@ -13,45 +13,14 @@
             <form ng-submit="update()">
                 <div class="row">
                     <div class="col-md-12">
-                        <label>Plano:</label>
-                        <input type="text" ng-model="plano.plano" required class="form-control">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Descrição:</label>
-                        <textarea rows="5" ng-model="plano.descricao" required class="form-control"></textarea>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <label>Prioridade:</label>
-                        <select ng-model="plano.prioridade" class="form-control">
-                            <option value="5" selected="selected">5</option>
-                            <option value="4">4</option>
-                            <option value="3">3</option>
-                            <option value="2">2</option>
-                            <option value="1">1</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label>Valor:</label>
-                        <input type="text" ng-model="plano.valor" required class="form-control">
-                    </div>
-                    <div class="col-md-3">
-                        <label>Periodicidade:</label>
-                        <select ng-model="plano.periodicidade" class="form-control">
-                            <option value="anual" selected="selected">Anual</option>
-                            <option value="semestral">Semestral</option>
-                            <option value="trimestral">Trimestral</option>
-                            <option value="mensal">Mensal</option>
-                        </select>
+                        <label>Categoria:</label>
+                        <input type="text" ng-model="categoria.categoria" required class="form-control">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <br>
-                        <button type="submit" class="btn btn-primary col-md-12">ATUALIZAR</button>
+                        <button type="submit" class="btn btn-success col-md-12">ATUALIZAR</button>
                     </div>
                 </div>
             </form>
