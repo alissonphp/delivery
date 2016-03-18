@@ -48,6 +48,7 @@
 <script src={{ asset('app/scripts/routes.js') }}></script>
 <script src={{ asset('app/scripts/routes/ticket.js') }}></script>
 <script src={{ asset('app/scripts/routes/categoria.js') }}></script>
+<script src={{ asset('app/scripts/routes/cardapio.js') }}></script>
 <script src={{ asset('app/scripts/factories/planoFactory.js') }}></script>
 <script src={{ asset('app/scripts/factories/empresaFactory.js') }}></script>
 <script src={{ asset('app/scripts/factories/categoriaFactory.js') }}></script>

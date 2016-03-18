@@ -35,9 +35,29 @@ class CardapioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(Request $request)
     {
-        return Plano::create($request->all());
+        try {
+            $empresa = Empresa::find($request->input('empresa'));
+            $cardEmp = new EmpresaCardapio();
+            $cardEmp->empresa()->associate($empresa);
+            $cardEmp->rotulo = $request->input('rotulo');
+            $cardEmp->timestamps = true;
+            $cardEmp->save();
+            return response('ok',200);
+        } catch(\Exception $ex) {
+            return response($ex->getMessage(), 500);
+        }
+    }
+
+    public function deleteDelete(Request $request, $id)
+    {
+        try {
+            EmpresaCardapio::find($id)->delete();
+            return response('ok',200);
+        }catch(\Exception $ex) {
+            return response($ex->getMessage(), 500);
+        }
     }
 
     public function postStoreitens(Request $request, $id)
