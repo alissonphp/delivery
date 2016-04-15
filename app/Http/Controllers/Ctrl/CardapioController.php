@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Ctrl;
 
+use App\Http\Controllers\Controller;
 use App\Models\CardapioItem;
 use App\Models\Empresa;
 use App\Models\EmpresaCardapio;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 class CardapioController extends Controller
 {

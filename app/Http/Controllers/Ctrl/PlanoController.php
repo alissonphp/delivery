@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Ctrl;
 
 use App\Models\Plano;
 use Illuminate\Http\Request;
