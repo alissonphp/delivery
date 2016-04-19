@@ -1,22 +1,17 @@
 <?php
 
+Route::get('/', function() { return view('site.index'); });
+Route::get('restaurante', function() { return view('site.profile'); });
 Route::get('/ctrl', function () {
     return view('ctrl.app');
 });
 Route::group(['prefix' => 'api/v1/'], function(){
-    Route::resource('plano',    'PlanoController');
-    Route::resource('empresa',  'EmpresaController');
-    Route::resource('categoria','CategoriaController');
+    Route::resource('plano',    'Ctrl\PlanoController');
+    Route::resource('empresa',  'Ctrl\EmpresaController');
+    Route::resource('categoria','Ctrl\CategoriaController');
     Route::controllers([
-        'empresainfos'      => 'EmpresaInfosController',
-        'empresacardapio'   => 'CardapioController',
-        'empresaticket'     => 'TicketController'
+        'empresainfos'      => 'Ctrl\EmpresaInfosController',
+        'empresacardapio'   => 'Ctrl\CardapioController',
+        'empresaticket'     => 'Ctrl\TicketController'
     ]);
 });
-
-//
-//Route::group(['middleware' => ['web']], function () {
-//    Route::get('home', function () {
-//        return view('welcome');
-//    });
-//});

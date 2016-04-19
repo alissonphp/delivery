@@ -1,32 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Ctrl;
 
-use App\Models\CardapioItem;
-use App\Models\Empresa;
-use App\Models\EmpresaCardapio;
+use App\Models\Plano;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class CardapioController extends Controller
+class PlanoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getList($id)
+    public function index()
     {
-        $em = Empresa::find($id);
-        return $em->cardapio;
-    }
-    public function getItens($id)
-    {
-        $cardapio = EmpresaCardapio::find($id);
-        $cardapio->itens;
-        return $cardapio;
+        return Plano::all();
     }
 
     /**
@@ -40,30 +31,6 @@ class CardapioController extends Controller
         return Plano::create($request->all());
     }
 
-    public function postStoreitens(Request $request, $id)
-    {
-        $cardapio = EmpresaCardapio::find($id);
-        foreach($request->input('itens') as $item){
-            $it = new CardapioItem();
-            $it->cardapio()->associate($cardapio);
-            $it->item = $item['item'];
-            $it->descricao = $item['descricao'];
-            $it->preco = $item['preco'];
-            $it->porcao = $item['porcao'];
-            $it->ativo = $item['ativo'];
-            $it->save();
-        }
-        return response($id, 200);
-    }
-    public function deleteDeleteitens($id)
-    {
-        try {
-            CardapioItem::find($id)->delete();
-            return response("deleted", 200);
-        } catch (\Exception $ex) {
-            return response($ex->getMessage(), $ex->getCode());
-        }
-    }
     /**
      * Display the specified resource.
      *

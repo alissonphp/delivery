@@ -5,6 +5,7 @@ Homestead.json
 .env
 .ideia
 .ideia/*
+.idea
 /.idea/.name
 /.idea/blade.xml
 /.idea/deliveryclube.iml
@@ -13,3 +14,8 @@ Homestead.json
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/vcs.xml
+/.idea/copyright/profiles_settings.xml
+/.idea/dataSources.ids
+/.idea/dataSources.local.xml
+/public/assets/images/uploads
+/public/assets/images/ofertas_ticket
