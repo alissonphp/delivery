@@ -69,7 +69,9 @@ class CardapioController extends Controller
             $it->item = $item['item'];
             $it->descricao = $item['descricao'];
             $it->preco = $item['preco'];
-            $it->porcao = $item['porcao'];
+            if(isset($item['porcao'])){
+                $it->porcao = $item['porcao'];
+            }
             $it->ativo = $item['ativo'];
             $it->save();
         }

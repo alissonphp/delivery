@@ -1,5 +1,5 @@
 <div ng-init="itens()">
-    <a ui-sref="insertItens({id: data.id })" class="pull-right btn btn-success btn-outline btn-rounded">
+    <a ui-sref="itensCardapio({id: data.id })" class="pull-right btn btn-success btn-outline btn-rounded">
         <i class="glyphicon glyphicon-plus"></i>
         VOLTAR A LISTA DE ITENS
     </a>
@@ -37,7 +37,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>Porção (250g, 2L, etc.):</label>
-                                        <input type="text" ng-model="item.porcao" required class="form-control">
+                                        <input type="text" ng-model="item.porcao" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row">
