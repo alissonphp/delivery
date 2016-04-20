@@ -2,6 +2,7 @@
 
 Route::get('/', function() { return view('site.index'); });
 Route::get('restaurante', function() { return view('site.profile'); });
+Route::get('pesquisa', function() { return view('site.pesquisa'); });
 Route::get('/ctrl', function () {
     return view('ctrl.app');
 });
