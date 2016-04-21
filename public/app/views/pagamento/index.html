@@ -1,0 +1,40 @@
+<div>
+    <a ui-sref=novoPagamento class="pull-right btn btn-success btn-outline btn-rounded">
+        <i class="glyphicon glyphicon-plus"></i>
+        NOVA FORMA DE PAGAMENTO
+    </a>
+
+    <h2>Gerenciamento
+        <small>Formas de Pagamento:</small>
+    </h2>
+    <div class=jumbotron>
+        <div class=container>
+            <h1>Lista de Formas de Pagamento:</h1>
+            <table datatable="ng" class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Forma de Pagamento</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="pagamento in pagamentos">
+                    <td>{{ pagamento.id }}</td>
+                    <td>{{ pagamento.forma }}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                            <a ui-sref="editarPagamento({id: pagamento.id})" class="btn btn-warning" title="Editar">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
+                            <a class="btn btn-danger" ng-click="delete(pagamento.id)" title="Excluir">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

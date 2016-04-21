@@ -93,5 +93,17 @@ ctrlApp.config(function ($stateProvider, $urlRouterProvider) {
             parent: "dashboard",
             templateUrl: "/app/views/empresa/infos.html",
             controller: "EmpresaCtrl"
+        })
+        .state("bairrosEmpresa", {
+            url: "/cadastros/empresas/bairros/:id",
+            parent: "dashboard",
+            templateUrl: "/app/views/empresa/bairros.html",
+            controller: "EmpresaCtrl"
+        })
+        .state("pagamentosEmpresa", {
+            url: "/cadastros/empresas/pagamentos/:id",
+            parent: "dashboard",
+            templateUrl: "/app/views/empresa/pagamentos.html",
+            controller: "EmpresaCtrl"
         });
 });

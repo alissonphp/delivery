@@ -162,4 +162,28 @@ class EmpresaInfosController extends Controller
         return response('ok', 200);
 
     }
+    public function getEmpresabairros($id)
+    {
+        $empresa = Empresa::find($id);
+        return $empresa->bairros;
+    }
+    public function postDefinebairros($id, Request $request)
+    {
+        $empresa = Empresa::find($id);
+        $empresa->bairros()->detach();
+        $empresa->bairros()->attach($request->input('bairros'));
+        return response('ok',200);
+    }
+    public function getEmpresapagamentos($id)
+    {
+        $empresa = Empresa::find($id);
+        return $empresa->pagamentos;
+    }
+    public function postDefinepagamentos($id, Request $request)
+    {
+        $empresa = Empresa::find($id);
+        $empresa->pagamentos()->detach();
+        $empresa->pagamentos()->attach($request->input('pagamentos'));
+        return response('ok',200);
+    }
 }
