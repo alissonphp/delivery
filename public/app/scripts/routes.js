@@ -105,5 +105,11 @@ ctrlApp.config(function ($stateProvider, $urlRouterProvider) {
             parent: "dashboard",
             templateUrl: "/app/views/empresa/pagamentos.html",
             controller: "EmpresaCtrl"
+        })
+        .state("horariosEmpresa", {
+            url: "/cadastros/empresas/horarios/:id",
+            parent: "dashboard",
+            templateUrl: "/app/views/empresa/horarios.html",
+            controller: "EmpresaCtrl"
         });
 });

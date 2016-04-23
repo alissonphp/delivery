@@ -47,4 +47,8 @@ class Empresa extends Model
     {
         return $this->belongsToMany('App\Models\Pagamento', 'empresa_pagamentos', 'empresa_id', 'pagamento_id');
     }
+    public function funcionamento()
+    {
+        return $this->hasMany('App\Models\Funcionamento', 'empresa_id');
+    }
 }

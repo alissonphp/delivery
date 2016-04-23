@@ -155,5 +155,23 @@ ctrlApp.controller('EmpresaCtrl', ['$scope', '$state', 'EmpresaFactory', 'Bairro
                 ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
             });
         };
+        $scope.loadHorarios = function() {
+            $scope.empresaHorarios = {};
+            $http.get(CONFIG.API+'empresainfos/empresahorarios/'+$stateParams.id).then(function(r){
+                angular.forEach(angular.fromJson(r.data), function(obj){
+                    $scope.empresaHorarios[obj['dia']] = obj;
+                });
+            }, function(e){
+                ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
+            });
+        };
+        $scope.defineHorarios = function() {
+            $http.post(CONFIG.API+'empresainfos/definehorarios/'+$stateParams.id, {horarios: $scope.empresaHorarios}).then(function(r){
+                ngNotify.set('Horários de funcionamento definidos com sucesso!', 'success');
+                $state.go('empresas');
+            }, function(e){
+                ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
+            });
+        };
     }
 ]);
