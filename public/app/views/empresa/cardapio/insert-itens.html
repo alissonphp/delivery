@@ -67,7 +67,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item" ng-repeat="item in novosItens">
                                     <span class="badge">{{ item.preco | currency:"R$ " }}</span>
-                                    {{ item.item }} | <a href="" ng-click="removeItem(item)" class="text-danger"> <i class="glyphicon glyphicon-trash"></i> </a>
+                                    {{ item.item }} | <a href="" ng-click="removeItem($index)" class="text-danger"> <i class="glyphicon glyphicon-trash"></i> </a>
                                 </li>
                             </ul>
                             <a href="" ng-click="storeItens()" ng-show="novosItens.length > 0" class="btn btn-success col-md-12"><i class="glyphicon glyphicon-save"></i> SALVAR ITENS NO CARDÁPIO </a>

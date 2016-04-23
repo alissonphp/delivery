@@ -52,7 +52,7 @@ ctrlApp.controller('CardapioCtrl', ['$scope','EmpresaFactory', '$state', 'ngNoti
         };
 
         $scope.removeItem = function(item) {
-            $scope.novosItens.splice(item);
+            $scope.novosItens.splice(item, 1);
             ngNotify.set('Item removido', 'success');
 
         }
