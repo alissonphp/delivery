@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ctrl;
 
 use App\Http\Controllers\Controller;
 use App\Models\CardapioItem;
+use App\Models\CardapioItemVariacoes;
 use App\Models\Empresa;
 use App\Models\EmpresaCardapio;
 use Illuminate\Http\Request;
@@ -63,20 +64,32 @@ class CardapioController extends Controller
     public function postStoreitens(Request $request, $id)
     {
         $cardapio = EmpresaCardapio::find($id);
+
         foreach($request->input('itens') as $item){
             $it = new CardapioItem();
             $it->cardapio()->associate($cardapio);
             $it->item = $item['item'];
+            $it->preco = $item['preco'];
+            $it->ativo = $item['ativo'];
             if(isset($item['descricao'])){
                 $it->descricao = $item['descricao'];
             }
-            $it->preco = $item['preco'];
             if(isset($item['porcao'])){
                 $it->porcao = $item['porcao'];
             }
-            $it->ativo = $item['ativo'];
             $it->save();
+
+            if(isset($item['variacoes'])){
+                foreach($item['variacoes'] as $v) {
+                    $variacao = new CardapioItemVariacoes();
+                    $variacao->item()->associate($it);
+                    $variacao->rotulo = $v['rotulo'];
+                    $variacao->preco = $v['preco'];
+                    $variacao->save();
+                }
+            }
         }
+
         return response($id, 200);
     }
     public function deleteDeleteitens($id)

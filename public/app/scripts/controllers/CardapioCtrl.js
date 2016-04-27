@@ -51,20 +51,30 @@ ctrlApp.controller('CardapioCtrl', ['$scope','EmpresaFactory', '$state', 'ngNoti
             $('#myModal').modal('hide');
         };
 
+        $scope.removeItem = function(item) {
+            $scope.novosItens.splice(item, 1);
+            ngNotify.set('Item removido', 'success');
+
+        };
+
+        $scope.removeSubItem = function(subItem) {
+            if($scope.variacoes.length == 1) {
+                ngNotify.set('Deve haver pelo menos uma variação no item', 'error');
+            } else {
+                $scope.variacoes.splice(subItem, 1);
+                ngNotify.set('Variação removida', 'success');
+            }
+        };
+
         $scope.storeItens = function(){
             $http.post(CONFIG.API+'empresacardapio/storeitens/'+$stateParams.id, {itens: $scope.novosItens}).then(function (r) {
+                //console.log(r.data);
                 ngNotify.set('Todos os itens adicionados ao cardápio com sucesso!', 'success');
                 $state.go('itensCardapio', {id: r.data});
             }, function (e) {
                 ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
             });
         };
-
-        $scope.removeItem = function(item) {
-            $scope.novosItens.splice(item, 1);
-            ngNotify.set('Item removido', 'success');
-
-        }
 
         $scope.deleteItem = function(id) {
             $http.delete(CONFIG.API+'empresacardapio/deleteitens/'+id).then(function (r) {
@@ -76,7 +86,7 @@ ctrlApp.controller('CardapioCtrl', ['$scope','EmpresaFactory', '$state', 'ngNoti
         };
 
         $scope.openModal = function() {
-            if($scope.item == null || $scope.item.preco != "0.00") {
+            if($scope.item == null || $scope.item.preco != "0") {
                 return ngNotify.set('Informe um rótulo válido e preço 0 (zero) para adicionar variação', 'error');
             } else {
                 $('#myModal').modal('show');

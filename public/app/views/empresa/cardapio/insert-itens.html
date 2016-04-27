@@ -86,7 +86,7 @@
 
                                     <ul ng-show="item.variacoes.length > 0">
                                         <li ng-repeat="sub in item.variacoes">
-                                            {{ sub.rotulo }} <span class="badge">{{ sub.preco | currency:"R$ " }}</span>
+                                            {{ sub.rotulo }} <a href="" ng-click="removeSubItem($index)" class="text-danger"> <i class="glyphicon glyphicon-trash"></i></a> <span class="badge">{{ sub.preco | currency:"R$ " }}</span>
                                         </li>
                                     </ul>
 
