@@ -34,6 +34,18 @@
                                         <input type="text" ng-model="item.preco" required class="form-control">
                                     </div>
                                 </div>
+                                <div class="row" ng-show="item.variacoes.length > 0">
+                                    <div class="col-md-12">
+                                        <br>
+                                        <label>Variações do item:</label>
+                                        <ul class="list-group">
+                                            <li class="list-group-item" ng-repeat="sub in item.variacoes">
+                                                <span class="badge">{{ sub.preco | currency:"R$ " }}</span>
+                                                {{ sub.rotulo }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>Porção (250g, 2L, etc.):</label>
@@ -53,7 +65,8 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button class="btn btn-primary col-md-12" type="submit">ADICIONAR ESTE ITEM</button>
+                                        <button class="btn btn-primary col-md-5" type="submit">PREPARAR ITEM</button>
+                                        <button ng-click="openModal()" class="btn btn-default col-md-5 col-md-offset-2" type="button">ADICIONAR VARIAÇÃO</button>
                                     </div>
                                 </div>
                             </form>
@@ -66,8 +79,18 @@
                         <div class="panel-body">
                             <ul class="list-group">
                                 <li class="list-group-item" ng-repeat="item in novosItens">
-                                    <span class="badge">{{ item.preco | currency:"R$ " }}</span>
-                                    {{ item.item }} | <a href="" ng-click="removeItem($index)" class="text-danger"> <i class="glyphicon glyphicon-trash"></i> </a>
+
+                                    <span class="badge" ng-hide="item.variacoes.length > 0">{{ item.preco | currency:"R$ " }}</span>
+
+                                    {{ item.item }} <a href="" ng-click="removeItem($index)" class="text-danger"> <i class="glyphicon glyphicon-trash"></i></a>
+
+                                    <ul ng-show="item.variacoes.length > 0">
+                                        <li ng-repeat="sub in item.variacoes">
+                                            {{ sub.rotulo }} <span class="badge">{{ sub.preco | currency:"R$ " }}</span>
+                                        </li>
+                                    </ul>
+
+
                                 </li>
                             </ul>
                             <a href="" ng-click="storeItens()" ng-show="novosItens.length > 0" class="btn btn-success col-md-12"><i class="glyphicon glyphicon-save"></i> SALVAR ITENS NO CARDÁPIO </a>
@@ -75,6 +98,39 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Variação do item {{ item.item | uppercase }}</h4>
+            </div>
+            <form ng-submit="pushSubItem()">
+                <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Rótulo: (Ex: Pequena, Médias, Dupla, etc...)</label>
+                                <input type="text" ng-model="subitem.rotulo" class="form-control">
+                            </div>
+                            <div class="col-md-12">
+                                <label>Preço: </label>
+                                <input type="text" ng-model="subitem.preco" class="form-control">
+                            </div>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                </div>
+            </form>
+
         </div>
     </div>
 </div>
