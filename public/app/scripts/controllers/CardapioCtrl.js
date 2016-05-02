@@ -170,13 +170,13 @@ ctrlApp.controller('CardapioCtrl', ['$scope','EmpresaFactory', '$state', 'ngNoti
         $scope.editItem = function() {
             $http.get(CONFIG.API+'empresacardapio/show/'+$stateParams.item).then(function (r) {
                 $scope.item = angular.fromJson(r.data);
-                if($scope.item.categoria == 'Comum') {
-                    $scope.item.variacoes = r.data.variacao;
-                } else {
+                if($scope.item.categoria == 'Pizza') {
                     var composicao = angular.fromJson(r.data.composicao);
                     $scope.item.tamanhos = angular.fromJson(composicao.tamanhos);
                     $scope.item.tipos = composicao.tipos;
                     $scope.item.sabores = composicao.sabores;
+                } else {
+                    $scope.item.variacoes = r.data.variacao;
                 }
             }, function (e) {
                 ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
