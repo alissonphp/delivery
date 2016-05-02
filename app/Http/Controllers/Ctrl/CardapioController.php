@@ -106,6 +106,63 @@ class CardapioController extends Controller
 
         return response($id, 200);
     }
+    public function postUpdateitem(Request $request, $id){
+
+        $it = CardapioItem::find($id);
+        $item = $request->input('item');
+        if($item['categoria'] == "Comum") {
+            $it->item = $item['item'];
+            $it->preco = $item['preco'];
+            $it->categoria = $item['categoria'];
+            $it->ativo = $item['ativo'];
+            if(isset($item['descricao'])){
+                $it->descricao = $item['descricao'];
+            }
+            if(isset($item['porcao'])){
+                $it->porcao = $item['porcao'];
+            }
+            $it->save();
+
+            $this->clearVariations($id);
+
+            if(isset($item['variacoes'])){
+                foreach($item['variacoes'] as $v) {
+                    $variacao = new CardapioItemVariacoes();
+                    $variacao->item()->associate($it);
+                    $variacao->rotulo = $v['rotulo'];
+                    $variacao->preco = $v['preco'];
+                    $variacao->save();
+                }
+            }
+
+        } else {
+            $composicao = [];
+            $composicao['tamanhos'] = $item['tamanhos'];
+            $composicao['tipos'] = $item['tipos'];
+            $composicao['sabores'] = $item['sabores'];
+            $it->item = "Pizza";
+            $it->categoria = "Pizza";
+            $it->preco = "0.00";
+            $it->ativo = 1;
+            $it->composicao = json_encode($composicao);
+            $it->save();
+        }
+
+        return response($item['cardapio_id'], 200);
+
+    }
+
+    public function clearVariations($id) {
+        $vars = CardapioItemVariacoes::where('cardapio_items_id',$id)->get();
+        try {
+            foreach($vars as $v) {
+                CardapioItemVariacoes::find($v->id)->delete();
+            }
+        } catch(\Exception $ex) {
+            return $ex->getMessage();
+        }
+    }
+
     public function deleteDeleteitens($id)
     {
         try {

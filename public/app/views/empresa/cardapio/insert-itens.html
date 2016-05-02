@@ -159,7 +159,8 @@
                                         Pizza <a href="" ng-click="removeItem($index)" class="text-danger"> <i class="glyphicon glyphicon-trash"></i></a>
                                         <ul>
                                             <li ng-repeat="sabor in item.sabores">
-                                                <strong>{{ sabor.sabor}}</strong>
+                                                <strong>{{ sabor.sabor}}</strong><br>
+                                                <small>{{ sabor.descricao }}</small>
                                                 <ul>
                                                     <li ng-repeat="(k, v) in sabor.preco">
                                                         {{ k }} | {{ v | currency:"R$ " }}
@@ -235,11 +236,6 @@
                         <div class="col-md-12">
                             <div class="checkbox">
                                 <label>
-                                    <input type="radio" name="sabores" ng-model="tamanho.sabor" value=""> Normal
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
                                     <input type="radio" name="sabores" ng-model="tamanho.sabor" value="2"> 2 Sabores
                                 </label>
                             </div>
@@ -303,6 +299,14 @@
                             <input name="sabor" type="text" ng-model="sabor.sabor" class="form-control">
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Descrição:</label>
+                            <textarea ng-model="sabor.descricao" class="form-control"></textarea>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-12">
                             <h3>Preços:</h3>
@@ -328,7 +332,6 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>

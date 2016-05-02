@@ -1,5 +1,5 @@
 <div ng-init="editItem()">
-    <a ui-sref="itensCardapio({id: data.id })" class="pull-right btn btn-success btn-outline btn-rounded">
+    <a ui-sref="itensCardapio({id: item.cardapio_id })" class="pull-right btn btn-success btn-outline btn-rounded">
         <i class="glyphicon glyphicon-plus"></i>
         VOLTAR A LISTA DE ITENS
     </a>
@@ -10,24 +10,12 @@
     <div class=jumbotron>
         <div class=container>
             <h1>Itens <small>Item: {{ item.item }}</small></h1>
-            {{ item.tamanhos }}
-            {{ item.tipos }}
-            {{ item.sabores }}
             <div class="row">
                 <div class="col-md-7">
                     <div class="panel panel-default">
                         <div class="panel-heading">Dados do item:</div>
                         <div class="panel-body">
                             <form ng-submit="updateItem(item.id)" novalidate>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>
-                                            <select class="form-control" name="categoria" id="categoria" ng-model="item.categoria">
-                                                <option ng-repeat="categoria in categorias" value="{{categoria}}">{{categoria}}</option>
-                                            </select>
-                                        </label>
-                                    </div>
-                                </div>
                                 <div ng-show="item.categoria == 'Comum'">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -54,7 +42,7 @@
                                             <ul class="list-group">
                                                 <li class="list-group-item" ng-repeat="sub in item.variacoes">
                                                     <span class="badge">{{ sub.preco | currency:"R$ " }}</span>
-                                                    {{ sub.rotulo }}
+                                                    {{ sub.rotulo }} <a href="" ng-click="removeVariacao($index)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -129,6 +117,57 @@
                                     </div>
 
                                     <br>
+                                </div>
+                                <div ng-show="item.categoria == 'Pizza'">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h4>Tamanhos da Pizza: <small><a href="" data-toggle="modal" data-target="#modalTamanho"> <i class="glyphicon glyphicon-plus-sign"></i> </a></small></h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <ul class="list-group">
+                                                <li class="list-group-item" ng-repeat="tamanho in item.tamanhos">
+                                                    {{ tamanho.tamanho }} <span class="text-warning" ng-show="tamanho.sabor">| {{ tamanho.sabor }} sabores</span> <a href="" ng-click="removeSectionPizza('tamanhos',$index)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" ng-show="item.tamanhos">
+                                        <div class="col-md-12">
+                                            <h4>Tipos de Massa: <small><a href="" data-toggle="modal" data-target="#modalTipo"> <i class="glyphicon glyphicon-plus-sign"></i> </a></small></h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <ul class="list-group">
+                                                <li class="list-group-item" ng-repeat="tipo in item.tipos">
+                                                    {{ tipo.tipo}} <a href="" ng-click="removeSectionPizza('tipos',$index)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" ng-show="item.tamanhos">
+                                        <div class="col-md-12">
+                                            <h4>Sabores de Pizza: <small><a href="" data-toggle="modal" data-target="#modalSabor"> <i class="glyphicon glyphicon-plus-sign"></i> </a></small></h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <ul class="list-group">
+                                                <li class="list-group-item" ng-repeat="sabor in item.sabores">
+                                                    <strong>{{ sabor.sabor}}</strong> <a href="" ng-click="removeSectionPizza('sabores',$index)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+                                                    <ul>
+                                                        <li ng-repeat="(k, v) in sabor.preco">
+                                                            {{ k }} | {{ v | currency:"R$ " }}
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row" ng-show="item.categoria != null">
                                     <div class="col-md-12">

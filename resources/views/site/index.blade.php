@@ -236,6 +236,9 @@
             <div class="col m4">
                 <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
+                        <div class="rest-brand">
+                            <img src="assets/images/restaurants/logos/giraffas.png" class="responsive-img" alt="">
+                        </div>
                         <img class="activator" src="assets/images/restaurants/giraffas.jpg">
                     </div>
                     <div class="card-content">

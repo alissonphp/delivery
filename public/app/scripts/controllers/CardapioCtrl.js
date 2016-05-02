@@ -50,34 +50,57 @@ ctrlApp.controller('CardapioCtrl', ['$scope','EmpresaFactory', '$state', 'ngNoti
 
         $scope.pushSubItem = function() {
             var subItem = $scope.subitem;
-            $scope.variacoes.push(subItem);
+            if(!$scope.item.variacoes) {
+                $scope.variacoes.push(subItem);
+                $scope.item.variacoes = $scope.variacoes;
+            } else {
+                $scope.item.variacoes.push(subItem);
+            }
             $scope.subitem = null;
-            $scope.item.variacoes = $scope.variacoes;
             $('#myModal').modal('hide');
         };
 
         $scope.pushTamanho = function() {
             var tamanho = $scope.tamanho;
-            $scope.tamanhos.push(tamanho);
+            if(!$scope.item.tamanhos) {
+                $scope.tamanhos.push(tamanho);
+                $scope.item.tamanhos = $scope.tamanhos;
+            } else {
+                $scope.item.tamanhos.push(tamanho);
+            }
             $scope.tamanho = null;
-            $scope.item.tamanhos = $scope.tamanhos;
             $('#modalTamanho').modal('hide');
         };
 
         $scope.pushTipo = function() {
             var tipo = $scope.tipo;
-            $scope.tipos.push(tipo);
+            if(!$scope.item.tipos) {
+                $scope.tipos.push(tipo);
+                $scope.item.tipos = $scope.tipos;
+            } else {
+                $scope.item.tipos.push(tipo);
+            }
             $scope.tipo = null;
-            $scope.item.tipos = $scope.tipos;
             $('#modalTipo').modal('hide');
+
         };
 
         $scope.pushSabor = function() {
             var sabor = $scope.sabor;
-            $scope.sabores.push(sabor);
+            if(!$scope.item.sabores) {
+                $scope.sabores.push(sabor);
+                $scope.item.sabores = $scope.sabores;
+            } else {
+                $scope.item.sabores.push(sabor);
+            }
             $scope.sabor = null;
-            $scope.item.sabores = $scope.sabores;
             $('#modalSabor').modal('hide');
+        };
+
+        $scope.removeSectionPizza = function(section,item){
+            var sectionItem = 'item.'+section;
+            $scope.$eval(sectionItem).splice(item, 1);
+            ngNotify.set('Item removido', 'success');
         };
 
         $scope.removeItem = function(item) {
@@ -95,10 +118,29 @@ ctrlApp.controller('CardapioCtrl', ['$scope','EmpresaFactory', '$state', 'ngNoti
             }
         };
 
+        $scope.removeVariacao = function(subItem) {
+            if($scope.item.variacoes.length == 1) {
+                ngNotify.set('Deve haver pelo menos uma variação no item', 'error');
+            } else {
+                $scope.item.variacoes.splice(subItem, 1);
+                ngNotify.set('Variação removida', 'success');
+            }
+        };
+
         $scope.storeItens = function(){
             $http.post(CONFIG.API+'empresacardapio/storeitens/'+$stateParams.id, {itens: $scope.novosItens}).then(function (r) {
                 //console.log(r.data);
                 ngNotify.set('Todos os itens adicionados ao cardápio com sucesso!', 'success');
+                $state.go('itensCardapio', {id: r.data});
+            }, function (e) {
+                ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
+            });
+        };
+
+        $scope.updateItem = function(){
+            $http.post(CONFIG.API+'empresacardapio/updateitem/'+$stateParams.item, {item: $scope.item, cardapio: $stateParams.cardapio}).then(function (r) {
+                //console.log(r.data);
+                ngNotify.set('Item atualizado!', 'success');
                 $state.go('itensCardapio', {id: r.data});
             }, function (e) {
                 ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
@@ -136,7 +178,6 @@ ctrlApp.controller('CardapioCtrl', ['$scope','EmpresaFactory', '$state', 'ngNoti
                     $scope.item.tipos = composicao.tipos;
                     $scope.item.sabores = composicao.sabores;
                 }
-                console.log($scope.item);
             }, function (e) {
                 ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
             });
