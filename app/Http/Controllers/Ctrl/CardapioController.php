@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ctrl;
 
 use App\Http\Controllers\Controller;
 use App\Models\CardapioItem;
+use App\Models\CardapioItemVariacoes;
 use App\Models\Empresa;
 use App\Models\EmpresaCardapio;
 use Illuminate\Http\Request;
@@ -63,18 +64,105 @@ class CardapioController extends Controller
     public function postStoreitens(Request $request, $id)
     {
         $cardapio = EmpresaCardapio::find($id);
+
         foreach($request->input('itens') as $item){
             $it = new CardapioItem();
             $it->cardapio()->associate($cardapio);
-            $it->item = $item['item'];
-            $it->descricao = $item['descricao'];
-            $it->preco = $item['preco'];
-            $it->porcao = $item['porcao'];
-            $it->ativo = $item['ativo'];
-            $it->save();
+            if($item['categoria'] == "Comum") {
+                $it->item = $item['item'];
+                $it->preco = $item['preco'];
+                $it->categoria = $item['categoria'];
+                $it->ativo = $item['ativo'];
+                if(isset($item['descricao'])){
+                    $it->descricao = $item['descricao'];
+                }
+                if(isset($item['porcao'])){
+                    $it->porcao = $item['porcao'];
+                }
+                $it->save();
+
+                if(isset($item['variacoes'])){
+                    foreach($item['variacoes'] as $v) {
+                        $variacao = new CardapioItemVariacoes();
+                        $variacao->item()->associate($it);
+                        $variacao->rotulo = $v['rotulo'];
+                        $variacao->preco = $v['preco'];
+                        $variacao->save();
+                    }
+                }
+            } else {
+                $composicao = [];
+                $composicao['tamanhos'] = $item['tamanhos'];
+                $composicao['tipos'] = $item['tipos'];
+                $composicao['sabores'] = $item['sabores'];
+                $it->item = "Pizza";
+                $it->categoria = "Pizza";
+                $it->preco = "0.00";
+                $it->ativo = 1;
+                $it->composicao = json_encode($composicao);
+                $it->save();
+            }
         }
+
         return response($id, 200);
     }
+    public function postUpdateitem(Request $request, $id){
+
+        $it = CardapioItem::find($id);
+        $item = $request->input('item');
+        if($item['categoria'] == "Comum") {
+            $it->item = $item['item'];
+            $it->preco = $item['preco'];
+            $it->categoria = $item['categoria'];
+            $it->ativo = $item['ativo'];
+            if(isset($item['descricao'])){
+                $it->descricao = $item['descricao'];
+            }
+            if(isset($item['porcao'])){
+                $it->porcao = $item['porcao'];
+            }
+            $it->save();
+
+            $this->clearVariations($id);
+
+            if(isset($item['variacoes'])){
+                foreach($item['variacoes'] as $v) {
+                    $variacao = new CardapioItemVariacoes();
+                    $variacao->item()->associate($it);
+                    $variacao->rotulo = $v['rotulo'];
+                    $variacao->preco = $v['preco'];
+                    $variacao->save();
+                }
+            }
+
+        } else {
+            $composicao = [];
+            $composicao['tamanhos'] = $item['tamanhos'];
+            $composicao['tipos'] = $item['tipos'];
+            $composicao['sabores'] = $item['sabores'];
+            $it->item = "Pizza";
+            $it->categoria = "Pizza";
+            $it->preco = "0.00";
+            $it->ativo = 1;
+            $it->composicao = json_encode($composicao);
+            $it->save();
+        }
+
+        return response($item['cardapio_id'], 200);
+
+    }
+
+    public function clearVariations($id) {
+        $vars = CardapioItemVariacoes::where('cardapio_items_id',$id)->get();
+        try {
+            foreach($vars as $v) {
+                CardapioItemVariacoes::find($v->id)->delete();
+            }
+        } catch(\Exception $ex) {
+            return $ex->getMessage();
+        }
+    }
+
     public function deleteDeleteitens($id)
     {
         try {
@@ -90,9 +178,10 @@ class CardapioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getShow($id)
     {
-        return Plano::find($id);
+        $item = CardapioItem::where('id',$id)->with('variacao')->get();
+        return json_encode($item[0]);
     }
 
 

@@ -1,0 +1,29 @@
+<div>
+    <a ui-sref="pagamentos" class="pull-right btn btn-primary btn-outline btn-rounded">
+        <i class="glyphicon glyphicon-circle-arrow-left"></i>
+        VOLTAR PARA LISTAGEM
+    </a>
+
+    <h2>Gerenciamento
+        <small>Formas de Pagamento:</small>
+    </h2>
+    <div class=jumbotron>
+        <div class=container>
+            <h1>Cadastrar nova:</h1>
+            <form ng-submit="store()">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Forma:</label>
+                        <input type="text" ng-model="pagamento.forma" required class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <br>
+                        <button type="submit" class="btn btn-success col-md-12">CADASTRAR</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

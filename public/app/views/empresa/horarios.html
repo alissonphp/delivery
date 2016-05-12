@@ -1,0 +1,104 @@
+<div>
+    <a ui-sref="empresas" class="pull-right btn btn-primary btn-outline btn-rounded">
+        <i class="glyphicon glyphicon-circle-arrow-left"></i>
+        VOLTAR PARA LISTAGEM
+    </a>
+
+    <h2>Gerenciamento
+        <small>Empresas:</small>
+    </h2>
+    <div class="jumbotron">
+        <div class="container" ng-init="loadHorarios()">
+            <h1>Horários de Funcionamento: <small>{{ info.fantasia }}</small></h1>
+            <p> Formato: informar hora, minuto e segundo (18:30:00) </p>
+            <p> Quando o fechamento for 0hr informar <strong>23:59:59</strong> </p>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th width="40%">Dia da semana</th>
+                                <th>Abertura</th>
+                                <th>Fechamento</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Segunda-feira</td>
+                                <td>
+                                    <input type="text" ng-model="empresaHorarios[1]['abertura']" class="form-control">
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="empresaHorarios[1]['fechamento']" class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Terça-feira</td>
+                                <td>
+                                    <input type="text" ng-model="empresaHorarios[2]['abertura']" class="form-control">
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="empresaHorarios[2]['fechamento']" class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Quarta-feira</td>
+                                <td>
+                                    <input type="text" ng-model="empresaHorarios[3]['abertura']" class="form-control">
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="empresaHorarios[3]['fechamento']" class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Quinta-feira</td>
+                                <td>
+                                    <input type="text" ng-model="empresaHorarios[4]['abertura']" class="form-control">
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="empresaHorarios[4]['fechamento']" class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sexta-feira</td>
+                                <td>
+                                    <input type="text" ng-model="empresaHorarios[5]['abertura']" class="form-control">
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="empresaHorarios[5]['fechamento']" class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sábado</td>
+                                <td>
+                                    <input type="text" ng-model="empresaHorarios[6]['abertura']" class="form-control">
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="empresaHorarios[6]['fechamento']" class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Domingo</td>
+                                <td>
+                                    <input type="text" ng-model="empresaHorarios[7]['abertura']" class="form-control">
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="empresaHorarios[7]['fechamento']" class="form-control">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <br>
+                    <button type="button" ng-click="defineHorarios()" class="btn btn-lg btn-success col-md-12">DEFINIR HORÁRIOS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Empresa extends Model
 {
-    protected $fillable = ['razao','fantasia','cnpj','responsavel','telefone_delivery'];
+    protected $fillable = ['razao','fantasia','cnpj','responsavel','telefone_delivery', 'telefone_delivery2', 'taxa_entrega'];
     public function endereco()
     {
         return $this->hasOne('App\Models\EmpresaEndereco', 'empresa_id');
@@ -38,5 +38,17 @@ class Empresa extends Model
     public function empresacategoria()
     {
         return $this->hasMany('App\Models\EmpresaCategoria','empresa_id');
+    }
+    public function bairros()
+    {
+        return $this->belongsToMany('App\Models\Bairro', 'empresa_bairros', 'empresa_id', 'bairro_id');
+    }
+    public function pagamentos()
+    {
+        return $this->belongsToMany('App\Models\Pagamento', 'empresa_pagamentos', 'empresa_id', 'pagamento_id');
+    }
+    public function funcionamento()
+    {
+        return $this->hasMany('App\Models\Funcionamento', 'empresa_id');
     }
 }

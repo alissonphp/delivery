@@ -1,0 +1,38 @@
+<div>
+    <a ui-sref="empresas" class="pull-right btn btn-primary btn-outline btn-rounded">
+        <i class="glyphicon glyphicon-circle-arrow-left"></i>
+        VOLTAR PARA LISTAGEM
+    </a>
+
+    <h2>Gerenciamento
+        <small>Empresas:</small>
+    </h2>
+    <div class="jumbotron">
+        <div class="container" ng-init="loadPagamentos()">
+            <h1>Formas de Pagamento Aceitas: <small>{{ info.fantasia }}</small></h1>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="text" ng-model="search" class="form-control" placeholder="Filtrar ... ">
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-3" ng-repeat="pagamento in allPagamentos | filter:search">
+                        <label>
+                            <input type="checkbox" data-checklist-model="empresaPagamentos" data-checklist-value="pagamento.id"> {{pagamento.forma}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <br>
+                    <button type="button" ng-click="definePagamentos()" class="btn btn-lg btn-success col-md-12">DEFINIR FORMAS DE PAGAMENTO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

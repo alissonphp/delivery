@@ -1,7 +1,10 @@
-ctrlApp.controller('EmpresaCtrl', ['$scope', '$state', 'EmpresaFactory', 'CategoriaFactory', 'PlanoFactory', 'ngNotify', '$http', '$stateParams', 'CONFIG', 'Upload',
-    function ($scope, $state, EmpresaFactory, CategoriaFactory, PlanoFactory, ngNotify, $http, $stateParams, CONFIG, Upload) {
+ctrlApp.controller('EmpresaCtrl', ['$scope', '$state', 'EmpresaFactory', 'BairroFactory', 'PagamentoFactory', 'CategoriaFactory', 'PlanoFactory', 'ngNotify', '$http', '$stateParams', 'CONFIG', 'Upload',
+    function ($scope, $state, EmpresaFactory, BairroFactory, PagamentoFactory, CategoriaFactory, PlanoFactory, ngNotify, $http, $stateParams, CONFIG, Upload) {
         $scope.empresas = EmpresaFactory.query();
         $scope.categorias = CategoriaFactory.query();
+        if($stateParams.id) {
+            $scope.info = EmpresaFactory.get({id: $stateParams.id});
+        }
         $scope.store = function () {
             var data = $scope.empresa;
             var categorias = [];
@@ -111,6 +114,62 @@ ctrlApp.controller('EmpresaCtrl', ['$scope', '$state', 'EmpresaFactory', 'Catego
                 //console.log(r.data);
                 $state.go('empresas');
             }, function (e) {
+                ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
+            });
+        };
+        $scope.loadBairros = function() {
+            $scope.allBairros = BairroFactory.query();
+            $scope.empresaBairros = [];
+            $http.get(CONFIG.API+'empresainfos/empresabairros/'+$stateParams.id).then(function(r){
+                angular.forEach(angular.fromJson(r.data), function(obj){
+                    $scope.empresaBairros.push(obj['id']);
+                });
+            }, function(e){
+                ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
+            });
+        };
+        $scope.defineBairros = function() {
+            $http.post(CONFIG.API+'empresainfos/definebairros/'+$stateParams.id, {bairros: $scope.empresaBairros}).then(function(r){
+                ngNotify.set('Bairros de entrega denifinos com sucesso!', 'success');
+                $state.go('empresas');
+            }, function(e){
+                ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
+            });
+        };
+        $scope.loadPagamentos = function() {
+            $scope.allPagamentos = PagamentoFactory.query();
+            $scope.empresaPagamentos = [];
+            $http.get(CONFIG.API+'empresainfos/empresapagamentos/'+$stateParams.id).then(function(r){
+                angular.forEach(angular.fromJson(r.data), function(obj){
+                    $scope.empresaPagamentos.push(obj['id']);
+                });
+            }, function(e){
+                ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
+            });
+        };
+        $scope.definePagamentos = function() {
+            $http.post(CONFIG.API+'empresainfos/definepagamentos/'+$stateParams.id, {pagamentos: $scope.empresaPagamentos}).then(function(r){
+                ngNotify.set('Forma de pagamento definidas com sucesso!', 'success');
+                $state.go('empresas');
+            }, function(e){
+                ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
+            });
+        };
+        $scope.loadHorarios = function() {
+            $scope.empresaHorarios = {};
+            $http.get(CONFIG.API+'empresainfos/empresahorarios/'+$stateParams.id).then(function(r){
+                angular.forEach(angular.fromJson(r.data), function(obj){
+                    $scope.empresaHorarios[obj['dia']] = obj;
+                });
+            }, function(e){
+                ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
+            });
+        };
+        $scope.defineHorarios = function() {
+            $http.post(CONFIG.API+'empresainfos/definehorarios/'+$stateParams.id, {horarios: $scope.empresaHorarios}).then(function(r){
+                ngNotify.set('Horários de funcionamento definidos com sucesso!', 'success');
+                $state.go('empresas');
+            }, function(e){
                 ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
             });
         };

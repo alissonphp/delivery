@@ -6,6 +6,7 @@ var ctrlApp = angular.module('ctrlApp', [
         'ngStorage',
         'ngNotify',
         'ngFileUpload',
+        'checklist-model',
         'datatables'
     ])
     .filter('dateParse', function() {

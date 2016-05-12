@@ -10,4 +10,9 @@ class CardapioItem extends Model
     {
         return $this->belongsTo('App\Models\EmpresaCardapio', 'cardapio_id');
     }
+
+    public function variacao()
+    {
+        return $this->hasMany('App\Models\CardapioItemVariacoes','cardapio_items_id');
+    }
 }

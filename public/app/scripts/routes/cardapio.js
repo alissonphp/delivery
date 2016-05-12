@@ -23,5 +23,11 @@ ctrlApp.config(function ($stateProvider) {
             parent: "dashboard",
             templateUrl: "/app/views/empresa/cardapio/insert-itens.html",
             controller: "CardapioCtrl"
+        })
+        .state("editItem", {
+            url: "/cadastros/empresas/cardapio/itens/editar/:cardapio/:item",
+            parent: "dashboard",
+            templateUrl: "/app/views/empresa/cardapio/edit-item.html",
+            controller: "CardapioCtrl"
         });
 });

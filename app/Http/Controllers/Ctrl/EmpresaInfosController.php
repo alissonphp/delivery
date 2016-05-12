@@ -8,6 +8,7 @@ use App\Models\EmpresaEndereco;
 use App\Models\EmpresaImagem;
 use App\Models\EmpresaPlano;
 use App\Models\EmpresaSocial;
+use App\Models\Funcionamento;
 use App\Models\Plano;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -161,5 +162,55 @@ class EmpresaInfosController extends Controller
         $imgEmpresa->save();
         return response('ok', 200);
 
+    }
+    public function getEmpresabairros($id)
+    {
+        $empresa = Empresa::find($id);
+        return $empresa->bairros;
+    }
+    public function postDefinebairros($id, Request $request)
+    {
+        $empresa = Empresa::find($id);
+        $empresa->bairros()->detach();
+        $empresa->bairros()->attach($request->input('bairros'));
+        return response('ok',200);
+    }
+    public function getEmpresapagamentos($id)
+    {
+        $empresa = Empresa::find($id);
+        return $empresa->pagamentos;
+    }
+    public function postDefinepagamentos($id, Request $request)
+    {
+        $empresa = Empresa::find($id);
+        $empresa->pagamentos()->detach();
+        $empresa->pagamentos()->attach($request->input('pagamentos'));
+        return response('ok',200);
+    }
+    public function getEmpresahorarios($id)
+    {
+        $empresa = Empresa::find($id);
+        return $empresa->funcionamento;
+    }
+    public function postDefinehorarios($id, Request $request)
+    {
+        $empresa = Empresa::find($id);
+        foreach($request->input('horarios') as $dia => $hro) {
+            $item = Funcionamento::where('empresa_id',$id)->where('dia',$dia)->first();
+            if(count($item) > 0) {
+                $item->abertura = $hro['abertura'];
+                $item->fechamento = $hro['fechamento'];
+                $item->save();
+            }
+            else {
+                $func = new Funcionamento();
+                $func->empresa_id = $id;
+                $func->dia = $dia;
+                $func->abertura = $hro['abertura'];
+                $func->fechamento = $hro['fechamento'];
+                $func->save();
+            }
+        }
+        return response('ok',200);
     }
 }

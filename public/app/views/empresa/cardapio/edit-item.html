@@ -1,30 +1,21 @@
-<div ng-init="itens()">
-    <a ui-sref="itensCardapio({id: data.id })" class="pull-right btn btn-success btn-outline btn-rounded">
+<div ng-init="editItem()">
+    <a ui-sref="itensCardapio({id: item.cardapio_id })" class="pull-right btn btn-success btn-outline btn-rounded">
         <i class="glyphicon glyphicon-plus"></i>
         VOLTAR A LISTA DE ITENS
     </a>
 
     <h2>Gerenciamento
-        <small>Cardápio:</small>
+        <small>Item do Cardápio:</small>
     </h2>
     <div class=jumbotron>
         <div class=container>
-            <h1>Itens <small>Cardápio: {{ data.rotulo }}</small></h1>
+            <h1>Itens <small>Item: {{ item.item }}</small></h1>
             <div class="row">
                 <div class="col-md-7">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Informe os dados do item:</div>
+                        <div class="panel-heading">Dados do item:</div>
                         <div class="panel-body">
-                            <form ng-submit="pushItem()" novalidate>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>
-                                            <select class="form-control" name="categoria" id="categoria" ng-model="item.categoria">
-                                                <option ng-repeat="categoria in categorias" value="{{categoria}}">{{categoria}}</option>
-                                            </select>
-                                        </label>
-                                    </div>
-                                </div>
+                            <form ng-submit="updateItem(item.id)" novalidate>
                                 <div ng-show="item.categoria == 'Comum'">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -51,7 +42,7 @@
                                             <ul class="list-group">
                                                 <li class="list-group-item" ng-repeat="sub in item.variacoes">
                                                     <span class="badge">{{ sub.preco | currency:"R$ " }}</span>
-                                                    {{ sub.rotulo }}
+                                                    {{ sub.rotulo }} <a href="" ng-click="removeVariacao($index)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -72,6 +63,59 @@
                                             </select>
                                         </div>
                                     </div>
+
+                                    <div ng-show="item.categoria == 'Pizza'">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4>Tamanhos da Pizza: <small><a href="" data-toggle="modal" data-target="#modalTamanho"> <i class="glyphicon glyphicon-plus-sign"></i> </a></small></h4>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item" ng-repeat="tamanho in item.tamanhos">
+                                                        {{ tamanho.tamanho }} <span class="text-warning" ng-show="tamanho.sabor">| {{ tamanho.sabor }} sabores</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" ng-show="item.tamanhos">
+                                            <div class="col-md-12">
+                                                <h4>Tipos de Massa: <small><a href="" data-toggle="modal" data-target="#modalTipo"> <i class="glyphicon glyphicon-plus-sign"></i> </a></small></h4>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item" ng-repeat="tipo in item.tipos">
+                                                        {{ tipo.tipo}}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" ng-show="item.tamanhos">
+                                            <div class="col-md-12">
+                                                <h4>Sabores de Pizza: <small><a href="" data-toggle="modal" data-target="#modalSabor"> <i class="glyphicon glyphicon-plus-sign"></i> </a></small></h4>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item" ng-repeat="sabor in item.sabores">
+                                                        <strong>{{ sabor.sabor}}</strong>
+                                                        <ul>
+                                                            <li ng-repeat="(k, v) in sabor.preco">
+                                                                {{ k }} | {{ v | currency:"R$ " }}
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <br>
                                 </div>
                                 <div ng-show="item.categoria == 'Pizza'">
@@ -84,7 +128,7 @@
                                         <div class="col-md-12">
                                             <ul class="list-group">
                                                 <li class="list-group-item" ng-repeat="tamanho in item.tamanhos">
-                                                    {{ tamanho.tamanho }} <span class="text-warning" ng-show="tamanho.sabor">| {{ tamanho.sabor }} sabores</span>
+                                                    {{ tamanho.tamanho }} <span class="text-warning" ng-show="tamanho.sabor">| {{ tamanho.sabor }} sabores</span> <a href="" ng-click="removeSectionPizza('tamanhos',$index)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -99,7 +143,7 @@
                                         <div class="col-md-12">
                                             <ul class="list-group">
                                                 <li class="list-group-item" ng-repeat="tipo in item.tipos">
-                                                    {{ tipo.tipo}}
+                                                    {{ tipo.tipo}} <a href="" ng-click="removeSectionPizza('tipos',$index)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -114,7 +158,7 @@
                                         <div class="col-md-12">
                                             <ul class="list-group">
                                                 <li class="list-group-item" ng-repeat="sabor in item.sabores">
-                                                    <strong>{{ sabor.sabor}}</strong>
+                                                    <strong>{{ sabor.sabor}}</strong> <a href="" ng-click="removeSectionPizza('sabores',$index)"> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
                                                     <ul>
                                                         <li ng-repeat="(k, v) in sabor.preco">
                                                             {{ k }} | {{ v | currency:"R$ " }}
@@ -125,10 +169,9 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row" ng-show="item.categoria != null">
                                     <div class="col-md-12">
-                                        <button class="btn btn-primary col-md-5" type="submit">PREPARAR ITEM</button>
+                                        <button class="btn btn-primary col-md-5" type="submit">ATUALIZAR ITEM</button>
                                         <button ng-show="item.categoria != 'Pizza'" ng-click="openModal()" class="btn btn-default col-md-5 col-md-offset-2" type="button">ADICIONAR VARIAÇÃO</button>
                                     </div>
                                 </div>
@@ -136,47 +179,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Itens preparados:</div>
-                        <div class="panel-body">
-                            <ul class="list-group">
-                                <li class="list-group-item" ng-repeat="item in novosItens">
 
-                                    <div ng-show="item.categoria == 'Comum'">
-                                        <span class="badge" ng-hide="item.variacoes.length > 0">{{ item.preco | currency:"R$ " }}</span>
-
-                                        {{ item.item }} <a href="" ng-click="removeItem($index)" class="text-danger"> <i class="glyphicon glyphicon-trash"></i></a>
-
-                                        <ul ng-show="item.variacoes.length > 0">
-                                            <li ng-repeat="sub in item.variacoes">
-                                                {{ sub.rotulo }} <a href="" ng-click="removeSubItem($index)" class="text-danger"> <i class="glyphicon glyphicon-trash"></i></a> <span class="badge">{{ sub.preco | currency:"R$ " }}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div ng-show="item.categoria == 'Pizza'">
-                                        Pizza <a href="" ng-click="removeItem($index)" class="text-danger"> <i class="glyphicon glyphicon-trash"></i></a>
-                                        <ul>
-                                            <li ng-repeat="sabor in item.sabores">
-                                                <strong>{{ sabor.sabor}}</strong><br>
-                                                <small>{{ sabor.descricao }}</small>
-                                                <ul>
-                                                    <li ng-repeat="(k, v) in sabor.preco">
-                                                        {{ k }} | {{ v | currency:"R$ " }}
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-
-                                </li>
-                            </ul>
-                            <a href="" ng-click="storeItens()" ng-show="novosItens.length > 0" class="btn btn-success col-md-12"><i class="glyphicon glyphicon-save"></i> SALVAR ITENS NO CARDÁPIO </a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -234,6 +237,11 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="radio" name="sabores" ng-model="tamanho.sabor" value=""> Normal
+                                </label>
+                            </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="radio" name="sabores" ng-model="tamanho.sabor" value="2"> 2 Sabores
@@ -299,14 +307,12 @@
                             <input name="sabor" type="text" ng-model="sabor.sabor" class="form-control">
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-12">
                             <label>Descrição:</label>
                             <textarea ng-model="sabor.descricao" class="form-control"></textarea>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-12">
                             <h3>Preços:</h3>
@@ -332,6 +338,7 @@
                             </table>
                         </div>
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>

@@ -16,7 +16,6 @@
                     <th>#</th>
                     <th>Razão</th>
                     <th>Fantasia</th>
-                    <th>CNPJ</th>
                     <th>Responsável</th>
                     <th>Registrado</th>
                     <th></th>
@@ -27,7 +26,6 @@
                     <td>{{ empresa.id }}</td>
                     <td>{{ empresa.razao }}</td>
                     <td>{{ empresa.fantasia }}</td>
-                    <td>{{ empresa.cnpj }}</td>
                     <td>{{ empresa.responsavel }}</td>
                     <td>{{ empresa.created_at | dateParse | date:'short'}}</td>
                     <td>
@@ -41,11 +39,20 @@
                             <a ui-sref="empresaCardapio({id: empresa.id})" class="btn btn-default" title="Gerenciar Cardápios">
                                 <i class="glyphicon glyphicon-list"></i>
                             </a>
-                            <a ui-sref="ticketEmpresa({id: empresa.id})" class="btn btn-default" title="Gerenciar Tickets">
-                                <i class="glyphicon glyphicon-asterisk"></i>
+                            <!--<a ui-sref="ticketEmpresa({id: empresa.id})" class="btn btn-default" title="Gerenciar Tickets">-->
+                                <!--<i class="glyphicon glyphicon-asterisk"></i>-->
+                            <!--</a>-->
+                            <a ui-sref="horariosEmpresa({id: empresa.id})" class="btn btn-default" title="Horários de Funcionamento">
+                                <i class="glyphicon glyphicon-time"></i>
                             </a>
                             <a ui-sref="imgsEmpresa({id: empresa.id})" class="btn btn-default" title="Imagens">
                                 <i class="glyphicon glyphicon-picture"></i>
+                            </a>
+                            <a ui-sref="pagamentosEmpresa({id: empresa.id})" class="btn btn-default" title="Formas de Pagamento">
+                                <i class="glyphicon glyphicon-credit-card"></i>
+                            </a>
+                            <a ui-sref="bairrosEmpresa({id: empresa.id})" class="btn btn-warning" title="Bairros de Entrega">
+                                <i class="glyphicon glyphicon-map-marker"></i>
                             </a>
                             <a class="btn btn-danger" ng-click="delete(empresa.id)" title="Excluir">
                                 <i class="glyphicon glyphicon-trash"></i>
