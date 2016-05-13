@@ -49,6 +49,9 @@ p {
   height: auto;
   color: rgba(255,255,255,.9);
 }
+.timeline {
+  min-height: 400px !important;
+}
 .fadeOut {
   opacity: 0.2;
 }

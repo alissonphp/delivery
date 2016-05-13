@@ -76,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="search-especialidades" class="col m10 offset-m1 valign back-transp search-item">
+                <div id="search-especialidades" class="col m10 offset-m1 back-transp search-item">
                     <div class="close-box">
                         <i class="material-icons" title="Voltar">backspace</i>
                     </div>
@@ -86,8 +86,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col m4">
-                            - Massas
+                        <div class="col m12">
+                            @foreach($categorias as $c)
+                                <h6>{{ $c->categoria }}</h6>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -198,7 +200,7 @@
     </div>
 </div>
 
-<div class="parallax-container valign-wrapper">
+<div class="parallax-container timeline valign-wrapper">
     <!--<div class="section no-pad-bot">-->
     <!--<div class="container">-->
     <!--<div class="row center">-->
@@ -207,7 +209,7 @@
     <!--</div>-->
     <!--</div>-->
     <div class="parallax">
-        <img src="assets/images/backgrounds/tutorial.png" alt="Unsplashed background img 2">
+        <img src="assets/images/logo/timeline1.png" alt="Unsplashed background img 2">
     </div>
 </div>
 
@@ -230,33 +232,36 @@
         <div class="row">
             <div class="col l6 s12">
                 <h5 class="">Delivery Clube</h5>
-                <p class="grey lighten-2">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+                <p>
+                    O Delivery Clube nasceu em 2014, após a necessidade de se comer algo diferente, além da
+                    tradicional pizza, no conforto do lar.
+                </p>
 
 
             </div>
             <div class="col l3 s12">
-                <h5 class="white-text">Settings</h5>
+                <h5 class="white-text">Sobre</h5>
                 <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
+                    <li><a class="white-text" href="#!">Conheça o Delivery Clube</a></li>
+                    <li><a class="white-text" href="#!">Anuncie Conosco</a></li>
+                    <li><a class="white-text" href="#!">Entre em contato</a></li>
+                    <li><a class="white-text" href="#!">Cadastrar/Entrar</a></li>
                 </ul>
             </div>
             <div class="col l3 s12">
-                <h5 class="white-text">Connect</h5>
+                <h5 class="white-text">Contato</h5>
                 <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
+                    <li><a class="white-text" href="#!">(98) 3221-5544</a></li>
+                    <li><a class="white-text" href="#!">contato@deliveryclube.com.br</a></li>
+                    <li><a class="white-text" href="#!">Av. Central N 541 - Coahama, São Luís - MA</a></li>
+                    <li><a class="white-text" href="#!">CEP: 65055-445</a></li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="footer-copyright">
         <div class="container">
-            Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+            Copyright 2016. Delivery Clube
         </div>
     </div>
 </footer>
