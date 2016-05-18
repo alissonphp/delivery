@@ -1,42 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt_BR">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <title>Delivery Clube</title>
-
-    <!-- CSS  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="assets/css/animate.css" type="text/css" rel="stylesheet"/>
-</head>
-<body>
-<div class="navbar-fixed">
-    <nav class="red darken-1" role="navigation">
-        <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">
-                <img src="assets/images/logo/primary-logo-png-transp-mini-header.png" alt="">
-            </a>
-            <span class="slogan flow-text">Seu guia de delivery em São Luís</span>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="#" class="white-text">Sobre</a></li>
-                <li><a href="#" class="white-text">Anuncie</a></li>
-                <li><a href="#" class="white-text">Contato</a></li>
-                <li><a href="#" class="white-text">Entrar/Cadastrar</a></li>
-            </ul>
-
-            <ul id="nav-mobile" class="side-nav">
-                <li><a href="#">Sobre</a></li>
-                <li><a href="#">Anuncie</a></li>
-                <li><a href="#">Contato</a></li>
-                <li><a href="#">Entrar/Cadastrar</a></li>
-            </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse white-text"><i class="material-icons">menu</i></a>
-        </div>
-    </nav>
-</div>
-
+@extends('site.base')
+@section('css')
+    @parent
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.css') }}">
+    @stop
+@section('content')
 <div id="index-banner" class="parallax-container valign-wrapper">
     <div class="section no-pad-bot">
         <div class="container">
@@ -44,53 +11,145 @@
                 <div class="col m10 offset-m1 valign back-transp search-tools animated fadeInRight">
                     <div class="row">
                         <div class="col m12">
-                            <h4 class="bordered header center white-text text-lighten-2">Pesquise e monte o seu pedido :)</h4>
+                            <h4 class="bordered header center white-text text-lighten-2">Pesquise e simule o seu pedido :)</h4>
                         </div>
                     </div>
                     <div class="row center">
-                        <div class="col m3">
-                            <a href="#" class="white-text">
+                        <div class="col m3 s12">
+                            <a href="#search-especialidades" class="white-text">
                                 <div class="bt-search">
                                     <i class="material-icons big">list</i>
                                     <p>Especialidades</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col m3">
-                            <a href="#" class="white-text">
-                                <i class="material-icons big">restaurant</i>
-                                <p>Restaurantes</p>
+                        <div class="col m3 s12">
+                            <a href="#search-restaurantes" class="white-text">
+                                <div class="bt-search">
+                                    <i class="material-icons big">restaurant</i>
+                                    <p>Restaurantes</p>
+                                </div>
                             </a>
                         </div>
-                        <div class="col m3">
-                            <a href="#" class="white-text">
-                                <i class="material-icons big">star</i>
-                                <p>Mais Avaliados</p>
+                        <div class="col m3 s12">
+                            <a href="#search-avaliados" class="white-text">
+                                <div class="bt-search">
+                                    <i class="material-icons big">star</i>
+                                    <p>Mais Avaliados</p>
+                                </div>
                             </a>
                         </div>
-                        <div class="col m3">
-                            <a href="#" class="white-text">
-                                <i class="material-icons big">place</i>
-                                <p>Bairros de Entrega</p>
+                        <div class="col m3 s12">
+                            <a href="#search-bairros" class="white-text">
+                                <div class="bt-search">
+                                    <i class="material-icons big">place</i>
+                                    <p>Bairros de Entrega</p>
+                                </div>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div id="search-especialidades" class="col m10 offset-m1 valign back-transp search-item">
+
+                <div id="search-especialidades" class="col m10 s12 offset-m1 valign back-transp search-item">
                     <div class="close-box">
                         <i class="material-icons" title="Voltar">backspace</i>
                     </div>
                     <div class="row">
-                        <div class="col m12">
+                        <div class="col m12 s12">
                             <h4 class="header white-text text-lighten-2"> Especialidades</h4>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col m4">
-                            - Massas
+                        <div class="col m12 s12">
+                            <div class="form-group">
+                                <select style="width: 100%" class="especialidades-search">
+                                    <option value="" selected> Selecione uma especialidade... </option>
+                                    @foreach($categorias as $c)
+                                        <option value="{{ $c->id }}">{{ $c->categoria }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col m12 s12">
+                            <button class="btn btn-large green col m12 s12">PESQUISAR RESTAURANTES <i class="material-icons right">search</i></button>
                         </div>
                     </div>
                 </div>
+
+                <div id="search-restaurantes" class="col m10 s12 offset-m1 valign back-transp search-item">
+                    <div class="close-box">
+                        <i class="material-icons" title="Voltar">backspace</i>
+                    </div>
+                    <div class="row">
+                        <div class="col m12 s12">
+                            <h4 class="header white-text text-lighten-2"> Restaurantes</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col m12 s12">
+                            <div class="form-group">
+                                <select style="width: 100%" class="restaurantes-search">
+                                    <option value="" selected> Pesquise por um restaurante... </option>
+                                    @foreach($restaurantes as $r)
+                                        <option value="{{ $r->id }}">{{ $r->fantasia}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col m12 s12">
+                            <button class="btn btn-large green col m12 s12">PESQUISAR RESTAURANTES <i class="material-icons right">search</i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="search-avaliados" class="col m10 s12 offset-m1 valign back-transp search-item">
+                    <div class="close-box">
+                        <i class="material-icons" title="Voltar">backspace</i>
+                    </div>
+                    <div class="row">
+                        <div class="col m12 s12">
+                            <h4 class="header white-text text-lighten-2"> Mais Avaliados</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col m12 s12">
+                            <p>Estamos coletando avaliações dos restaurantes! Em breve você poderá pesquisar pelos mais bem avaliados do Delivery Clube.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="search-bairros" class="col m10 s12 offset-m1 valign back-transp search-item">
+                    <div class="close-box">
+                        <i class="material-icons" title="Voltar">backspace</i>
+                    </div>
+                    <div class="row">
+                        <div class="col m12 s12">
+                            <h4 class="header white-text text-lighten-2"> Bairros de Entrega</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col m12 s12">
+                            <div class="form-group">
+                                <select style="width: 100%" class="bairros-search">
+                                    <option value="" selected> Informe o bairro de entrega... </option>
+                                    @foreach($bairros as $b)
+                                        <option value="{{ $b->id }}">{{ $b->bairro}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col m12 s12">
+                            <button class="btn btn-large green col m12 s12">PESQUISAR RESTAURANTES <i class="material-icons right">search</i></button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -148,7 +207,9 @@
                 <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
                         <div class="rest-brand">
-                            <img src="assets/images/uploads/{{ $p->empresa->imagens['logo'] }}" class="responsive-img" alt="">
+                            <a href="{{ action('Site\HomeController@getRestaurante', ['slug' => $p->empresa->slug]) }}">
+                                <img src="assets/images/uploads/{{ $p->empresa->imagens['logo'] }}" class="responsive-img" alt="">
+                            </a>
                         </div>
                         <img class="activator" src="assets/images/uploads/{{ $p->empresa->imagens['anuncio_cover'] }}">
                     </div>
@@ -172,7 +233,7 @@
                         </p>
                         <div class="row">
                             <div class="col m12">
-                                <a href="#" class="btn white col m12 red-text text-darken-3"> Cardápio Completo </a>
+                                <a href="{{ action('Site\HomeController@getRestaurante', ['slug' => $p->empresa->slug]) }}" class="btn white col m12 red-text text-darken-3"> Cardápio Completo </a>
                             </div>
                         </div>
                         <div class="row">
@@ -197,7 +258,6 @@
         </div>
     </div>
 </div>
-
 <div class="parallax-container valign-wrapper">
     <!--<div class="section no-pad-bot">-->
     <!--<div class="container">-->
@@ -207,7 +267,7 @@
     <!--</div>-->
     <!--</div>-->
     <div class="parallax">
-        <img src="assets/images/backgrounds/tutorial.png" alt="Unsplashed background img 2">
+        <img src="{{ asset('assets/images/backgrounds/tutorial.png')  }}" alt="Passo a passo">
     </div>
 </div>
 
@@ -224,48 +284,21 @@
 
     </div>
 </div>
-
-<footer class="page-footer red darken-1 white-text">
-    <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <h5 class="">Delivery Clube</h5>
-                <p class="grey lighten-2">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Settings</h5>
-                <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Connect</h5>
-                <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container">
-            Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-        </div>
-    </div>
-</footer>
-
-
-<!--  Scripts-->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="assets/js/materialize.js"></script>
-<script src="assets/js/init.js"></script>
-
-</body>
-</html>
+@stop
+@section('scripts')
+    @parent
+    <script type="text/javascript" src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.especialidades-search').select2({
+                placeholder: "Selecione uma especialidade..."
+            });
+            $('.restaurantes-search').select2({
+                placeholder: "Digite um nome de restaurante..."
+            });
+            $('.bairros-search').select2({
+                placeholder: "Informe o bairro de entrega..."
+            });
+        });
+    </script>
+    @stop

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Models\Bairro;
+use App\Models\Categorias;
+use App\Models\Empresa;
 use App\Models\EmpresaPlano;
 use Illuminate\Http\Request;
 
@@ -13,6 +16,37 @@ class HomeController extends Controller
     public function getIndex()
     {
         $empresasPremium = EmpresaPlano::where('plano_id',1)->orderByRaw("RAND()")->limit(6)->get();
-        return view('site.index',compact('empresasPremium'));
+        $categorias = Categorias::all(['id', 'categoria']);
+        $rests = Empresa::select('id','fantasia')->orderBy('fantasia','asc')->get();
+        $bairros = Bairro::select('id','bairro')->orderBy('bairro','asc')->get();
+        return view('site.index')
+            ->with('empresasPremium',$empresasPremium)
+            ->with('restaurantes',$rests)
+            ->with('bairros',$bairros)
+            ->with('categorias',$categorias);
+    }
+    public function getSobre()
+    {
+        return view('site.institucional.sobre');
+    }
+    public function getAnuncie()
+    {
+        return view('site.institucional.anuncie');
+    }
+    public function getRestaurante($slug)
+    {
+        $empresa = Empresa::where('slug', '=', $slug)->get();
+        return view('site.profile', compact('empresa'));
+    }
+
+    public function getSlug()
+    {
+        $empresas = Empresa::all();
+        foreach ($empresas as $empresa) {
+            $emp = Empresa::find($empresa->id);
+            $emp->slug = str_slug($empresa->fantasia);
+            $emp->save();
+        }
+    return 'ok';
     }
 }

@@ -6,11 +6,13 @@
     var classDefault = "col m10 offset-m1 valign back-transp search-tools animated fadeInRight";
     var classItem = "col m10 offset-m1 valign back-transp search-item";
 
-    $('.bt-search').click(function(){
+    $('.bt-search').click(function(e){
+      e.preventDefault();
       $(".search-tools").addClass('animated fadeOutLeft');
+      var targetBox = $(this).parent('a').attr('href');
       setTimeout(function() {
         $(".search-tools").hide();
-        $("#search-especialidades")
+        $(targetBox)
             .attr('style', 'display: block !important')
             .addClass('animated fadeInRight');
       }, 750);

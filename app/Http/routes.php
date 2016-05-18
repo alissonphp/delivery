@@ -1,6 +1,11 @@
 <?php
 
-Route::get('/', 'Site\HomeController@getIndex');
+//Route::get('/', 'Site\HomeController@getIndex');
+Route::group([], function(){
+    Route::controllers([
+            '/' => 'Site\HomeController'
+        ]);
+});
 Route::get('restaurante', function() { return view('site.profile'); });
 Route::get('pesquisa', function() { return view('site.pesquisa'); });
 Route::get('/ctrl', function () { return view('ctrl.app'); });
