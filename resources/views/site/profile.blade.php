@@ -42,13 +42,19 @@
                                             </div>
                                             <div class="col m3">
                                                 <div class="">
+                                                    @if($aberto)
                                                     <a href="#" title="ABERTO" class="btn btn-floating green">
                                                         <i class="material-icons white-text">alarm_on</i>
                                                     </a>
-                                                    <a href="#" title="Formas de Pagamento" class="btn btn-floating white">
+                                                    @else
+                                                        <a href="#" title="FECHADO" class="btn btn-floating red">
+                                                            <i class="material-icons white-text">alarm_off</i>
+                                                        </a>
+                                                    @endif
+                                                    <a href="#pagamentos" title="Formas de Pagamento" class="btn btn-floating white modal-trigger">
                                                         <i class="material-icons red-text">credit_card</i>
                                                     </a>
-                                                    <a href="#" title="Bairros de Entrega" class="btn btn-floating white">
+                                                    <a href="#bairros" title="Bairros de Entrega" class="btn btn-floating white modal-trigger">
                                                         <i class="material-icons red-text">place</i>
                                                     </a>
                                                 </div>
@@ -92,19 +98,19 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col m4 s12">
+                    <div class="col l4 m6 s12">
                         <br>
-                        <a class='dropdown-button btn col s12 grey lighten-3 black-text' href='#' data-activates='dropdown1'>
-                            <i class="material-icons left">restaurant</i> Seções do cardápio
+                        <a class='dropdown-button btn col s12 m12 l12 grey lighten-3 black-text' href='#' data-activates='dropdown1'>
+                            <i class="material-icons left">restaurant</i> Cardápio
                         </a>
 
                         <ul id='dropdown1' class='dropdown-content'>
-                            <li ng-repeat="cardapio in cardapios | orderBy: 'rotulo'">
+                            <li class="section-item" ng-repeat="cardapio in cardapios | orderBy: 'rotulo'">
                                 <a href="#<% cardapio.rotulo %>"><% cardapio.rotulo %></a>
                             </li>
                         </ul>
                     </div>
-                    <div class="col m8 s12">
+                    <div class="col l8 m6 s12">
                         <div class="input-field col s12">
                             <input placeholder="" class="col s12 m12" ng-model="filterCardapio" type="text" class="validate">
                             <label for="first_name">Pequisar item no cardápio </label>
@@ -123,12 +129,61 @@
                                 <div id="<% cardapio.rotulo %>" class="collapsible-header scrollspy"><% cardapio.rotulo %></div>
                                 <div class="collapsible-body">
                                     <div class="row" ng-repeat="item in cardapio.itens | filter: {item: filterCardapio}">
-                                        <div class="col m8">
-                                            <p class="item"><% item.item %></p>
-                                            <p class="description"><% item.descricao %></p>
+                                        <div ng-if="item.categoria == 'Comum'">
+                                            <div class="col m8">
+                                                <p class="item"><% item.item %></p>
+                                                <p class="description"><% item.descricao %></p>
+                                            </div>
+                                            <div class="col m4 right-align">
+                                                <p class="price"><% item.preco | currency : "R$ " %>
+                                                    <a href="javascript:void(0);" ng-click="addItem(item.item, 1, item.preco)"><i class="material-icons small right green-text">add_circle</i></a>
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price"><% item.preco | currency : "R$ " %><i class="material-icons small right green-text">add_circle</i></p>
+                                        <div ng-if="item.categoria == 'Pizza'">
+                                            <% pizza %>
+                                            <div class="col m12">
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col m12">
+                                                        <h5>1. Selecione o tamanho/tipo:</h5>
+                                                    </div>
+                                                    <div class="col m12" ng-init="tamanhos = parseComposicao(item).tamanhos">
+                                                        <ul>
+                                                            <li ng-repeat="t in tamanhos">
+                                                                <input type="radio" name="tamanho" ng-model="pizza[item.id].tamanho" id="<%t.tamanho%>" ng-value="t.tamanho">
+                                                                <label for="<%t.tamanho%>"><%t.tamanho%></label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col m12">
+                                                        <h5>2. Selecione a massa:</h5>
+                                                    </div>
+                                                    <div class="col m12" ng-init="tipos = parseComposicao(item).tipos">
+                                                        <ul>
+                                                            <li ng-repeat="tipo in tipos">
+                                                                <input type="radio" name="tipo" ng-model="pizza[item.id].tipo" id="<%tipo.tipo%>" ng-value="tipo.tipo">
+                                                                <label for="<%tipo.tipo%>"><%tipo.tipo%></label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col m12">
+                                                        <h5>3. Escolha o(s) sabor(es):</h5>
+                                                    </div>
+                                                    <div class="col m12" ng-init="sabores = parseComposicao(item).sabores">
+                                                        <ul>
+                                                            <li ng-repeat="s in sabores">
+                                                                <input type="radio" name="sabor" ng-model="pizza[item.id].sabor" id="<%s.sabor%>" ng-value="s.sabor">
+                                                                <label for="<%s.sabor%>"><%s.sabor%></label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -146,28 +201,30 @@
                     </div>
                     <div class="row">
                         <div class="col m12">
-                            <table class="striped">
-                                <tr>
-                                    <td><i class="material-icons tiny red-text left">cancel</i></td>
-                                    <td>04</td>
-                                    <td>Sushi Tradicional</td>
-                                    <td>6,00</td>
+                            <table class="striped" ng-show="pedido.length > 0">
+                                <tr ng-repeat="item in pedido">
+                                    <td>
+                                        <a href="javascript:void(0);" ng-click="addQtd(item)"><i class="material-icons tiny green-text">add_circle</i></a>
+                                        <a href="javascript:void(0);" ng-show="item.qtd > 1" ng-click="removeQtd(item)"><i class="material-icons tiny blue-text">remove_circle</i></a>
+                                        <a href="javascript:void(0);" ng-click="removeItem($index)"><i class="material-icons tiny red-text">cancel</i></a>
+                                    </td>
+                                    <td><% item.qtd %></td>
+                                    <td><% item.rotulo %></td>
+                                    <td><% item.total | currency %></td>
                                 </tr>
                             </table>
+                            <h6 ng-show="pedido.length === 0">Você ainda não selecionou itens para o seu pedido!</h6>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col m12 right-align">
-                            <h5>R$ 48,00</h5>
-                        </div>
+                    <div class="row" ng-show="pedido.length > 0">
                         <div class="col m12 right-align">
                             <h6>+ taxa de entrega: R$ 6,00</h6>
                         </div>
                         <div class="col m12 right-align">
-                            <h5>Total a pagar: <span class="green white-text totalCost"> R$ 54,00</span></h5>
+                            <h5>Total a pagar: <span class="green white-text totalCost"> <% pedido | sumByKey:'total' | currency %></span></h5>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" ng-show="pedido.length > 0">
                         <div class="col m12">
                             <a href="tel:{{$empresa->telefone_delivery}}" class="btn btn-large red col m12"><i class="material-icons left">perm_phone_msg</i>Fazer pedido: {{$empresa->telefone_delivery}}</a>
                         </div>
@@ -175,6 +232,34 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div id="pagamentos" class="modal">
+    <div class="modal-content">
+        <h4>Formas de Pagamento</h4>
+        <ul>
+            @foreach($empresa->pagamentos as $p)
+                <li>{{ $p->forma }}</li>
+            @endforeach
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Fechar</a>
+    </div>
+</div>
+
+<div id="bairros" class="modal">
+    <div class="modal-content">
+        <h4>Bairros de entrega</h4>
+        <ul>
+            @foreach($empresa->bairros as $b)
+                <li>{{ $b->bairro }}</li>
+            @endforeach
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Fechar</a>
     </div>
 </div>
 @stop
@@ -187,8 +272,11 @@
     <script src="{{ asset('assets/js/simulate/app.js') }}"></script>
     <script>
         $(document).ready(function(){
-            $(".dropdown-button").click(function(e) {
-               console.log(this);
+            $('.modal-trigger').leanModal();
+            $(".section-item").click(function(e) {
+                e.preventDefault();
+                var target = $(this).attr('href');
+                $('body').scrollTo(target);
             });
             $('.collapsible').collapsible({
                 accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style

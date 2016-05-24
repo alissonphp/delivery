@@ -6,6 +6,7 @@ use App\Models\Bairro;
 use App\Models\Categorias;
 use App\Models\Empresa;
 use App\Models\EmpresaPlano;
+use App\Models\Funcionamento;
 use DB;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,15 @@ class HomeController extends Controller
     public function getRestaurante($slug)
     {
         $empresa = Empresa::where('slug', '=', $slug)->first();
-        return view('site.profile', compact('empresa'));
+        $funcionamento = Funcionamento::where('empresa_id', $empresa->id)
+            ->where('dia', date('N'))->first();
+        $now = date('H:i:s');
+        if($now > $funcionamento->abertura && $now < $funcionamento->fechamento) {
+            $aberto = 1;
+        } else {
+            $aberto = 0;
+        }
+        return view('site.profile', compact('empresa','aberto'));
     }
 
     public function getCardapios($id)
