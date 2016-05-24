@@ -6,6 +6,7 @@ use App\Models\Bairro;
 use App\Models\Categorias;
 use App\Models\Empresa;
 use App\Models\EmpresaPlano;
+use DB;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -35,18 +36,32 @@ class HomeController extends Controller
     }
     public function getRestaurante($slug)
     {
-        $empresa = Empresa::where('slug', '=', $slug)->get();
+        $empresa = Empresa::where('slug', '=', $slug)->first();
         return view('site.profile', compact('empresa'));
     }
 
-    public function getSlug()
+    public function getCardapios($id)
     {
-        $empresas = Empresa::all();
-        foreach ($empresas as $empresa) {
-            $emp = Empresa::find($empresa->id);
-            $emp->slug = str_slug($empresa->fantasia);
-            $emp->save();
+        $cardapios = [];
+        $restaurante = Empresa::find($id);
+        foreach($restaurante->cardapio as $c) {
+            $cardapios[] = [
+                "rotulo" => $c->rotulo,
+                "itens" => $c->itens
+            ];
         }
-    return 'ok';
+
+        return $cardapios;
     }
+
+//    public function getSlug()
+//    {
+//        $empresas = Empresa::all();
+//        foreach ($empresas as $empresa) {
+//            $emp = Empresa::find($empresa->id);
+//            $emp->slug = str_slug($empresa->fantasia);
+//            $emp->save();
+//        }
+//    return 'ok';
+//    }
 }

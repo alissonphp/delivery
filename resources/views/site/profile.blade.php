@@ -8,39 +8,34 @@
                     <div class="row valign-wrapper">
                         <div class="col l2 m2 s2 hide-on-small-only center">
                             <div class="brand-logo">
-                                <img src="assets/images/restaurants/logos/logo_sushimax_new.png" class="responsive-img valign" alt="">
+                                <img src="{{ asset('assets/images/uploads/')."/".$empresa->imagens['logo'] }}" class="responsive-img valign" alt="">
                             </div>
                         </div>
                         <div class="col l8 m12 s12">
                             <div class="brand-infos">
                                 <div class="row">
                                     <div class="col m12">
-                                        <h4>Sushimax</h4>
-                                        <p>O SushiMax é a primeira casa especializada em delivery de comida japonesa do Maranhão.
-                                            Prezamos pela qualidade e rapidez na entrega, com um preço atrativo.</p>
+                                        <h4>{{ $empresa->fantasia }}</h4>
+                                        <p>{{ $empresa->descricao }}</p>
                                     </div>
                                     <div class="col m12">
                                         <div class="row reviews">
                                             <div class="col m3">
                                                 <div class="context">
-                                                    <p>30 ~ 45 mins</p>
+                                                    <p>{{ $empresa->tempo_medio }}</p>
                                                     <p class="legend">tempo de entrega</p>
                                                 </div>
                                             </div>
                                             <div class="col m3">
                                                 <div class="context">
-                                                    <p>R$ 8,00</p>
+                                                    <p>R$ {{ $empresa->taxa_entrega }}</p>
                                                     <p class="legend">taxa de entrega</p>
                                                 </div>
                                             </div>
                                             <div class="col m3">
                                                 <div class="context">
                                                     <p>
-                                                        <i class="tiny material-icons">attach_money</i>
-                                                        <i class="tiny material-icons">attach_money</i>
-                                                        <i class="tiny material-icons">attach_money</i>
-                                                        <i class="tiny material-icons grey-text text-darken-2">attach_money</i>
-                                                        <i class="tiny material-icons grey-text text-darken-2">attach_money</i>
+                                                       R$ {{ number_format($empresa->pedido_medio,2,",",".") }}
                                                     </p>
                                                     <p class="legend">pedido médio</p>
                                                 </div>
@@ -84,12 +79,12 @@
             </div>
         </div>
     </div>
-    <div class="parallax fadeOut"><img src="assets/images/restaurants/covers/sushimax.jpg" alt=""></div>
+    <div class="parallax fadeOut"><img src="{{ asset('assets/images/uploads/')."/".$empresa->imagens['anuncio_banner'] }}" alt=""></div>
 </div>
 
-<div class="container">
-    <div class="section">
-        <div class="row">
+<div class="container" ng-app="simulateApp">
+    <div class="section" ng-controller="MainController">
+        <div class="row" ng-init="getCardapio({{ $empresa->id }})">
             <div class="col m8">
                 <div class="row">
                     <div class="col m12">
@@ -97,218 +92,43 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col m4">
-                        <div class="input-field col s12">
-                            <select>
-                                <option value="" disabled selected>Selecione...</option>
-                                <option value="1">Peças</option>
-                                <option value="2">Pratos Especiais</option>
-                                <option value="3">Bebidas</option>
-                                <option value="3">Sobremesas</option>
-                                <option value="3">Grelhados</option>
-                                <option value="3">Molhos</option>
-                            </select>
-                            <label>Seção do cardápio:</label>
-                        </div>
+                    <div class="col m4 s12">
+                        <br>
+                        <a class='dropdown-button btn col s12 grey lighten-3 black-text' href='#' data-activates='dropdown1'>
+                            <i class="material-icons left">restaurant</i> Seções do cardápio
+                        </a>
+
+                        <ul id='dropdown1' class='dropdown-content'>
+                            <li ng-repeat="cardapio in cardapios | orderBy: 'rotulo'">
+                                <a href="#<% cardapio.rotulo %>"><% cardapio.rotulo %></a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="col m8">
+                    <div class="col m8 s12">
                         <div class="input-field col s12">
-                            <input placeholder="" id="first_name" type="text" class="validate">
+                            <input placeholder="" class="col s12 m12" ng-model="filterCardapio" type="text" class="validate">
                             <label for="first_name">Pequisar item no cardápio </label>
                         </div>
                     </div>
                 </div>
+                <div class="row" ng-show="filterCardapio">
+                    <div class="col m12">
+                        <h6> <i class="material-icons left">search</i> Filtrando por: <% filterCardapio %></h6>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col m12 cardapio">
+                    <div class="col m12 s12 cardapio">
                         <ul class="collapsible" data-collapsible="expandable">
-                            <li>
-                                <div class="collapsible-header active">Peças</div>
+                            <li ng-repeat="cardapio in cardapios | filter: {itens: {item: filterCardapio}} | orderBy: 'rotulo'">
+                                <div id="<% cardapio.rotulo %>" class="collapsible-header scrollspy"><% cardapio.rotulo %></div>
                                 <div class="collapsible-body">
-                                    <div class="row">
+                                    <div class="row" ng-repeat="item in cardapio.itens | filter: {item: filterCardapio}">
                                         <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
+                                            <p class="item"><% item.item %></p>
+                                            <p class="description"><% item.descricao %></p>
                                         </div>
                                         <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header active">Pratos Especiais</div>
-                                <div class="collapsible-body">
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header active">Bebidas</div>
-                                <div class="collapsible-body">
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header active">Sobremesas</div>
-                                <div class="collapsible-body">
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header active">Grelhados</div>
-                                <div class="collapsible-body">
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header active">Molhos</div>
-                                <div class="collapsible-body">
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col m8">
-                                            <p class="item">Sushi Tradicional (50g)</p>
-                                            <p class="description">arroz, alga, salmão fresco (30g), legumes</p>
-                                        </div>
-                                        <div class="col m4 right-align">
-                                            <p class="price">R$ 1,50 <i class="material-icons small right green-text">add_circle</i></p>
+                                            <p class="price"><% item.preco | currency : "R$ " %><i class="material-icons small right green-text">add_circle</i></p>
                                         </div>
                                     </div>
                                 </div>
@@ -333,30 +153,6 @@
                                     <td>Sushi Tradicional</td>
                                     <td>6,00</td>
                                 </tr>
-                                <tr>
-                                    <td><i class="material-icons tiny red-text left">cancel</i></td>
-                                    <td>03</td>
-                                    <td>Hot California (sem creeam cheese)</td>
-                                    <td>12,00</td>
-                                </tr>
-                                <tr>
-                                    <td><i class="material-icons tiny red-text left">cancel</i></td>
-                                    <td>02</td>
-                                    <td>Peito de Frango Grelhado</td>
-                                    <td>16,00</td>
-                                </tr>
-                                <tr>
-                                    <td><i class="material-icons tiny red-text left">cancel</i></td>
-                                    <td>02</td>
-                                    <td>Coca-cola Zero (lata)</td>
-                                    <td>10,00</td>
-                                </tr>
-                                <tr>
-                                    <td><i class="material-icons tiny red-text left">cancel</i></td>
-                                    <td>01</td>
-                                    <td>Molho/Geléia de Pimenta</td>
-                                    <td>4,00</td>
-                                </tr>
                             </table>
                         </div>
                     </div>
@@ -373,7 +169,7 @@
                     </div>
                     <div class="row">
                         <div class="col m12">
-                            <a href="tel:+559832199998" class="btn btn-large red col m12"><i class="material-icons left">perm_phone_msg</i>Fazer pedido: (98) 3213-8880</a>
+                            <a href="tel:{{$empresa->telefone_delivery}}" class="btn btn-large red col m12"><i class="material-icons left">perm_phone_msg</i>Fazer pedido: {{$empresa->telefone_delivery}}</a>
                         </div>
                     </div>
                 </div>
@@ -384,8 +180,16 @@
 @stop
 @section('scripts')
     @parent
+    <script src="{{ asset('app/vendor/angular/angular.min.js') }}"></script>
+    <script src="{{ asset('app/vendor/angular/angular-locale_pt-br.js') }}"></script>
+    <script src="{{ asset('app/vendor/angular/ngStorage.min.js') }}"></script>
+    <script src="{{ asset('app/vendor/notify/ng-notify.min.js') }}"></script>
+    <script src="{{ asset('assets/js/simulate/app.js') }}"></script>
     <script>
         $(document).ready(function(){
+            $(".dropdown-button").click(function(e) {
+               console.log(this);
+            });
             $('.collapsible').collapsible({
                 accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
             });
