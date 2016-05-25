@@ -141,7 +141,7 @@
                                             </div>
                                         </div>
                                         <div ng-if="item.categoria == 'Pizza'">
-                                            <% pizza %>
+                                            <% pizza[cardapio.id] %>
                                             <div class="col m12">
                                                 <br>
                                                 <div class="row">
@@ -151,34 +151,38 @@
                                                     <div class="col m12" ng-init="tamanhos = parseComposicao(item).tamanhos">
                                                         <ul>
                                                             <li ng-repeat="t in tamanhos">
-                                                                <input type="radio" name="tamanho" ng-model="pizza[item.id].tamanho" id="<%t.tamanho%>" ng-value="t.tamanho">
+                                                                <input type="radio" name="tamanho" ng-model="pizza[cardapio.id].tamanho" id="<%t.tamanho%>" ng-value="t.tamanho">
                                                                 <label for="<%t.tamanho%>"><%t.tamanho%></label>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row" ng-if="pizza[cardapio.id].tamanho">
                                                     <div class="col m12">
                                                         <h5>2. Selecione a massa:</h5>
                                                     </div>
                                                     <div class="col m12" ng-init="tipos = parseComposicao(item).tipos">
                                                         <ul>
                                                             <li ng-repeat="tipo in tipos">
-                                                                <input type="radio" name="tipo" ng-model="pizza[item.id].tipo" id="<%tipo.tipo%>" ng-value="tipo.tipo">
+                                                                <input type="radio" name="tipo" ng-model="pizza[cardapio.id].tipo" id="<%tipo.tipo%>" ng-value="tipo.tipo">
                                                                 <label for="<%tipo.tipo%>"><%tipo.tipo%></label>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row" ng-if="pizza[cardapio.id].tipo">
                                                     <div class="col m12">
                                                         <h5>3. Escolha o(s) sabor(es):</h5>
                                                     </div>
                                                     <div class="col m12" ng-init="sabores = parseComposicao(item).sabores">
                                                         <ul>
                                                             <li ng-repeat="s in sabores">
-                                                                <input type="radio" name="sabor" ng-model="pizza[item.id].sabor" id="<%s.sabor%>" ng-value="s.sabor">
-                                                                <label for="<%s.sabor%>"><%s.sabor%></label>
+                                                                <%s.sabor%>
+                                                                <ul>
+                                                                    <li ng-repeat="(tam, preco) in s.preco">
+                                                                        <% tam %> <% preco %>
+                                                                    </li>
+                                                                </ul>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -217,11 +221,11 @@
                         </div>
                     </div>
                     <div class="row" ng-show="pedido.length > 0">
-                        <div class="col m12 right-align">
-                            <h6>+ taxa de entrega: R$ 6,00</h6>
+                        <div class="col m12 right-align" ng-if="taxaEntrega != 0.00" ng-init="getTaxaEntrega({{ $empresa->id  }})">
+                            <h6>+ taxa de entrega: <% taxaEntrega | currency %></h6>
                         </div>
                         <div class="col m12 right-align">
-                            <h5>Total a pagar: <span class="green white-text totalCost"> <% pedido | sumByKey:'total' | currency %></span></h5>
+                            <h5>Total a pagar: <span class="green white-text totalCost"> <% getTotal() | currency %></span></h5>
                         </div>
                     </div>
                     <div class="row" ng-show="pedido.length > 0">

@@ -14,22 +14,30 @@ var simulateApp = angular.module('simulateApp', [
 
             var sum = 0;
             for (var i = data.length - 1; i >= 0; i--) {
-                sum += parseInt(data[i][key]);
+                sum += parseFloat(data[i][key]);
             }
 
             return sum;
         };
     })
     .constant("ENDPOINT", {
-        "CARDAPIO": "http://localhost:8000/cardapios/"
+        "CARDAPIO": "http://localhost:8000/cardapios/",
+        "TAXA_ENTREGA": "http://localhost:8000/taxa/"
     });
-simulateApp.controller('MainController', ['$scope','$http','ENDPOINT','ngNotify',
-    function($scope, $http, ENDPOINT, ngNotify){
+simulateApp.controller('MainController', ['$scope','$http','ENDPOINT','ngNotify','$filter',
+    function($scope, $http, ENDPOINT, ngNotify, $filter){
         $scope.pedido = [];
-        $scope.pizza = null;
+        $scope.pizza = [];
         $scope.getCardapio = function(id) {
             $http.get(ENDPOINT.CARDAPIO+id).then(function(r){
                 $scope.cardapios = r.data;
+            }, function(e){
+                console.log(e);
+            });
+        };
+        $scope.getTaxaEntrega = function(id){
+            $http.get(ENDPOINT.TAXA_ENTREGA+id).then(function(r){
+                return $scope.taxaEntrega = r.data
             }, function(e){
                 console.log(e);
             });
@@ -55,6 +63,11 @@ simulateApp.controller('MainController', ['$scope','$http','ENDPOINT','ngNotify'
         $scope.removeQtd = function(item) {
             item.qtd = item.qtd - 1;
             item.total = item.preco * item.qtd;
+        };
+        $scope.getTotal = function() {
+            var subTotalPedido = $filter('sumByKey')($scope.pedido, 'total');
+            var total = parseFloat(parseFloat(subTotalPedido) + parseFloat($scope.taxaEntrega));
+            return total;
         };
     }
 ]);

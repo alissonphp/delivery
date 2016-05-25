@@ -63,6 +63,11 @@ class HomeController extends Controller
         return $cardapios;
     }
 
+    public function getTaxa($id)
+    {
+        return Empresa::find($id)->taxa_entrega;
+    }
+
 //    public function getSlug()
 //    {
 //        $empresas = Empresa::all();
