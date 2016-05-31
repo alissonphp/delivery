@@ -7,6 +7,7 @@ use App\Models\Categorias;
 use App\Models\Empresa;
 use App\Models\EmpresaPlano;
 use App\Models\Funcionamento;
+use App\Models\Pagamento;
 use DB;
 use Illuminate\Http\Request;
 
@@ -55,8 +56,9 @@ class HomeController extends Controller
         $restaurante = Empresa::find($id);
         foreach($restaurante->cardapio as $c) {
             $cardapios[] = [
+                "id"     => $c->id,
                 "rotulo" => $c->rotulo,
-                "itens" => $c->itens
+                "itens"  => $c->itens
             ];
         }
 
@@ -66,6 +68,31 @@ class HomeController extends Controller
     public function getTaxa($id)
     {
         return Empresa::find($id)->taxa_entrega;
+    }
+
+    public function getPesquisa(Request $request)
+    {
+        $seachQuery = \DB::table('empresas')
+                    ->join('empresa_planos','empresas.id','=','empresa_planos.empresa_id')
+                    ->join('planos','empresa_planos.plano_id','=','planos.id');
+
+        if($request->has('q')) {
+            $seachQuery->where('empresas.fantasia','like','%'.$request->input('q').'%');
+        }
+        if($request->has('e')) {
+            $esp = Categorias::where('categoria','=',$request->input('e'))->first();
+            $seachQuery->join('empresa_categorias','empresas.id','=','empresa_categorias.empresa_id')
+                ->where('empresa_categorias.categoria_id',$esp->id)
+                ->groupBy('empresas.id');
+        }
+        if($request->has('pg')){
+            $pgto = Pagamento::where('forma','=',$request->input('pg'))->first();
+            $seachQuery->join('empresa_pagamentos','empresas.id','=','empresa_pagamentos.empresa_id')
+                ->where('empresa_pagamentos.pagamento_id','=',$pgto->id);
+        }
+
+        $request = $seachQuery->orderBy('planos.prioridade','desc')->get();
+        return view('site.pesquisa');
     }
 
 //    public function getSlug()

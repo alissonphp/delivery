@@ -8,7 +8,7 @@ Route::group([], function(){
 });
 Route::get('restaurante', function() { return view('site.profile'); });
 Route::get('pesquisa', function() { return view('site.pesquisa'); });
-Route::get('/ctrl', function () { return view('ctrl.app'); });
+Route::get('ctrl', function () { return view('ctrl.app'); });
 
 Route::group(['prefix' => 'api/v1/'], function(){
     Route::resource('plano',    'Ctrl\PlanoController');

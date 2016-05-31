@@ -20,6 +20,22 @@ var simulateApp = angular.module('simulateApp', [
             return sum;
         };
     })
+    .filter('searchKey', function () {
+        return function(data, key) {
+            if (typeof(data) === 'undefined' || typeof(key) === 'undefined') {
+                return 0;
+            }
+            var ini = 0;
+            var result = [];
+            angular.forEach(data, function(v, k){
+                if(k == key) {
+                    result[ini] = v;
+                    ini++;
+                }
+            });
+            return result;
+        };
+    })
     .constant("ENDPOINT", {
         "CARDAPIO": "http://localhost:8000/cardapios/",
         "TAXA_ENTREGA": "http://localhost:8000/taxa/"
