@@ -74,7 +74,9 @@ class HomeController extends Controller
     {
         $seachQuery = \DB::table('empresas')
                     ->join('empresa_planos','empresas.id','=','empresa_planos.empresa_id')
-                    ->join('planos','empresa_planos.plano_id','=','planos.id');
+                    ->join('empresa_imagems','empresas.id','=','empresa_imagems.empresa_id')
+                    ->join('planos','empresa_planos.plano_id','=','planos.id')
+                    ->select('empresas.descricao as empresa_descricao', 'empresas.*', 'empresa_imagems.*');
 
         if($request->has('q')) {
             $seachQuery->where('empresas.fantasia','like','%'.$request->input('q').'%');
@@ -90,9 +92,14 @@ class HomeController extends Controller
             $seachQuery->join('empresa_pagamentos','empresas.id','=','empresa_pagamentos.empresa_id')
                 ->where('empresa_pagamentos.pagamento_id','=',$pgto->id);
         }
+        if($request->has('b')){
+            $bairro = Bairro::where('bairro','=',$request->input('b'))->first();
+            $seachQuery->join('empresa_bairros','empresas.id','=','empresa_bairros.empresa_id')
+                ->where('empresa_bairros.bairro_id','=',$bairro->id);
+        }
 
         $request = $seachQuery->orderBy('planos.prioridade','desc')->get();
-        return view('site.pesquisa');
+        return view('site.pesquisa',compact('request'));
     }
 
 //    public function getSlug()

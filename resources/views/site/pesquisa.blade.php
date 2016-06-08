@@ -47,228 +47,60 @@
         </div>
 
         <div class="row">
-            <div class="col l3 m3 s12">
-                <div class="card hoverable">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="assets/images/restaurants/pizzahut1.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Pizza Hut<i class="material-icons right">more_vert</i></span>
-                        <p>
-                            A excelência em pizzas, lasanhas e massas em geral. Confira!
-                        </p>
-                        <br>
-                        <p class="center">
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                        </p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Pizza Hut<i class="material-icons right">close</i></span>
-                        <p>Confira nosso menu de massas completo. Além de pizzas doces especiais, sucos e muito mais.</p>
-                        <div class="row">
-                            <div class="col m12">
-                                <a href="#" class="btn white col m12 red-text text-darken-3"> Cardápio Completo </a>
+            @foreach($request as $p)
+                <div class="col l3 m3 s12">
+                    <div class="card hoverable">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <div class="rest-brand">
+                                <a href="{{ action('Site\HomeController@getRestaurante', ['slug' => $p->slug]) }}">
+                                    <img src="assets/images/uploads/{{ $p->logo }}" class="responsive-img" alt="">
+                                </a>
                             </div>
+                            <img class="activator" src="assets/images/uploads/{{ $p->anuncio_cover }}">
                         </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Tempo médio: <span class="green-text flow-text"> 35 min</span>
-                            </div>
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4">{{ $p->fantasia }}<i class="material-icons right">more_vert</i></span>
+                            <p>
+                                {{ str_limit($p->descricao, 65, '...') }}
+                            </p>
+                            <br>
+                            {{--<p class="center">--}}
+                                {{--<i class="material-icons yellow-text ">star</i>--}}
+                                {{--<i class="material-icons yellow-text ">star</i>--}}
+                                {{--<i class="material-icons yellow-text ">star</i>--}}
+                                {{--<i class="material-icons yellow-text ">star</i>--}}
+                                {{--<i class="material-icons yellow-text ">star</i>--}}
+                            {{--</p>--}}
                         </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Valor médio: <span class="green-text flow-text"> R$ 39,90</span>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">{{ $p->fantasia }}<i class="material-icons right">close</i></span>
+                            <p>
+                                {{ $p->descricao }}
+                            </p>
+                            <div class="row">
+                                <div class="col m12">
+                                    <a href="{{ action('Site\HomeController@getRestaurante', ['slug' => $p->slug]) }}" class="btn white col m12 red-text text-darken-3"> Cardápio Completo </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Grau de Satisfação: <span class="green-text flow-text"> 86%</span>
+                            <div class="row">
+                                <div class="col m12">
+                                    Tempo médio: <span class="green-text flow-text"> {{ $p->tempo_medio }}</span>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col l3 m3 s12">
-                <div class="card hoverable">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="assets/images/restaurants/taipan.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Taipan<i class="material-icons right">more_vert</i></span>
-                        <p>
-                            Comidas típicas japonesas. Sushi, sashimi, frangos, grelhados, etc.
-                        </p>
-                        <br>
-                        <p class="center">
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                        </p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Pizza Hut<i class="material-icons right">close</i></span>
-                        <p>Confira nosso menu de massas completo. Além de pizzas doces especiais, sucos e muito mais.</p>
-                        <div class="row">
-                            <div class="col m12">
-                                <a href="#" class="btn white col m12 red-text text-darken-3"> Cardápio Completo </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Tempo médio: <span class="green-text flow-text"> 35 min</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Valor médio: <span class="green-text flow-text"> R$ 39,90</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Grau de Satisfação: <span class="green-text flow-text"> 86%</span>
-                            </div>
+                            {{--<div class="row">--}}
+                            {{--<div class="col m12">--}}
+                            {{--Valor médio: <span class="green-text flow-text"> R$ 00,90</span>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="row">--}}
+                            {{--<div class="col m12">--}}
+                            {{--Grau de Satisfação: <span class="green-text flow-text"> 86%</span>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col l3 m3 s12">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="assets/images/restaurants/giraffas.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Giraffas<i class="material-icons right">more_vert</i></span>
-                        <p>
-                            Semana especial! Na compra do GIRAKIDS você ganha um brinde!
-                        </p>
-                        <br>
-                        <p class="center">
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                        </p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Pizza Hut<i class="material-icons right">close</i></span>
-                        <p>Confira nosso menu de massas completo. Além de pizzas doces especiais, sucos e muito mais.</p>
-                        <div class="row">
-                            <div class="col m12">
-                                <a href="#" class="btn white col m12 red-text text-darken-3"> Cardápio Completo </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Tempo médio: <span class="green-text flow-text"> 35 min</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Valor médio: <span class="green-text flow-text"> R$ 39,90</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Grau de Satisfação: <span class="green-text flow-text"> 86%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col l3 m3 s12">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="assets/images/restaurants/giraffas.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Giraffas<i class="material-icons right">more_vert</i></span>
-                        <p>
-                            Semana especial! Na compra do GIRAKIDS você ganha um brinde!
-                        </p>
-                        <br>
-                        <p class="center">
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                        </p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Pizza Hut<i class="material-icons right">close</i></span>
-                        <p>Confira nosso menu de massas completo. Além de pizzas doces especiais, sucos e muito mais.</p>
-                        <div class="row">
-                            <div class="col m12">
-                                <a href="#" class="btn white col m12 red-text text-darken-3"> Cardápio Completo </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Tempo médio: <span class="green-text flow-text"> 35 min</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Valor médio: <span class="green-text flow-text"> R$ 39,90</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Grau de Satisfação: <span class="green-text flow-text"> 86%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col l3 m3 s12">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="assets/images/restaurants/giraffas.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Giraffas<i class="material-icons right">more_vert</i></span>
-                        <p>
-                            Semana especial! Na compra do GIRAKIDS você ganha um brinde!
-                        </p>
-                        <br>
-                        <p class="center">
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                            <i class="material-icons yellow-text ">star</i>
-                        </p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Pizza Hut<i class="material-icons right">close</i></span>
-                        <p>Confira nosso menu de massas completo. Além de pizzas doces especiais, sucos e muito mais.</p>
-                        <div class="row">
-                            <div class="col m12">
-                                <a href="#" class="btn white col m12 red-text text-darken-3"> Cardápio Completo </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Tempo médio: <span class="green-text flow-text"> 35 min</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Valor médio: <span class="green-text flow-text"> R$ 39,90</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col m12">
-                                Grau de Satisfação: <span class="green-text flow-text"> 86%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
 
     </div>

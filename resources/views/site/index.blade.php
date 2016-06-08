@@ -59,23 +59,25 @@
                             <h4 class="header white-text text-lighten-2"> Especialidades</h4>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col m12 s12">
-                            <div class="form-group">
-                                <select style="width: 100%" class="especialidades-search">
-                                    <option value="" selected> Selecione uma especialidade... </option>
-                                    @foreach($categorias as $c)
-                                        <option value="{{ $c->id }}">{{ $c->categoria }}</option>
-                                    @endforeach
-                                </select>
+                    <form action="{{ url('pesquisa') }}" method="get">
+                        <div class="row">
+                            <div class="col m12 s12">
+                                <div class="form-group">
+                                    <select name="e" style="width: 100%" class="especialidades-search">
+                                        <option value="" selected> Selecione uma especialidade... </option>
+                                        @foreach($categorias as $c)
+                                            <option value="{{ $c->categoria }}">{{ $c->categoria }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col m12 s12">
-                            <button class="btn btn-large green col m12 s12">PESQUISAR RESTAURANTES <i class="material-icons right">search</i></button>
+                        <div class="row">
+                            <div class="col m12 s12">
+                                <button type="submit" class="btn btn-large green col m12 s12">PESQUISAR RESTAURANTES <i class="material-icons right">search</i></button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
                 <div id="search-restaurantes" class="col m10 s12 offset-m1 valign back-transp search-item">
@@ -87,23 +89,25 @@
                             <h4 class="header white-text text-lighten-2"> Restaurantes</h4>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col m12 s12">
-                            <div class="form-group">
-                                <select style="width: 100%" class="restaurantes-search">
-                                    <option value="" selected> Pesquise por um restaurante... </option>
-                                    @foreach($restaurantes as $r)
-                                        <option value="{{ $r->id }}">{{ $r->fantasia}}</option>
-                                    @endforeach
-                                </select>
+                    <form action="{{ url('pesquisa') }}" method="get">
+                        <div class="row">
+                            <div class="col m12 s12">
+                                <div class="form-group">
+                                    <select name="q" style="width: 100%" class="restaurantes-search">
+                                        <option value="" selected> Pesquise por um restaurante... </option>
+                                        @foreach($restaurantes as $r)
+                                            <option value="{{ $r->fantasia}}">{{ $r->fantasia}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col m12 s12">
-                            <button class="btn btn-large green col m12 s12">PESQUISAR RESTAURANTES <i class="material-icons right">search</i></button>
+                        <div class="row">
+                            <div class="col m12 s12">
+                                <button class="btn btn-large green col m12 s12">PESQUISAR RESTAURANTES <i class="material-icons right">search</i></button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
                 <div id="search-avaliados" class="col m10 s12 offset-m1 valign back-transp search-item">
@@ -131,23 +135,25 @@
                             <h4 class="header white-text text-lighten-2"> Bairros de Entrega</h4>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col m12 s12">
-                            <div class="form-group">
-                                <select style="width: 100%" class="bairros-search">
-                                    <option value="" selected> Informe o bairro de entrega... </option>
-                                    @foreach($bairros as $b)
-                                        <option value="{{ $b->id }}">{{ $b->bairro}}</option>
-                                    @endforeach
-                                </select>
+                    <form action="{{ url('pesquisa') }}" method="get">
+                        <div class="row">
+                            <div class="col m12 s12">
+                                <div class="form-group">
+                                    <select name="b" style="width: 100%" class="bairros-search">
+                                        <option value="" selected> Informe o bairro de entrega... </option>
+                                        @foreach($bairros as $b)
+                                            <option value="{{ $b->bairro }}">{{ $b->bairro}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col m12 s12">
-                            <button class="btn btn-large green col m12 s12">PESQUISAR RESTAURANTES <i class="material-icons right">search</i></button>
+                        <div class="row">
+                            <div class="col m12 s12">
+                                <button class="btn btn-large green col m12 s12">PESQUISAR RESTAURANTES <i class="material-icons right">search</i></button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
             </div>
@@ -203,7 +209,7 @@
         </div>
         <div class="row">
             @foreach($empresasPremium as $p)
-            <div class="col m4">
+            <div class="col l3 m4 s6">
                 <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
                         <div class="rest-brand">
