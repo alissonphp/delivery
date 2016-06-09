@@ -17,6 +17,26 @@ ctrlApp.controller('CardapioCtrl', ['$scope','EmpresaFactory', '$state', 'ngNoti
                 ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
             });
         };
+
+        $scope.show = function () {
+            $http.get(CONFIG.API+'empresacardapio/showcardapio/'+$stateParams.cardapio).then(function(r) {
+                $scope.cardapio = r.data;
+            }, function (e) {
+                ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
+                console.log(e);
+            });
+        };
+        $scope.update = function () {
+            var data = $scope.cardapio;
+            $http.put(CONFIG.API+'empresacardapio/updatecardapio', {data: data, id: $stateParams.cardapio}).then(function(r) {
+                $state.go('empresaCardapio', {id: $stateParams.id});
+                ngNotify.set('Cardápio atualizado com sucesso!', 'info');
+            }, function (e) {
+                ngNotify.set('Ocorreu um erro na operação. Código: ' + e.status, 'error');
+                console.log(e);
+            });
+        };
+
         $scope.delete = function(item) {
             $http.delete(CONFIG.API+'empresacardapio/delete/'+item).then(function(r){
                 $state.go('empresaCardapio', {id: $stateParams.id}, {reload: true});

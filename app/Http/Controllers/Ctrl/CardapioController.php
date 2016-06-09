@@ -30,6 +30,24 @@ class CardapioController extends Controller
         return $cardapio;
     }
 
+    public function getShowcardapio($id)
+    {
+        return EmpresaCardapio::find($id);
+    }
+
+    public function putUpdatecardapio(Request $request)
+    {
+        try {
+            $card = EmpresaCardapio::find($request->input('id'));
+            $card->rotulo = $request->input('data.rotulo');
+            $card->timestamps = true;
+            $card->save();
+            return response('ok',200);
+        } catch(\Exception $ex) {
+            return response($ex->getMessage(), 500);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *

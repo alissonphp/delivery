@@ -29,6 +29,9 @@
                             <a ui-sref="itensCardapio({id: cardapio.id })" class="btn btn-default" title="Itens do cardápio">
                                 <i class="glyphicon glyphicon-list"></i>
                             </a>
+                            <a ui-sref="editarCardapio({id: info.id, cardapio: cardapio.id})" class="btn btn-warning" title="Editar">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </a>
                             <a class="btn btn-danger" ng-click="delete(cardapio.id)" title="Excluir">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </a>

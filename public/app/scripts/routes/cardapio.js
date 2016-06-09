@@ -12,6 +12,12 @@ ctrlApp.config(function ($stateProvider) {
             templateUrl: "/app/views/empresa/cardapio/create.html",
             controller: "CardapioCtrl"
         })
+        .state("editarCardapio", {
+            url: "/cadastros/empresas/cardapios/editar/:id/:cardapio",
+            parent: "dashboard",
+            templateUrl: "/app/views/empresa/cardapio/update.html",
+            controller: "CardapioCtrl"
+        })
         .state("itensCardapio", {
             url: "/cadastros/empresas/itens/cardapio/:id",
             parent: "dashboard",
