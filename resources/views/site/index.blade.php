@@ -189,9 +189,9 @@
             <div class="col s12 m4">
                 <div class="icon-block">
                     <h2 class="center red-text"><i class="material-icons">done_all</i></h2>
-                    <h5 class="center">Enviar solicitação</h5>
+                    <h5 class="center">Ligue</h5>
 
-                    <p class="light">Tudo pronto? Agora é só enviar o seu pedido para o resturante (via telefone) e aguardar. Não esqueça de avaliar o restaurante, ajuda bastante. </p>
+                    <p class="light">Tudo pronto? Agora é só ligar e fazer o seu pedido para o resturante escolhido e aguardar. Não esqueça de avaliar o restaurante, ajuda bastante. </p>
                 </div>
             </div>
         </div>
