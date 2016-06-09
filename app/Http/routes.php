@@ -3,11 +3,11 @@
 //Route::get('/', 'Site\HomeController@getIndex');
 Route::group([], function(){
     Route::controllers([
-            '/' => 'Site\HomeController'
+            'beta' => 'Site\HomeController'
         ]);
 });
-Route::get('restaurante', function() { return view('site.profile'); });
-Route::get('pesquisa', function() { return view('site.pesquisa'); });
+//Route::get('restaurante', function() { return view('site.profile'); });
+//Route::get('pesquisa', function() { return view('site.pesquisa'); });
 Route::get('ctrl', function () { return view('ctrl.app'); });
 
 Route::group(['prefix' => 'api/v1/'], function(){

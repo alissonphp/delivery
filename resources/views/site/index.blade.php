@@ -204,12 +204,12 @@
         <div class="row">
             <div class="col s12 center">
                 <h3><i class="mdi-content-send brown-text"></i></h3>
-                <h4>Restaurantes <span class="flow-text red-text text-darken-3">PREMIUM DELIVERY</span></h4>
+                <h4>Restaurantes Destaques <span class="flow-text red-text text-darken-3">| Delivery Clube</span></h4>
             </div>
         </div>
         <div class="row">
             @foreach($empresasPremium as $p)
-            <div class="col l3 m4 s6">
+            <div class="col l4 m4 s6">
                 <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
                         <div class="rest-brand">
@@ -264,32 +264,16 @@
         </div>
     </div>
 </div>
-<div class="parallax-container valign-wrapper">
-    <!--<div class="section no-pad-bot">-->
-    <!--<div class="container">-->
-    <!--<div class="row center">-->
-    <!--<h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <div class="parallax">
-        <img src="{{ asset('assets/images/backgrounds/tutorial.png')  }}" alt="Passo a passo">
-    </div>
-</div>
-
-<div class="container">
-    <div class="section">
-
-        <div class="row">
-            <div class="col s12 center">
-                <h3><i class="mdi-content-send brown-text"></i></h3>
-                <h4>Contact Us</h4>
-                <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
-            </div>
+<div class="row orange">
+    <div class="container center">
+        <div class="col m12">
+            <br>
+            <h3 class="white-text no-pad-bot">Como funciona o <br>Delivery Clube?</h3>
+            <img src="{{ asset('assets/images/logo/timeline2.png') }}" class="responsive-img" alt="Passo a passo">
         </div>
-
     </div>
 </div>
+
 @stop
 @section('scripts')
     @parent
