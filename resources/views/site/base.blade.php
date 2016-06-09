@@ -65,7 +65,7 @@
                 <h5>Restaurantes Destaques:</h5>
                 <ul>
                     @foreach($data['premium'] as $p)
-                        <li><a href="{{ action('Site\HomeController@getPesquisa')."?q=".$p->empresa->fantasia }}" class="white-text">{{ $p->empresa->fantasia }}</a></li>
+                        <li><a href="{{ action('Site\HomeController@getRestaurante', ['slug' => $p->empresa->slug]) }}" class="white-text">{{ $p->empresa->fantasia }}</a></li>
                     @endforeach
                 </ul>
             </div>
