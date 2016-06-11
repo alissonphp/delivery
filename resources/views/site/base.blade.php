@@ -80,7 +80,7 @@
                 <ul>
                     <li>
                         <a href="#" class="white-text">
-                            (98) 3221-5544 / 3221-5554
+                            (98) 98246-1295 / 98713-7693
                         </a>
                     </li>
                     <li>
@@ -89,7 +89,7 @@
                     </li>
                     <li>
                         <a href="#" class="white-text">
-                            Av. Central N 541 - Coahama, São Luís - MA
+                            Rua 04, QD D, N° 06, Residencial Araras - Cohama
                         </a>
                     </li>
                 </ul>

@@ -4648,7 +4648,7 @@ small {
 .card .card-reveal {
   padding: 20px;
   position: absolute;
-  background-color: #fff;
+  background: rgba(255,255,255,.9);
   width: 100%;
   overflow-y: auto;
   top: 100%;

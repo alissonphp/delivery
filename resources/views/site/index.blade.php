@@ -173,7 +173,7 @@
                     <h2 class="center red-text"><i class="material-icons">search</i></h2>
                     <h5 class="center">Pesquise</h5>
 
-                    <p class="light">Navegue por especialidades, restaurantes, bairros disponíveis para delivery, preços, avaliações. Entre e fique a vontade.</p>
+                    <p class="light">Navegue por especialidades, restaurantes, bairros disponíveis para entrega, preços, avaliações. Entre e fique a vontade.</p>
                 </div>
             </div>
 
@@ -244,7 +244,7 @@
                         </div>
                         <div class="row">
                             <div class="col m12">
-                                Tempo médio: <span class="green-text flow-text"> {{ $p->empresa->tempo_medio }}</span>
+                                Tempo médio: <span class="green-text"> <strong>{{ $p->empresa->tempo_medio }}</strong></span>
                             </div>
                         </div>
                         {{--<div class="row">--}}
@@ -264,12 +264,15 @@
         </div>
     </div>
 </div>
-<div class="row orange">
+<div class="row amber darken-1 tutorial">
     <div class="container center">
         <div class="col m12">
-            <br>
-            <h3 class="white-text no-pad-bot">Como funciona o <br>Delivery Clube?</h3>
-            <img src="{{ asset('assets/images/logo/timeline2.png') }}" class="responsive-img" alt="Passo a passo">
+            <div class="mascote">
+                <img src="{{ asset('assets/images/logo/mascote.png') }}" class="responsive-img" alt="Mascote">
+            </div>
+            {{--<br>--}}
+            {{--<h3 class="white-text no-pad-bot">Como funciona o <br>Delivery Clube?</h3>--}}
+            <img src="{{ asset('assets/images/logo/tutorial.png') }}" class="responsive-img" alt="Passo a passo">
         </div>
     </div>
 </div>
