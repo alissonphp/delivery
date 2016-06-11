@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Models\Bairro;
+use App\Models\CardapioItem;
 use App\Models\Categorias;
 use App\Models\Empresa;
 use App\Models\EmpresaPlano;
@@ -58,7 +59,7 @@ class HomeController extends Controller
             $cardapios[] = [
                 "id"     => $c->id,
                 "rotulo" => $c->rotulo,
-                "itens"  => $c->itens
+                "itens"  => CardapioItem::where('cardapio_id',$c->id)->with('variacao')->get()
             ];
         }
 

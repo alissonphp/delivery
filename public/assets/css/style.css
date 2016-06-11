@@ -104,6 +104,16 @@ p.legend {
 .cardapio p.item {
   font-size: 1.6rem;
 }
+.cardapio p.item-var {
+  font-size: 1.2rem;
+  margin-left: 20px;
+}
+.cardapio .no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+.cardapio .margin-bottom-10 {
+  margin-bottom: 5px !important;
+}
 .cardapio p.price {
   font-size: 1.8rem;
 }

@@ -129,17 +129,39 @@
                                 <div id="<% cardapio.rotulo %>" class="collapsible-header scrollspy"><% cardapio.rotulo %></div>
                                 <div class="collapsible-body">
                                     <div class="row" ng-repeat="item in cardapio.itens | filter: {item: filterCardapio}">
+                                        {{-- visualização para itens comuns --}}
                                         <div ng-if="item.categoria == 'Comum'">
-                                            <div class="col m8">
-                                                <p class="item"><% item.item %></p>
-                                                <p class="description"><% item.descricao %></p>
+                                            <div ng-hide="item.variacao.length > 0">
+                                                <div class="col m8">
+                                                    <p class="item"><% item.item %></p>
+                                                    <p class="description"><% item.descricao %></p>
+                                                </div>
+                                                <div class="col m4 right-align">
+                                                    <p class="price"><% item.preco | currency : "R$ " %>
+                                                        <a href="javascript:void(0);" ng-click="addItem(item.item, 1, item.preco)"><i class="material-icons small right green-text">add_circle</i></a>
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="col m4 right-align">
-                                                <p class="price"><% item.preco | currency : "R$ " %>
-                                                    <a href="javascript:void(0);" ng-click="addItem(item.item, 1, item.preco)"><i class="material-icons small right green-text">add_circle</i></a>
-                                                </p>
+                                            <div ng-show="item.variacao.length > 0">
+                                                <div class="row margin-bottom-10">
+                                                    <div class="col m12">
+                                                        <p class="item"><% item.item %></p>
+                                                        <p class="description">(<% item.descricao %>)</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row no-margin-bottom" ng-repeat="v in item.variacao">
+                                                    <div class="col m8">
+                                                        <p class="item-var"><% v.rotulo %></p>
+                                                    </div>
+                                                    <div class="col m4 right-align">
+                                                        <p class="price"><% v.preco | currency : "R$ " %>
+                                                            <a href="javascript:void(0);" ng-click="addItem(item.item+' - '+v.rotulo, 1, v.preco)"><i class="material-icons small right green-text">add_circle</i></a>
+                                                        </p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                        {{-- visualização para itens do tipo pizza --}}
                                         <div ng-if="item.categoria == 'Pizza'">
                                             <div class="col m12">
                                                 <br>
@@ -194,6 +216,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {{-- fim da visão para pizza --}}
                                     </div>
                                 </div>
                             </li>
