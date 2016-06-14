@@ -208,7 +208,7 @@
         </div>
         <div class="row">
             @foreach($empresasPremium as $p)
-            <div class="col l4 m6 s6">
+            <div class="col l4 m6 s12">
                 <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
                         <div class="rest-brand">
