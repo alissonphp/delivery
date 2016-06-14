@@ -4610,6 +4610,7 @@ small {
 .card .card-content {
   padding: 20px;
   border-radius: 0 0 2px 2px;
+  min-height: 170px;
 }
 
 .card .card-content p {
