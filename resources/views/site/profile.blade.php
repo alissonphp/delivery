@@ -148,7 +148,7 @@
                                                 <div class="row margin-bottom-10">
                                                     <div class="col m12">
                                                         <p class="item"><% item.item %></p>
-                                                        <p class="description">(<% item.descricao %>)</p>
+                                                        <p class="description" ng-if="item.descricao">(<% item.descricao %>)</p>
                                                     </div>
                                                 </div>
                                                 <div class="row no-margin-bottom" ng-repeat="v in item.variacao">
@@ -260,6 +260,9 @@
                     <div class="row" ng-show="pedido.length > 0">
                         <div class="col m12 right-align" ng-if="taxaEntrega != 0.00" ng-init="getTaxaEntrega({{ $empresa->id  }})">
                             <h6>+ taxa de entrega: <% taxaEntrega | currency %></h6>
+                        </div>
+                        <div class="col m12 right-align" ng-if="taxaEntrega == 0.00" ng-init="getTaxaEntrega({{ $empresa->id  }})">
+                            <h6 class="red-text">*consulte a taxa de entrega no ato do pedido</h6>
                         </div>
                         <div class="col m12 right-align">
                             <h5>Total a pagar: <span class="green white-text totalCost"> <% getTotal() | currency %></span></h5>
