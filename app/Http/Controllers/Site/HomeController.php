@@ -75,6 +75,10 @@ class HomeController extends Controller
 
     public function getPesquisa(Request $request)
     {
+        $payments = Pagamento::all();
+        $bairros = Bairro::all();
+        $empresas = Empresa::all();
+        $searchItens = $request->all();
         $seachQuery = \DB::table('empresas')
                     ->join('empresa_planos','empresas.id','=','empresa_planos.empresa_id')
                     ->join('empresa_imagems','empresas.id','=','empresa_imagems.empresa_id')
@@ -102,7 +106,7 @@ class HomeController extends Controller
         }
 
         $request = $seachQuery->orderBy('planos.prioridade','desc')->get();
-        return view('site.pesquisa',compact('request'));
+        return view('site.pesquisa',compact('request','payments','bairros','empresas','searchItens'));
     }
 
 //    public function getSlug()

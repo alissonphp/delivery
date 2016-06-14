@@ -1,54 +1,92 @@
 @extends('site.base')
+@section('css')
+    @parent
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.css') }}">
+@stop
 @section('content')
-<div class="container-fluid grey lighten-4 fixed">
-    <div class="container">
-        <div class="row">
-            <div class="input-field col m4">
-                <select multiple>
-                    <option value="" disabled selected>especialidades</option>
-                    <option value="1">Massas</option>
-                    <option value="2">Grelhados</option>
-                    <option value="3">Carnes</option>
-                </select>
-            </div>
-            <div class="input-field col m4">
-                <select multiple>
-                    <option value="" disabled selected>formas de pagamento</option>
-                    <option value="1">Cartão - Débito</option>
-                    <option value="2">Cartão - Crédito</option>
-                    <option value="2">Cartão - Ticket</option>
-                    <option value="3">Dinheiro</option>
-                </select>
-            </div>
-            <div class="col m4">
-                <p>Bairro de Entrega:</p>
+<form action="{{ action('Site\HomeController@getPesquisa') }}" method="get">
+    <div class="container-fluid grey lighten-4 fixed">
+        <div class="container">
+            <div class="row search">
+                <div class="input-field col l4 m4 s12">
+                    <select name="e" style="width: 100%" class="especialidades-search form-control">
+                        @if(isset($searchItens['e']))
+                        <option value="{{ $searchItens['e'] }}" selected> {{ $searchItens['e'] }}</option>
+                        @else
+                        <option value="" selected> Selecione uma especialidade... </option>
+                        @endif
+                        @foreach($data['especialidades'] as $e)
+                            <option value="{{ $e->categoria }}">{{ $e->categoria }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="input-field col l4 m4 s12">
+                    <select name="pg" style="width: 100%" class="pagamento-search">
+                        @if(isset($searchItens['pg']))
+                            <option value="{{ $searchItens['pg'] }}" selected> {{ $searchItens['pg'] }}</option>
+                        @else
+                        <option value="" selected> Informe a forma de pagamento... </option>
+                        @endif
+                        @foreach($payments as $p)
+                            <option value="{{ $p->forma }}">{{ $p->forma }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="input-field col l4 m4 s12">
+                    <select name="b" style="width: 100%" class="bairros-search">
+                        @if(isset($searchItens['b']))
+                            <option value="{{ $searchItens['b'] }}" selected> {{ $searchItens['b'] }}</option>
+                        @else
+                        <option value="" selected> Informe o bairro de entrega... </option>
+                        @endif
+                        @foreach($bairros as $b)
+                            <option value="{{ $b->bairro }}">{{ $b->bairro}}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container-fluid">
-    <div class="container">
-        <div class="row">
-            <div class="input-field col m12">
-                <input id="last_name" type="text" class="validate">
-                <label for="last_name">Pesquisar restaurante ... Ex.: Casa de Massas, CIA da Carne, etc.</label>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="input-field col l12 m12 s12">
+                    <select name="q" style="width: 100%" class="restaurantes-search">
+                        @if(isset($searchItens['q']))
+                            <option value="{{ $searchItens['q'] }}" selected> {{ $searchItens['q'] }}</option>
+                        @else
+                        <option value="" selected> Pesquise por um restaurante... </option>
+                        @endif
+                        @foreach($empresas as $r)
+                            <option value="{{ $r->fantasia}}">{{ $r->fantasia}}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col l12 m12 s12">
+                    <button class="btn green col l12 m12 s12"><i class="material-icons right">search</i> PESQUISAR EMPRESAS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 <div class="row">
     <div class="container">
         <div class="row">
             <div class="col s12">
                 <h3><i class="mdi-content-send brown-text"></i></h3>
-                <h4>Restaurantes encontrados:</h4>
+                <h4>Restaurantes encontrados: <small>({{ count($request) }} itens listados</small>)</h4>
             </div>
         </div>
 
         <div class="row">
             @foreach($request as $p)
-                <div class="col l3 m3 s12">
+                <div class="col l4 m6 s12">
                     <div class="card hoverable">
                         <div class="card-image waves-effect waves-block waves-light">
                             <div class="rest-brand">
@@ -59,7 +97,7 @@
                             <img class="activator" src="{{ asset('assets/images/uploads/'.$p->anuncio_cover) }}">
                         </div>
                         <div class="card-content">
-                            <span class="card-title activator grey-text text-darken-4">{{ $p->fantasia }}<i class="material-icons right">more_vert</i></span>
+                            <span class="card-title activator grey-text text-darken-4">{{ str_limit($p->fantasia,14) }}<i class="material-icons right">more_vert</i></span>
                             <p>
                                 {{ str_limit($p->descricao, 65, '...') }}
                             </p>
@@ -108,9 +146,23 @@
 @stop
 @section('scripts')
     @parent
+    <script type="text/javascript" src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
     <script>
         $(document).ready(function(){
+            $('.especialidades-search').select2({
+                placeholder: "Selecione uma especialidade..."
+            });
+            $('.restaurantes-search').select2({
+                placeholder: "Digite um nome de restaurante..."
+            });
+            $('.bairros-search').select2({
+                placeholder: "Informe o bairro de entrega..."
+            });
+            $('.pagamento-search').select2({
+                placeholder: "Informe a forma de pagamento..."
+            });
             $('select').material_select();
         });
     </script>
     @stop
+

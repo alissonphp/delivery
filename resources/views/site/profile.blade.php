@@ -127,7 +127,7 @@
                 <div class="row">
                     <div class="col m12 s12 cardapio">
                         <ul class="collapsible" data-collapsible="expandable">
-                            <li ng-repeat="cardapio in cardapios | filter: {itens: {item: filterCardapio}} | orderBy: 'rotulo'">
+                            <li ng-repeat="cardapio in cardapios | filter: {itens: {item: filterCardapio}}">
                                 <div id="<% cardapio.rotulo %>" class="collapsible-header scrollspy"><% cardapio.rotulo %></div>
                                 <div class="collapsible-body">
                                     <div class="row" ng-repeat="item in cardapio.itens | filter: {item: filterCardapio}">

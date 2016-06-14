@@ -2,7 +2,7 @@
   box-sizing: border-box;
   display: inline-block;
   margin: 0;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   position: relative;
   vertical-align: middle; }
   .select2-container .select2-selection--single {
@@ -14,7 +14,7 @@
     -webkit-user-select: none; }
     .select2-container .select2-selection--single .select2-selection__rendered {
       display: block;
-      padding-left: 8px;
+      padding-left: 5px;
       padding-right: 20px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -128,9 +128,9 @@
 
 .select2-container--default .select2-selection--single {
   background-color: #fff;
-  border: 1px solid #aaa;
+  border: 1px solid #eee;
   padding: 8px;
-  border-radius: 4px; }
+}
   .select2-container--default .select2-selection--single .select2-selection__rendered {
     color: #444;
     line-height: 28px; }
@@ -153,7 +153,7 @@
       height: 0;
       left: 50%;
       margin-left: -4px;
-      margin-top: -2px;
+      margin-top: 6px;
       position: absolute;
       top: 50%;
       width: 0; }
