@@ -219,7 +219,7 @@
                         <img class="activator" src="assets/images/uploads/{{ $p->empresa->imagens['anuncio_cover'] }}">
                     </div>
                     <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">{{ str_limit($p->empresa->fantasia,17) }}<i class="material-icons right">more_vert</i></span>
+                        <span class="card-title activator grey-text text-darken-4">{{ str_limit($p->empresa->fantasia,14) }}<i class="material-icons right">more_vert</i></span>
                         <p>
                             {{ str_limit($p->empresa->descricao, 65, '...') }}
                         </p>
