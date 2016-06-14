@@ -43,10 +43,12 @@ class HomeController extends Controller
         $funcionamento = Funcionamento::where('empresa_id', $empresa->id)
             ->where('dia', date('N'))->first();
         $now = date('H:i:s');
-        if($now > $funcionamento->abertura && $now < $funcionamento->fechamento) {
-            $aberto = 1;
-        } else {
-            $aberto = 0;
+        if($funcionamento){
+            if($now > $funcionamento->abertura && $now < $funcionamento->fechamento) {
+                $aberto = 1;
+            } else {
+                $aberto = 0;
+            }
         }
         return view('site.profile', compact('empresa','aberto'));
     }

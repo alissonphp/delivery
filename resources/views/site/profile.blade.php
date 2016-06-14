@@ -42,14 +42,16 @@
                                             </div>
                                             <div class="col m3">
                                                 <div class="">
-                                                    @if($aberto)
-                                                    <a href="#" title="ABERTO" class="btn btn-floating green">
-                                                        <i class="material-icons white-text">alarm_on</i>
-                                                    </a>
-                                                    @else
-                                                        <a href="#" title="FECHADO" class="btn btn-floating red">
-                                                            <i class="material-icons white-text">alarm_off</i>
-                                                        </a>
+                                                    @if(isset($aberto))
+                                                        @if($aberto)
+                                                            <a href="#" title="ABERTO" class="btn btn-floating green">
+                                                                <i class="material-icons white-text">alarm_on</i>
+                                                            </a>
+                                                        @else
+                                                            <a href="#" title="FECHADO" class="btn btn-floating red">
+                                                                <i class="material-icons white-text">alarm_off</i>
+                                                            </a>
+                                                        @endif
                                                     @endif
                                                     <a href="#pagamentos" title="Formas de Pagamento" class="btn btn-floating white modal-trigger">
                                                         <i class="material-icons red-text">credit_card</i>
@@ -165,7 +167,7 @@
                                         <div ng-if="item.categoria == 'Pizza'">
                                             <div class="col m12">
                                                 <br>
-                                                <% pizza[cardapio.id] %>
+                                                {{--<% pizza[cardapio.id] %>--}}
                                                 <div class="row">
                                                     <div class="col m12">
                                                         <h5>1. Selecione o tamanho/tipo:</h5>
@@ -173,13 +175,20 @@
                                                     <div class="col m12" ng-init="tamanhos = parseComposicao(item).tamanhos">
                                                         <ul>
                                                             <li ng-repeat="t in tamanhos">
-                                                                <input type="radio" name="tamanho" ng-model="pizza[cardapio.id].tamanho" id="<%t.tamanho%>" ng-value="t">
-                                                                <label for="<%t.tamanho%>"><%t.tamanho%> <span nf-if="t.sabor">(<%t.sabor%> sabores)</span></label>
+                                                                <input type="radio" name="tamanho" ng-model="pizza[cardapio.id].tamanho" id="<%t.tamanho%>" ng-value='t'>
+                                                                <label for="<%t.tamanho%>"><%t.tamanho%> <span nf-if="t.sabor"></span></label>
                                                             </li>
                                                         </ul>
                                                     </div>
+                                                    <div class="col m12" ng-if="pizza[cardapio.id].tamanho.sabor == 2">
+                                                        <h6>*Quantos sabores?</h6>
+                                                        <input type="radio" name="sabores" ng-model="pizza[cardapio.id].tamanho.saborescolha" id="sabor1" ng-value="1">
+                                                        <label for="sabor1">1 Sabor</label>
+                                                        <input type="radio" name="sabores" ng-model="pizza[cardapio.id].tamanho.saborescolha" id="sabor2" ng-value="2">
+                                                        <label for="sabor2">2 Sabores</label>
+                                                    </div>
                                                 </div>
-                                                <div class="row" ng-if="pizza[cardapio.id].tamanho">
+                                                <div class="row" ng-if="pizza[cardapio.id].tamanho.saborescolha">
                                                     <div class="col m12">
                                                         <h5>2. Selecione a massa:</h5>
                                                     </div>
@@ -199,15 +208,15 @@
                                                     <div class="col m12" ng-init="sabores = parseComposicao(item).sabores">
                                                         <div class="row" ng-repeat="s in sabores">
                                                             <div class="col m8">
-                                                                <p class="item" ng-if="pizza[cardapio.id].tamanho.sabor == 2">1/2 <%s.sabor%></p>
-                                                                <p class="item" ng-if="pizza[cardapio.id].tamanho.sabor != 2"><%s.sabor%></p>
+                                                                <p class="item" ng-if="pizza[cardapio.id].tamanho.saborescolha == 2">1/2 <%s.sabor%></p>
+                                                                <p class="item" ng-if="pizza[cardapio.id].tamanho.saborescolha != 2"><%s.sabor%></p>
                                                                 <p class="description"><%s.descricao%></p>
                                                             </div>
                                                             <div class="col m4 right-align" ng-repeat="(tam, preco) in s.preco|searchKey:pizza[cardapio.id].tamanho.tamanho">
-                                                                <p class="price" ng-if="pizza[cardapio.id].tamanho.sabor == 2"><% preco/2 | currency : "R$ " %>
+                                                                <p class="price" ng-if="pizza[cardapio.id].tamanho.saborescolha == 2"><% preco/2 | currency : "R$ " %>
                                                                     <a href="javascript:void(0);" ng-click="addItem('1/2 '+s.sabor+'('+pizza[cardapio.id].tamanho.tamanho+')', 1, preco/2)"><i class="material-icons small right green-text">add_circle</i></a>
                                                                 </p>
-                                                                <p class="price" ng-if="pizza[cardapio.id].tamanho.sabor != 2"><% preco | currency : "R$ " %>
+                                                                <p class="price" ng-if="pizza[cardapio.id].tamanho.saborescolha != 2"><% preco | currency : "R$ " %>
                                                                     <a href="javascript:void(0);" ng-click="addItem(s.sabor+'('+pizza[cardapio.id].tamanho.tamanho+')', 1, preco)"><i class="material-icons small right green-text">add_circle</i></a>
                                                                 </p>
                                                             </div>

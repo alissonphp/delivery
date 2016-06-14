@@ -201,10 +201,9 @@
 
 <div class="row grey lighten-4">
     <div class="container">
-        <div class="row">
-            <div class="col s12 center">
-                <h3><i class="mdi-content-send brown-text"></i></h3>
-                <h4>Restaurantes Destaques <span class="flow-text red-text text-darken-3">| Delivery Clube</span></h4>
+        <div class="row valign-wrapper">
+            <div class="col s12 amber-text text-darken-1 destaque-title valign">
+                <h3><strong>Nossos</strong> Destaques</h3>
             </div>
         </div>
         <div class="row">
@@ -220,7 +219,7 @@
                         <img class="activator" src="assets/images/uploads/{{ $p->empresa->imagens['anuncio_cover'] }}">
                     </div>
                     <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">{{ $p->empresa->fantasia }}<i class="material-icons right">more_vert</i></span>
+                        <span class="card-title activator grey-text text-darken-4">{{ str_limit($p->empresa->fantasia,17) }}<i class="material-icons right">more_vert</i></span>
                         <p>
                             {{ str_limit($p->empresa->descricao, 65, '...') }}
                         </p>
@@ -272,7 +271,7 @@
             </div>
             {{--<br>--}}
             {{--<h3 class="white-text no-pad-bot">Como funciona o <br>Delivery Clube?</h3>--}}
-            <img src="{{ asset('assets/images/logo/tutorial.png') }}" class="responsive-img" alt="Passo a passo">
+            <img src="{{ asset('assets/images/logo/tutorial-fff.png') }}" class="responsive-img" alt="Passo a passo">
         </div>
     </div>
 </div>

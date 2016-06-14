@@ -42,7 +42,7 @@
         <div class="row">
             <div class="col s12">
                 <h3><i class="mdi-content-send brown-text"></i></h3>
-                <h4>Restaurantes Abertos <div class="chip green white-text">8</div></h4>
+                <h4>Restaurantes encontrados:</h4>
             </div>
         </div>
 
@@ -53,10 +53,10 @@
                         <div class="card-image waves-effect waves-block waves-light">
                             <div class="rest-brand">
                                 <a href="{{ action('Site\HomeController@getRestaurante', ['slug' => $p->slug]) }}">
-                                    <img src="assets/images/uploads/{{ $p->logo }}" class="responsive-img" alt="">
+                                    <img src="{{ asset('assets/images/uploads/'.$p->logo) }}" class="responsive-img" alt="">
                                 </a>
                             </div>
-                            <img class="activator" src="assets/images/uploads/{{ $p->anuncio_cover }}">
+                            <img class="activator" src="{{ asset('assets/images/uploads/'.$p->anuncio_cover) }}">
                         </div>
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4">{{ $p->fantasia }}<i class="material-icons right">more_vert</i></span>

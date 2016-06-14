@@ -142,6 +142,9 @@ p.legend {
 .especialidades-search {
   font-size: 1.7rem !important;
 }
+.destaque-title {
+  padding-top: 30px !important;
+}
 @media only screen and (max-width : 992px) {
   span.slogan {
     display: none !important;
@@ -177,13 +180,13 @@ p.legend {
 }
 .tutorial {
   margin-top: 120px !important;
-  padding: 60px 0 !important;
+  padding: 5px 0 !important;
   margin-bottom: 3px !important;
 }
 .tutorial .mascote {
   width: 180px;
   position: absolute;
-  margin-top: -211px;
+  margin-top: -156px;
 }
 footer.page-footer {
   margin: 0;
