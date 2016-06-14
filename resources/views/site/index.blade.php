@@ -203,7 +203,7 @@
     <div class="container">
         <div class="row valign-wrapper">
             <div class="col s12 amber-text text-darken-1 destaque-title valign">
-                <h3><strong>Nossos</strong> Destaques</h3>
+                <h4><strong>Nossos</strong> Destaques</h4>
             </div>
         </div>
         <div class="row">
