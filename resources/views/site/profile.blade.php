@@ -200,8 +200,8 @@
                                                     <div class="col m12" ng-init="tipos = parseComposicao(item).tipos">
                                                         <ul>
                                                             <li ng-repeat="tipo in tipos">
-                                                                <input type="radio" name="tipo" ng-model="pizza[cardapio.id].tipo" id="<%tipo.tipo%>" ng-value="tipo.tipo">
-                                                                <label for="<%tipo.tipo%>"><%tipo.tipo%></label>
+                                                                <input type="radio" name="tipo" ng-model="pizza[cardapio.id].tipo" id="<%cardapio.id+tipo.tipo%>" ng-value="tipo.tipo">
+                                                                <label for="<%cardapio.id+tipo.tipo%>"><%tipo.tipo%></label>
                                                             </li>
                                                         </ul>
                                                     </div>
