@@ -173,7 +173,6 @@
                                         <div ng-if="item.categoria == 'Pizza'">
                                             <div class="col m12">
                                                 <br>
-                                                {{--<% pizza[cardapio.id] %>--}}
                                                 <div class="row">
                                                     <div class="col m12">
                                                         <h5>1. Selecione o tamanho/tipo:</h5>
@@ -181,17 +180,17 @@
                                                     <div class="col m12" ng-init="tamanhos = parseComposicao(item).tamanhos">
                                                         <ul>
                                                             <li ng-repeat="t in tamanhos">
-                                                                <input type="radio" name="tamanho" ng-model="pizza[cardapio.id].tamanho" id="<%t.tamanho%>" ng-value='t'>
-                                                                <label for="<%t.tamanho%>"><%t.tamanho%> <span nf-if="t.sabor"></span></label>
+                                                                <input type="radio" ng-model="pizza[cardapio.id].tamanho" id="<%cardapio.id+t.tamanho%>" ng-value='t'>
+                                                                <label for="<%cardapio.id+t.tamanho%>"><%t.tamanho%> <span nf-if="t.sabor"></span></label>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                     <div class="col m12" ng-if="pizza[cardapio.id].tamanho.sabor == 2">
                                                         <h6>*Quantos sabores?</h6>
-                                                        <input type="radio" name="sabores" ng-model="pizza[cardapio.id].tamanho.saborescolha" id="sabor1" ng-value="1">
-                                                        <label for="sabor1">1 Sabor</label>
-                                                        <input type="radio" name="sabores" ng-model="pizza[cardapio.id].tamanho.saborescolha" id="sabor2" ng-value="2">
-                                                        <label for="sabor2">2 Sabores</label>
+                                                        <input type="radio" name="sabores" ng-model="pizza[cardapio.id].tamanho.saborescolha" id="sabor1<%cardapio.id%>" ng-value="1">
+                                                        <label for="sabor1<%cardapio.id%>">1 Sabor</label>
+                                                        <input type="radio" name="sabores" ng-model="pizza[cardapio.id].tamanho.saborescolha" id="sabor2<%cardapio.id%>" ng-value="2">
+                                                        <label for="sabor2<%cardapio.id%>">2 Sabores</label>
                                                     </div>
                                                 </div>
                                                 <div class="row" ng-if="pizza[cardapio.id].tamanho.saborescolha">
