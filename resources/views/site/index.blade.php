@@ -59,7 +59,7 @@
                             <h4 class="header white-text text-lighten-2"> Especialidades</h4>
                         </div>
                     </div>
-                    <form action="{{ url('pesquisa') }}" method="get">
+                    <form action="{{ action('Site\HomeController@getPesquisa') }}" method="get">
                         <div class="row">
                             <div class="col m12 s12">
                                 <div class="form-group">
@@ -159,7 +159,7 @@
             </div>
         </div>
     </div>
-    <div class="parallax"><img src="assets/images/backgrounds/home1.jpg" alt="Unsplashed background img 1"></div>
+    <div class="parallax"><img src="assets/images/backgrounds/home{{ rand(1,7) }}.jpg" alt="Unsplashed background img 1"></div>
 </div>
 
 

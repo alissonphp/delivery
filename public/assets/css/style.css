@@ -183,13 +183,21 @@ p.legend {
 }
 .tutorial {
   margin-top: 120px !important;
-  padding: 5px 0 !important;
+  padding: 20px 0 !important;
   margin-bottom: 3px !important;
 }
 .tutorial .mascote {
   width: 180px;
   position: absolute;
-  margin-top: -156px;
+  margin-top: -198px;
+}
+.social-icon {
+  margin-right: 10px;
+}
+.bairros {
+  -webkit-column-count: 4; /* Chrome, Safari, Opera */
+  -moz-column-count: 4; /* Firefox */
+  column-count: 4;
 }
 footer.page-footer {
   margin: 0;

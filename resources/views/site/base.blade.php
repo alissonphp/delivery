@@ -10,6 +10,7 @@
     <link href="{{ asset('assets/css/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="{{ asset('assets/css/style.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="{{ asset('assets/css/animate.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/font-awesome/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet"/>
     @show
 </head>
 <body>
@@ -72,17 +73,14 @@
             <div class="col m3 s12">
                 <h5>Acompanhe o Delivery:</h5>
                 <ul>
-                    <li><a href="#" class="white-text">Facebook</a></li>
-                    <li><a href="#" class="white-text">Instagram</a></li>
-                    <li><a href="#" class="white-text">Twitter</a></li>
+                    <li>
+                        <a href="https://www.facebook.com/DeliveryClube/" target="_blank" class="white-text social-icon"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+                        <a href="#" class="white-text social-icon"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/deliveryclube/" target="_blank" title="@deliveryclube" class="white-text social-icon"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+                    </li>
                 </ul>
                 <h5>Contatos:</h5>
                 <ul>
-                    <li>
-                        <a href="#" class="white-text">
-                            (98) 98246-1295 / 98713-7693
-                        </a>
-                    </li>
                     <li>
                         <a href="#" class="white-text">
                             contato@deliveryclube</a>
@@ -90,6 +88,12 @@
                     <li>
                         <a href="#" class="white-text">
                             Rua 04, QD D, N° 06, Residencial Araras - Cohama
+                        </a>
+                    </li>
+                    <li>
+                        <br>
+                        <a href="#" class="white-text">
+                            (98) 98246-1295 / 98713-7693
                         </a>
                     </li>
                 </ul>

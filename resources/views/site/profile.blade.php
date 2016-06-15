@@ -11,7 +11,7 @@
                                 <img src="{{ asset('assets/images/uploads/')."/".$empresa->imagens['logo'] }}" class="responsive-img valign" alt="">
                             </div>
                         </div>
-                        <div class="col l8 m12 s12">
+                        <div class="col l12 m12 s12">
                             <div class="brand-infos">
                                 <div class="row">
                                     <div class="col m12">
@@ -20,18 +20,23 @@
                                     </div>
                                     <div class="col m12">
                                         <div class="row reviews">
+                                            @if($empresa->tempo_medio)
                                             <div class="col m3">
                                                 <div class="context">
                                                     <p>{{ $empresa->tempo_medio }}</p>
                                                     <p class="legend">tempo de entrega</p>
                                                 </div>
                                             </div>
+                                            @endif
+                                            @if($empresa->taxa_entrega != "0.00")
                                             <div class="col m3">
                                                 <div class="context">
-                                                    <p>R$ {{ $empresa->taxa_entrega }}</p>
+                                                    <p>R$ {{ number_format($empresa->taxa_entrega,2,",",".") }}</p>
                                                     <p class="legend">taxa de entrega</p>
                                                 </div>
                                             </div>
+                                            @endif
+                                            @if($empresa->pedido_medio != "0.00")
                                             <div class="col m3">
                                                 <div class="context">
                                                     <p>
@@ -40,6 +45,7 @@
                                                     <p class="legend">pedido médio</p>
                                                 </div>
                                             </div>
+                                            @endif
                                             <div class="col m3">
                                                 <div class="">
                                                     @if(isset($aberto))
@@ -66,22 +72,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col l2 m12 s12">
-                            <p><i class="material-icons left">group</i> Avaliações:</p>
-                            <p class="yellow-text">
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star</i>
-                                <i class="material-icons">star_half</i>
-                                <span class="right score">4,5</span>
-                            </p>
-                            <p class="legend">comida <span class="new badge">5</span></p>
-                            <p class="legend">tempo de entrega <span class="new badge">4</span></p>
-                            <p class="legend">embalagem <span class="new badge">5</span></p>
-                            <p class="legend">custo/benefício <span class="new badge">4</span></p>
+                        {{--<div class="col l2 m12 s12">--}}
+                            {{--<p><i class="material-icons left">group</i> Avaliações:</p>--}}
+                            {{--<p class="yellow-text">--}}
+                                {{--<i class="material-icons">star</i>--}}
+                                {{--<i class="material-icons">star</i>--}}
+                                {{--<i class="material-icons">star</i>--}}
+                                {{--<i class="material-icons">star</i>--}}
+                                {{--<i class="material-icons">star_half</i>--}}
+                                {{--<span class="right score">4,5</span>--}}
+                            {{--</p>--}}
+                            {{--<p class="legend">comida <span class="new badge">5</span></p>--}}
+                            {{--<p class="legend">tempo de entrega <span class="new badge">4</span></p>--}}
+                            {{--<p class="legend">embalagem <span class="new badge">5</span></p>--}}
+                            {{--<p class="legend">custo/benefício <span class="new badge">4</span></p>--}}
 
-                        </div>
+                        {{--</div>--}}
                     </div>
                 </div>
             </div>
@@ -282,11 +288,25 @@
 <div id="pagamentos" class="modal">
     <div class="modal-content">
         <h4>Formas de Pagamento</h4>
-        <ul>
-            @foreach($empresa->pagamentos as $p)
-                <li>{{ $p->forma }}</li>
-            @endforeach
-        </ul>
+        <table class="striped">
+        @foreach($empresa->pagamentos as $p)
+            <?php
+                if($p->forma == "VISA - CRÉDITO" || $p->forma == "DÉBITO - VISA") { $flag = "visa.png"; }
+                elseif($p->forma == "MASTERCARD - CRÉDITO" || $p->forma == "DÉBITO - MASTERCARD") { $flag = "mastercard.png"; }
+                elseif($p->forma == "DINERS - CRÉDITO") { $flag = "diners.png"; }
+                elseif($p->forma == "AMERICAN EXPRESS - CRÉDITO") { $flag = "amex.png"; }
+                elseif($p->forma == "ELO - CRÉDITO" || $p->forma == "DÉBITO - ELO") { $flag = "elo.png"; }
+                elseif($p->forma == "HIPERCARD") { $flag = "hipercard.png"; }
+                elseif($p->forma == "PAYPAL") { $flag = "paypal.png"; }
+                elseif($p->forma == "BOLETO") { $flag = "boleto.png"; }
+                else { $flag = null; }
+                ?>
+            <tr>
+                <td width="50">@if($flag) <img src="{{ asset('assets/images/payments/'.$flag) }}" alt=""> @else - @endif</td>
+                <td>{{ $p->forma }}</td>
+            </tr>
+        @endforeach
+        </table>
     </div>
     <div class="modal-footer">
         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Fechar</a>
@@ -296,7 +316,7 @@
 <div id="bairros" class="modal">
     <div class="modal-content">
         <h4>Bairros de entrega</h4>
-        <ul>
+        <ul class="bairros">
             @foreach($empresa->bairros as $b)
                 <li>{{ $b->bairro }}</li>
             @endforeach
