@@ -273,11 +273,18 @@
                             <h5>Total a pagar: <span class="green white-text totalCost"> <% getTotal() | currency %></span></h5>
                         </div>
                     </div>
-                    <div class="row" ng-show="pedido.length > 0">
+                    <div class="row">
                         <div class="col m12">
-                            <a href="tel:{{$empresa->telefone_delivery}}" class="btn btn-large red col m12"><i class="material-icons left">perm_phone_msg</i>Fazer pedido: {{$empresa->telefone_delivery}}</a>
+                            <a href="tel:{{$empresa->telefone_delivery}}" class="btn btn-large red col m12"><i class="material-icons left">perm_phone_msg</i>ligar: {{$empresa->telefone_delivery}}</a>
                         </div>
                     </div>
+                    @if($empresa->telefone_delivery2)
+                    <div class="row">
+                        <div class="col m12">
+                            <a href="tel:{{$empresa->telefone_delivery2}}" class="btn btn-large red col m12"><i class="material-icons left">perm_phone_msg</i>ligar: {{$empresa->telefone_delivery}}</a>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
