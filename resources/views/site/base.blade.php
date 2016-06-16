@@ -24,14 +24,13 @@
             <ul class="right hide-on-med-and-down">
                 <li><a href="{{ action('Site\HomeController@getSobre') }}" class="white-text">Sobre</a></li>
                 <li><a href="{{ action('Site\HomeController@getAnuncie') }}" class="white-text">Anuncie</a></li>
-                <li><a href="#" class="white-text">Contato</a></li>
                 <li><a href="#" class="white-text">Entrar/Cadastrar</a></li>
             </ul>
 
             <ul id="nav-mobile" class="side-nav">
+                <li><a href="{{ action('Site\HomeController@getIndex') }}">Home</a></li>
                 <li><a href="{{ action('Site\HomeController@getSobre') }}">Sobre</a></li>
                 <li><a href="{{ action('Site\HomeController@getAnuncie') }}">Anuncie</a></li>
-                <li><a href="#">Contato</a></li>
                 <li><a href="#">Entrar/Cadastrar</a></li>
             </ul>
             <a href="#" data-activates="nav-mobile" class="button-collapse white-text"><i class="material-icons">menu</i></a>
@@ -49,7 +48,6 @@
                 <ul>
                     <li><a class="white-text" href="{{ action('Site\HomeController@getSobre') }}">Sobre</a></li>
                     <li><a class="white-text" href="{{ action('Site\HomeController@getAnuncie') }}">Anuncie</a></li>
-                    <li><a class="white-text" href="#">Contato</a></li>
                     <li><a class="white-text" href="#">Cadastro</a></li>
                     <li><a class="white-text" href="#">Revista Digital</a></li>
                 </ul>
@@ -63,7 +61,7 @@
                 </ul>
             </div>
             <div class="col m3 s12">
-                <h5>Restaurantes Destaques:</h5>
+                <h5>Nossos Destaques:</h5>
                 <ul>
                     @foreach($data['premium'] as $p)
                         <li><a href="{{ action('Site\HomeController@getRestaurante', ['slug' => $p->empresa->slug]) }}" class="white-text">{{ $p->empresa->fantasia }}</a></li>
@@ -88,12 +86,6 @@
                     <li>
                         <a href="#" class="white-text">
                             Rua 04, QD D, N° 06, Residencial Araras - Cohama
-                        </a>
-                    </li>
-                    <li>
-                        <br>
-                        <a href="#" class="white-text">
-                            (98) 98246-1295 / 98713-7693
                         </a>
                     </li>
                 </ul>

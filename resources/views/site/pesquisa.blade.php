@@ -10,10 +10,11 @@
             <div class="row search">
                 <div class="input-field col l4 m4 s12">
                     <select name="e" style="width: 100%" class="especialidades-search form-control">
-                        @if(isset($searchItens['e']))
+                        @if(isset($searchItens['e']) && $searchItens['e'] != "all")
+                        <option value="all"> Todas especialidades... </option>
                         <option value="{{ $searchItens['e'] }}" selected> {{ $searchItens['e'] }}</option>
                         @else
-                        <option value="" selected> Selecione uma especialidade... </option>
+                        <option value="all" selected> Todas especialidades... </option>
                         @endif
                         @foreach($data['especialidades'] as $e)
                             <option value="{{ $e->categoria }}">{{ $e->categoria }}</option>
@@ -22,10 +23,11 @@
                 </div>
                 <div class="input-field col l4 m4 s12">
                     <select name="pg" style="width: 100%" class="pagamento-search">
-                        @if(isset($searchItens['pg']))
+                        @if(isset($searchItens['pg']) && $searchItens['pg'] != "all")
+                            <option value="all"> Todas as formas de pagamento... </option>
                             <option value="{{ $searchItens['pg'] }}" selected> {{ $searchItens['pg'] }}</option>
                         @else
-                        <option value="" selected> Informe a forma de pagamento... </option>
+                            <option value="all" selected>Todas as formas de pagamento... </option>
                         @endif
                         @foreach($payments as $p)
                             <option value="{{ $p->forma }}">{{ $p->forma }}</option>
@@ -34,10 +36,11 @@
                 </div>
                 <div class="input-field col l4 m4 s12">
                     <select name="b" style="width: 100%" class="bairros-search">
-                        @if(isset($searchItens['b']))
+                        @if(isset($searchItens['b']) && $searchItens['b'] != "all")
+                            <option value="all"> Todas os bairros... </option>
                             <option value="{{ $searchItens['b'] }}" selected> {{ $searchItens['b'] }}</option>
                         @else
-                        <option value="" selected> Informe o bairro de entrega... </option>
+                            <option value="all" selected> Todas os bairros... </option>
                         @endif
                         @foreach($bairros as $b)
                             <option value="{{ $b->bairro }}">{{ $b->bairro}}</option>
@@ -52,10 +55,11 @@
             <div class="row">
                 <div class="input-field col l12 m12 s12">
                     <select name="q" style="width: 100%" class="restaurantes-search">
-                        @if(isset($searchItens['q']))
+                        @if(isset($searchItens['q']) && $searchItens['q'] != "all")
+                            <option value="all"> Todas empresas... </option>
                             <option value="{{ $searchItens['q'] }}" selected> {{ $searchItens['q'] }}</option>
                         @else
-                        <option value="" selected> Pesquise por um restaurante... </option>
+                            <option value="all" selected> Todas empresas... </option>
                         @endif
                         @foreach($empresas as $r)
                             <option value="{{ $r->fantasia}}">{{ $r->fantasia}}</option>
@@ -122,7 +126,7 @@
                             </div>
                             <div class="row">
                                 <div class="col m12">
-                                    Tempo médio: <span class="green-text flow-text"> {{ $p->tempo_medio }}</span>
+                                    Tempo médio: <span class="green-text"> {{ $p->tempo_medio }}</span>
                                 </div>
                             </div>
                             {{--<div class="row">--}}
@@ -150,16 +154,16 @@
     <script>
         $(document).ready(function(){
             $('.especialidades-search').select2({
-                placeholder: "Selecione uma especialidade..."
+                placeholder: "Todas especialidades..."
             });
             $('.restaurantes-search').select2({
-                placeholder: "Digite um nome de restaurante..."
+                placeholder: "Todas empresas..."
             });
             $('.bairros-search').select2({
-                placeholder: "Informe o bairro de entrega..."
+                placeholder: "Todos os bairros..."
             });
             $('.pagamento-search').select2({
-                placeholder: "Informe a forma de pagamento..."
+                placeholder: "Todas as forma de pagamento..."
             });
             $('select').material_select();
         });

@@ -141,7 +141,7 @@
                                         <div ng-if="item.categoria == 'Comum'">
                                             <div ng-hide="item.variacao.length > 0">
                                                 <div class="col m8">
-                                                    <p class="item"><% item.item %></p>
+                                                    <p class="item"><% item.item %> <small ng-if="item.porcao">(<% item.porcao %>)</small></p>
                                                     <p class="description"><% item.descricao %></p>
                                                 </div>
                                                 <div class="col m4 right-align">

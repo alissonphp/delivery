@@ -74,13 +74,16 @@ p {
   min-height: 300px !important;
 }
 .parallax-container-institucional {
-  background: rgba(0,0,0,.7);
+  background: #ffa000;
   min-height: 120px !important;
+  margin-bottom: 50px !important;
 }
   .parallax-container .section {
     width: 100%;
   }
-
+.big-flow {
+  font-size: 2.5rem !important;
+}
 .brand-infos p {
   margin: 0;
   line-height: normal;

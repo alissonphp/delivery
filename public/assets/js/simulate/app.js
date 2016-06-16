@@ -37,8 +37,8 @@ var simulateApp = angular.module('simulateApp', [
         };
     })
     .constant("ENDPOINT", {
-        "CARDAPIO": "http://localhost:8000/beta/cardapios/",
-        "TAXA_ENTREGA": "http://localhost:8000/beta/taxa/"
+        "CARDAPIO": "http://localhost:8000/cardapios/",
+        "TAXA_ENTREGA": "http://localhost:8000/taxa/"
     });
 simulateApp.controller('MainController', ['$scope','$http','ENDPOINT','ngNotify','$filter',
     function($scope, $http, ENDPOINT, ngNotify, $filter){

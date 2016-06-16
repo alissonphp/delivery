@@ -17,7 +17,7 @@ ctrlApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/login',
             parent: 'base',
             templateUrl: '/app/views/login.html',
-            controller: 'LoginCtrl'
+            controller: 'AuthCtrl'
         })
         .state('dashboard', {
             url: '/dashboard',

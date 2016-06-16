@@ -85,21 +85,21 @@ class HomeController extends Controller
                     ->join('planos','empresa_planos.plano_id','=','planos.id')
                     ->select('empresas.descricao as empresa_descricao', 'empresas.*', 'empresa_imagems.*');
 
-        if($request->has('q')) {
+        if($request->has('q') && $request->input('q') != "all") {
             $seachQuery->where('empresas.fantasia','like','%'.$request->input('q').'%');
         }
-        if($request->has('e')) {
+        if($request->has('e') && $request->input('e') != "all") {
             $esp = Categorias::where('categoria','=',$request->input('e'))->first();
             $seachQuery->join('empresa_categorias','empresas.id','=','empresa_categorias.empresa_id')
                 ->where('empresa_categorias.categoria_id',$esp->id)
                 ->groupBy('empresas.id');
         }
-        if($request->has('pg')){
+        if($request->has('pg') && $request->input('pg') != "all"){
             $pgto = Pagamento::where('forma','=',$request->input('pg'))->first();
             $seachQuery->join('empresa_pagamentos','empresas.id','=','empresa_pagamentos.empresa_id')
                 ->where('empresa_pagamentos.pagamento_id','=',$pgto->id);
         }
-        if($request->has('b')){
+        if($request->has('b') && $request->input('b') != "all"){
             $bairro = Bairro::where('bairro','=',$request->input('b'))->first();
             $seachQuery->join('empresa_bairros','empresas.id','=','empresa_bairros.empresa_id')
                 ->where('empresa_bairros.bairro_id','=',$bairro->id);
