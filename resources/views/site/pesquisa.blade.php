@@ -103,7 +103,7 @@
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4">{{ str_limit($p->fantasia,14) }}<i class="material-icons right">more_vert</i></span>
                             <p>
-                                {{ str_limit($p->descricao, 65, '...') }}
+                                {{ str_limit($p->descricao, 58, '...') }}
                             </p>
                             <br>
                             {{--<p class="center">--}}
