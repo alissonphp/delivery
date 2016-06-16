@@ -4,7 +4,7 @@
         <div class="section no-pad-bot">
             <div class="container">
                 <div class="row">
-                    <div class="col m12 center-align">
+                    <div class="col m12">
                         <h3 class="flow-text big-flow">BEM-VINDO AO CLUBE</h3>
                     </div>
                 </div>
