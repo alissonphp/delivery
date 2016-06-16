@@ -16,7 +16,7 @@ var ctrlApp = angular.module('ctrlApp', [
     })
     .constant("CONFIG", {
         "API": "http://localhost:8000/api/v1/",
-        "AUTH": "http://localhost:8000/ctrl/login"
+        "AUTH": "http://localhost:8000/login"
     })
     .config(function($httpProvider){
         $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {

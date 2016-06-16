@@ -13,7 +13,7 @@ Route::get('pesquisa', 'Site\HomeController@getPesquisa');
 //        ]);
 //});
 Route::get('ctrl', function () { return view('ctrl.app'); });
-Route::post('ctrl/login', 'Ctrl\AuthenticateController@Authenticate');
+Route::post('login', 'Ctrl\AuthenticateController@Authenticate');
 
 
 Route::group(['prefix' => 'api/v1/', 'middleware' => ['jwt.auth']], function(){
