@@ -3,15 +3,13 @@
 Route::get('/', 'Site\HomeController@getIndex');
 Route::get('sobre', 'Site\HomeController@getSobre');
 Route::get('anuncie', 'Site\HomeController@getAnuncie');
-Route::get('cardapios/{id}', 'Site\HomeController@getCardapios');
-Route::get('taxa/{id}', 'Site\HomeController@getTaxa');
+
 Route::get('restaurante/{slug}', 'Site\HomeController@getRestaurante');
 Route::get('pesquisa', 'Site\HomeController@getPesquisa');
-//Route::group([], function(){
-//    Route::controllers([
-//            'beta' => 'Site\HomeController'
-//        ]);
-//});
+Route::group(['middleware' => 'cors'], function(){
+    Route::get('cardapios/{id}', 'Site\HomeController@getCardapios');
+    Route::get('taxa/{id}', 'Site\HomeController@getTaxa');
+});
 Route::get('ctrl', function () { return view('ctrl.app'); });
 Route::post('login', 'Ctrl\AuthenticateController@Authenticate');
 
