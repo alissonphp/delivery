@@ -91,8 +91,7 @@ class HomeController extends Controller
         if($request->has('e') && $request->input('e') != "all") {
             $esp = Categorias::where('categoria','=',$request->input('e'))->first();
             $seachQuery->join('empresa_categorias','empresas.id','=','empresa_categorias.empresa_id')
-                ->where('empresa_categorias.categoria_id',$esp->id)
-                ->groupBy('empresas.id');
+                ->where('empresa_categorias.categoria_id',$esp->id);
         }
         if($request->has('pg') && $request->input('pg') != "all"){
             $pgto = Pagamento::where('forma','=',$request->input('pg'))->first();
@@ -105,7 +104,7 @@ class HomeController extends Controller
                 ->where('empresa_bairros.bairro_id','=',$bairro->id);
         }
 
-        $request = $seachQuery->orderBy('planos.prioridade','desc')->get();
+        $request = $seachQuery->groupBy('empresas.id')->orderBy('planos.prioridade','desc')->get();
         return view('site.pesquisa',compact('request','payments','bairros','empresas','searchItens'));
     }
 

@@ -100,10 +100,10 @@
                             </div>
                             <img class="activator" src="{{ asset('assets/images/uploads/'.$p->anuncio_cover) }}">
                         </div>
-                        <div class="card-content">
+                        <div class="card-content search-card">
                             <span class="card-title activator grey-text text-darken-4">{{ str_limit($p->fantasia,14) }}<i class="material-icons right">more_vert</i></span>
                             <p>
-                                {{ str_limit($p->descricao, 58, '...') }}
+                                {{ str_limit($p->descricao, 38, '...') }}
                             </p>
                             <br>
                             {{--<p class="center">--}}

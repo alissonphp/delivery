@@ -178,6 +178,9 @@ p.legend {
   margin-bottom: 0 !important;
   padding-bottom: 15px !important;
 }
+.search-card {
+  height: 200px !important;
+}
 .icon-block {
   padding: 0 15px;
 }

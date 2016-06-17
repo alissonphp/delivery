@@ -281,7 +281,7 @@
                     @if($empresa->telefone_delivery2)
                     <div class="row">
                         <div class="col m12">
-                            <a href="tel:{{$empresa->telefone_delivery2}}" class="btn btn-large red col m12"><i class="material-icons left">perm_phone_msg</i>ligar: {{$empresa->telefone_delivery}}</a>
+                            <a href="tel:{{$empresa->telefone_delivery2}}" class="btn btn-large red col m12"><i class="material-icons left">perm_phone_msg</i>ligar: {{$empresa->telefone_delivery2}}</a>
                         </div>
                     </div>
                     @endif
