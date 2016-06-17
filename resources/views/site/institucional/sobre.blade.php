@@ -42,7 +42,7 @@
                 <div class="col m12 center-align">
                     <br><br>
                     <h5>Navegue, pesquise e simule o seu pedido!</h5><br><br>
-                    <img src="{{ asset('assets/images/logo/showcase.png') }}" alt="">
+                    <img class="responsive-img" src="{{ asset('assets/images/logo/showcase.png') }}" alt="">
                 </div>
             </div>
         </div>
