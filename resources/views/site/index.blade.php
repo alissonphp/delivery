@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="row center">
-                        <div class="col m3 s12">
+                        <div class="col m3 s6">
                             <a href="#search-especialidades" class="white-text">
                                 <div class="bt-search">
                                     <i class="material-icons big">list</i>
@@ -23,7 +23,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col m3 s12">
+                        <div class="col m3 s6">
                             <a href="#search-restaurantes" class="white-text">
                                 <div class="bt-search">
                                     <i class="material-icons big">restaurant</i>
@@ -31,7 +31,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col m3 s12">
+                        <div class="col m3 s6">
                             <a href="#search-avaliados" class="white-text">
                                 <div class="bt-search">
                                     <i class="material-icons big">star</i>
@@ -39,7 +39,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col m3 s12">
+                        <div class="col m3 s6">
                             <a href="#search-bairros" class="white-text">
                                 <div class="bt-search">
                                     <i class="material-icons big">place</i>
