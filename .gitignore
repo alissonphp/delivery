@@ -3,6 +3,7 @@
 Homestead.yaml
 Homestead.json
 .env
+/.idea
 .idea
 /public/assets/images/uploads
 /public/assets/images/ofertas_ticket
