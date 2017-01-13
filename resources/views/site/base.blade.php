@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <title>Delivery Clube</title>
+    <title>Delivery</title>
     <!-- CSS  -->
     @section('css')
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -18,9 +18,9 @@
     <nav class="red darken-1" role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" href="{{ action('Site\HomeController@getIndex') }}" class="brand-logo">
-                <img src="{{ asset('assets/images/logo/primary-logo-png-transp-mini-header.png') }}" alt="">
+                <img src="{{ asset('assets/images/logo/logo.png') }}" class="responsive-img" alt="" width="75">
             </a>
-            <span class="slogan flow-text">Seu guia de delivery em São Luís</span>
+            <span class="slogan flow-text">Slogan | Delivery</span>
             <ul class="right hide-on-med-and-down">
                 <li><a href="{{ action('Site\HomeController@getSobre') }}" class="white-text">Sobre</a></li>
                 <li><a href="{{ action('Site\HomeController@getAnuncie') }}" class="white-text">Anuncie</a></li>
@@ -44,7 +44,7 @@
     <div class="container">
         <div class="row">
             <div class="col m3 s12">
-                <h5>Delivery Clube:</h5>
+                <h5>Delivery:</h5>
                 <ul>
                     <li><a class="white-text" href="{{ action('Site\HomeController@getSobre') }}">Sobre</a></li>
                     <li><a class="white-text" href="{{ action('Site\HomeController@getAnuncie') }}">Anuncie</a></li>
@@ -55,7 +55,7 @@
             <div class="col m3 s12">
                 <h5>Especialidades:</h5>
                 <ul>
-                    @foreach($data['especialidades'] as $e)
+                    @foreach(Footer::listCategories() as $e)
                     <li><a href="{{ action('Site\HomeController@getPesquisa')."?e=".$e->categoria }}" class="white-text">{{ $e->categoria }}</a></li>
                     @endforeach
                 </ul>
@@ -63,7 +63,7 @@
             <div class="col m3 s12">
                 <h5>Nossos Destaques:</h5>
                 <ul>
-                    @foreach($data['premium'] as $p)
+                    @foreach(Footer::premiumRestaurants() as $p)
                         <li><a href="{{ action('Site\HomeController@getRestaurante', ['slug' => $p->empresa->slug]) }}" class="white-text">{{ $p->empresa->fantasia }}</a></li>
                     @endforeach
                 </ul>
@@ -72,20 +72,20 @@
                 <h5>Acompanhe o Delivery:</h5>
                 <ul>
                     <li>
-                        <a href="https://www.facebook.com/DeliveryClube/" target="_blank" class="white-text social-icon"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+                        <a href="" target="_blank" class="white-text social-icon"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
                         <a href="#" class="white-text social-icon"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
-                        <a href="https://www.instagram.com/deliveryclube/" target="_blank" title="@deliveryclube" class="white-text social-icon"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+                        <a href="" target="_blank" title="@deliveryclube" class="white-text social-icon"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
                     </li>
                 </ul>
                 <h5>Contatos:</h5>
                 <ul>
                     <li>
                         <a href="#" class="white-text">
-                            contato@deliveryclube</a>
+                            contato@delivery</a>
                     </li>
                     <li>
                         <a href="#" class="white-text">
-                            Rua 04, QD D, N° 06, Residencial Araras - Cohama
+                            Endereço
                         </a>
                     </li>
                 </ul>
@@ -94,7 +94,7 @@
     </div>
     <div class="footer-copyright">
         <div class="container center">
-            <small>Copyright 2016. Delivery Clube</small>
+            <small>Copyright 2017. Delivery</small>
         </div>
     </div>
 </footer>

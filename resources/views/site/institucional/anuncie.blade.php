@@ -15,13 +15,10 @@
     <div class="container">
         <div class="row">
             <div class="col m6 l6 s12">
-                <p>O Delivery Clube, vem com uma proposta diferenciada para quem quer  impulsionar as suas vendas.</p>
-                <p>Somos um guia trimestral especializado em delivery e agora nas plataformas digitais, que traz os melhores restaurantes, lanchonetes e até mesmo empresas que desenvolvem um serviço diferenciado de entrega, como polpa de frutas, Águas de coco delivery ,além de cardápios, promoções especiais e várias vantagens exclusivas.</p>
+                <p>text</p>
             </div>
             <div class="col m6 l6 s12">
-                <p>Por ser útil às pessoas e ter uma excelente qualidade gráfica, todos aqueles que o recebem guardam o guia por muito tempo, deixando-o sempre a mão para ser utilizado, trazendo um grande retorno para nossos anunciantes.</p>
-                <p>Além disso, a distribuição é totalmente dirigida e o guia ainda conta com este site com ferramentas diferenciadas e inovadoras no setor, que é atualizado constantemente estando presentes todos os anunciantes. Aqui você encontra as melhores opções de São Luís.</p>
-                <h5>Só falta você!</h5>
+                <p>text</p>
             </div>
         </div>
     </div>
@@ -30,7 +27,7 @@
         <div class="row">
             <div class="col m6 l6 s12">
                 <h5>Entre em contato conosco:</h5>
-                <p>E-mail: <a href="mailto:contato@deliveryclube.com.br">contato@deliveryclube.com.br</a></p>
+                <p>E-mail: <a href="mailto:contato@contato.com.br">contato@contato.com.br</a></p>
                 <p>ou envie-nos uma mensagem preenchendo o formulário abaixo:</p>
                 <form action="#">
                     <div class="input-field">
